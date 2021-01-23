@@ -42,6 +42,7 @@
 </template>
 
 <script>
+
 import store from '@/store/store'
 import reqResources from '../../../helper/reqResources'
 
