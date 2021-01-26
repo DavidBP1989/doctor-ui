@@ -36,9 +36,7 @@ export default new Vuex.Store({
         },
         consults: {
             diagnostics: [],
-            treatments: [],
-            laboratory: [],
-            cabinet: []
+            treatments: []
         }
     },
     actions,

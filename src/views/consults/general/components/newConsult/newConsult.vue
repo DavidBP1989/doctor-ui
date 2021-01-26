@@ -88,10 +88,10 @@
         <b-row class="mt-2">
             <b-col class="text-md-right">
                 <diagnostics :newValues="form.diagnostics" />
-                <!--<treatments :dataList="form.treatments" :savedDataList="treatments_array" />
-                <laboratory :dataList="laboratory_array" />
-                <cabinet :dataList="cabinet_array" />
-                <prognostic :dataList="form.prognostic" />--> <!--btn de confirmar nueva consulta -->
+                <treatments :newValues="form.treatments" />
+                <laboratory :savedValues="laboratory" :newValues="form.laboratory" />
+                <cabinet :savedValues="cabinet" :newValues="form.cabinet" />
+                <!--<prognostic :dataList="form.prognostic" />--> <!--btn de confirmar nueva consulta -->
             </b-col>
         </b-row>
         <!--<added-items v-if="form.diagnostics.length > 0" title="Diagnosticos" type="diagnostic" :dataList="form.diagnostics" />

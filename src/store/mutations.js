@@ -41,12 +41,16 @@ const SET_CONSULTS_DIAGNOSTICS = (state, payload) => {
     state.consults.diagnostics = payload
 }
 
-const SET_CONSULTS_DIAGNOSTICS_DISABLEBYID = (state, id) => {
-    state.consults.diagnostics[id].disabled = true   
+const SET_CONSULTS_DIAGNOSTICS_DISABLESTATUS = (state, { id, status}) => {
+    state.consults.diagnostics[id].disabled = status
 }
 
-const SET_CONSULTS_DIAGNOSTICS_ENABLE = () => {
+const SET_CONSULTS_DIAGNOSTICS_ENABLE = state => {
     state.consults.diagnostics.forEach(x => x.disabled = false)
+}
+
+const ADD_CONSULTS_DIAGNOSTICS = (state, obj) => {
+    state.consults.diagnostics.unshift(obj)
 }
 
 const DELETE_CONSULTS_DIAGNOSTICS_BYID = (state, id) => {
@@ -58,25 +62,21 @@ const SET_CONSULTS_TREATMENTS = (state, payload) => {
     state.consults.treatments = payload
 }
 
-const SET_CONSULTS_TREATMENTS_DISABLEBYID = (state, id) => {
-    state.consults.treatments[id].disabled = true
+const SET_CONSULTS_TREATMENTS_DISABLESTATUS = (state, {id, status}) => {
+    state.consults.treatments[id].disabled = status
 }
 
-const SET_CONSULTS_TREATMENTS_ENABLE = () => {
+const SET_CONSULTS_TREATMENTS_ENABLE = state => {
     state.consults.treatments.forEach(x => x.disabled = false)
+}
+
+const ADD_CONSULTS_TREATMENTS = (state, obj) => {
+    state.consults.treatments.unshift(obj)
 }
 
 const DELETE_CONSULTS_TREATMENTS_BYID = (state, id) => {
     const index = state.consults.treatments.findIndex(x => x.id === id)
     state.consults.treatments.splice(index, 1)
-}
-//--
-const SET_CONSULTS_LABORATORY = (state, payload) => {
-    state.consults.laboratory = payload
-}
-
-const SET_CONSULTS_CABINET = (state, payload) => {
-    state.consults.cabinet = payload
 }
 //#endregion
 
@@ -115,15 +115,15 @@ export default {
     SET_PATIENT_RESERVED,
     SET_PATIENT_RELEVENTPATHOLOGIES,
     SET_CONSULTS_DIAGNOSTICS,
-    SET_CONSULTS_DIAGNOSTICS_DISABLEBYID,
+    SET_CONSULTS_DIAGNOSTICS_DISABLESTATUS,
     SET_CONSULTS_DIAGNOSTICS_ENABLE,
+    ADD_CONSULTS_DIAGNOSTICS,
     DELETE_CONSULTS_DIAGNOSTICS_BYID,
     SET_CONSULTS_TREATMENTS,
-    SET_CONSULTS_TREATMENTS_DISABLEBYID,
+    SET_CONSULTS_TREATMENTS_DISABLESTATUS,
     SET_CONSULTS_TREATMENTS_ENABLE,
+    ADD_CONSULTS_TREATMENTS,
     DELETE_CONSULTS_TREATMENTS_BYID,
-    SET_CONSULTS_LABORATORY,
-    SET_CONSULTS_CABINET,
     SET_AUTHENTICATION,
     SET_LOGOUT
 }

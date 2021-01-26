@@ -1,6 +1,9 @@
 import { onlyNumber } from '@/helper/utilities'
 import api from '@/api/consult-service'
 import diagnostics from './components/diagnostics.vue'
+import treatments from './components/treatments.vue'
+import laboratory from './components/laboratory.vue'
+import cabinet from './components/cabinet.vue'
 import reqResources from './helper/reqResources'
 import map from './helper/map'
 
@@ -9,7 +12,10 @@ export default {
         this.getNecessaryResources()
     },
     components: {
-        diagnostics
+        diagnostics,
+        treatments,
+        laboratory,
+        cabinet
     },
     data() {
         return {
@@ -32,7 +38,9 @@ export default {
                 laboratory: [],
                 cabinet: [],
                 prognostic: []
-            }
+            },
+            laboratory: [],
+            cabinet: []
         }
     },
     computed: {
@@ -56,10 +64,10 @@ export default {
                 this.$store.commit('SET_CONSULTS_TREATMENTS', map.mapForDiagnosticsAndTreatments(response))
             )
             reqResources.getLabStudies().then(response => 
-                this.$store.commit('SET_CONSULTS_LABORATORY', map.mapForLabAndCabinet(response))
+                this.laboratory = map.mapForLabAndCabinet(response)
             )
             reqResources.getCabinetStudies().then(response => 
-                this.$store.commit('SET_CONSULTS_CABINET', map.mapForLabAndCabinet(response))
+                this.cabinet = map.mapForLabAndCabinet(response)
             )
         },
         onlyDecimals(evt) {

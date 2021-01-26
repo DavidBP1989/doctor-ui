@@ -2,7 +2,7 @@
     <div class="_modalnewitem">
         <b-card no-body :header="`${isDiagnostic_andNot_treatment ? 'Diagnóstico' : 'Tratamiento'} del Paciente`">
             <b-list-group flush>
-                <b-list-group-item v-for="d in dataRes" :key="d.id">
+                <b-list-group-item v-for="d in listOfNewValues" :key="d.id">
                     <b-row class="align-items-center">
                         <b-col col md="9" class="text-left">
                             <div v-if="d.edit">
@@ -21,13 +21,13 @@
                         </b-col>
                     </b-row>
                 </b-list-group-item>
-                <b-list-group-item v-if="dataRes.length === 0" class="font-weight-bold">{{ `Ningún ${getTextType} agregado` }}</b-list-group-item>
+                <b-list-group-item v-if="listOfNewValues.length === 0" class="font-weight-bold">{{ `Ningún ${getTextType} agregado` }}</b-list-group-item>
             </b-list-group>
         </b-card>
-        <b-row class="mt-1 mb-1" v-if="dataRes.length > 0">
+        <b-row class="mt-1 mb-1" v-if="listOfNewValues.length > 0">
             <b-col class="text-right">
                 <b-button variant="secondary" @click="deleteItem(-1)">Eliminar todo</b-button>
-                <b-button variant="secondary" v-if="dataRes.length > 0" v-b-modal.saveas>Guardar como</b-button>
+                <b-button variant="secondary" v-if="listOfNewValues.length > 0" v-b-modal.saveas>Guardar como</b-button>
             </b-col>
         </b-row>
 
@@ -42,7 +42,6 @@
 </template>
 
 <script>
-
 import store from '@/store/store'
 import reqResources from '../../../helper/reqResources'
 
@@ -62,22 +61,29 @@ export default {
         }
     },
     methods: {
-        deleteItem(id, idSavedData) {
+        deleteItem(id, idSavedValues) {
             if (id === -1) {
                 this.deleteAll()
                 return
             }
 
             this.$delete(this.listOfNewValues, this.listOfNewValues.findIndex(x => x.id == id))
-            if (idSavedData !== null) {
-                this.saved_Data[this.saved_Data.findIndex(x => x.id == idSavedData)].disabled = false
+            if (idSavedValues !== null) {
+
+                const mut = this.isDiagnostic_andNot_treatment
+                ? 'SET_CONSULTS_DIAGNOSTICS_DISABLESTATUS'
+                : 'SET_CONSULTS_TREATMENTS_DISABLESTATUS'
+                store.commit(mut, { 
+                    id: idSavedValues,
+                    status: false
+                })
             }
         },
         deleteAll() {
             this.listOfNewValues.splice(0)
             store.commit(
-                this.isDiagnostic_andNot_treatment ?
-                'SET_CONSULTS_DIAGNOSTICS_ENABLE'
+                this.isDiagnostic_andNot_treatment
+                ? 'SET_CONSULTS_DIAGNOSTICS_ENABLE'
                 : 'SET_CONSULTS_TREATMENTS_ENABLE'
             )
         },
@@ -120,12 +126,19 @@ export default {
         pushInSavedData(result, list) {
             if (result.Id !== null && result.Id !== '')
             {
-                this.saved_Data.unshift({
+                const obj = {
                     id: result.Id,
                     name: this.groupName,
                     disabled: true,
                     list: list
-                })
+                }
+
+                store.commit(
+                    this.isDiagnostic_andNot_treatment
+                    ? 'ADD_CONSULTS_DIAGNOSTICS'
+                    : 'ADD_CONSULTS_TREATMENTS',
+                    obj
+                )
             }
             else
             this.$bvModal.msgBoxOk('No se puedo agregar', {

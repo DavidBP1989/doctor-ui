@@ -52,12 +52,14 @@ export default {
                     exclusive: false
                 })
             })
-            store.commit(
-                this.isDiagnostic_andNot_treatment ?
-                'SET_CONSULTS_DIAGNOSTICS_DISABLEBYID' :
-                'SET_CONSULTS_TREATMENTS_DISABLEBYID',
-                index
-            )
+
+            const mut = this.isDiagnostic_andNot_treatment
+            ? 'SET_CONSULTS_DIAGNOSTICS_DISABLESTATUS'
+            : 'SET_CONSULTS_TREATMENTS_DISABLESTATUS'
+            store.commit(mut, {
+                id: index,
+                status: true
+            })
             eventBus.$emit('changeViewToNewValues')
         },
         getLastId() {

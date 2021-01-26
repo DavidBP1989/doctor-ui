@@ -27,11 +27,8 @@
                 </b-button>
             </b-col>
         </b-row>
-        <new-items v-if="!showSavedValues"
-        :isDiagnostic_andNot_treatment="isDiagnostic_andNot_treatment"
-        :dataResponse="dataResponse" :savedData="savedData" />
-        
-        <saved-values :isDiagnostic_andNot_treatment="isDiagnostic_andNot_treatment" :newValues="listOfNewValues" />
+        <new-items v-if="!showSavedValues" :isDiagnostic_andNot_treatment="isDiagnostic_andNot_treatment" :newValues="newValues" />
+        <saved-values v-else :isDiagnostic_andNot_treatment="isDiagnostic_andNot_treatment" :newValues="listOfNewValues" />
     </b-container>
 </template>
 
