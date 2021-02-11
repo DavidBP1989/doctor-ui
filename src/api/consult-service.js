@@ -6,7 +6,11 @@ Vue.use(VueResource)
 const actions = {
     getConsultationDates: {
         method: 'GET',
-        url: `${API_URL}/consults/general/dates//{pacientId}`
+        url: `${API_URL}/consults/general/dates/{pacientId}`
+    },
+    saveConsult: {
+        method: 'POST',
+        url: `${API_URL}/consults/general/{doctorId}`
     }
 }
 
@@ -17,5 +21,8 @@ export default {
         return api.getConsultationDates({
             pacientId
         })
+    },
+    saveConsult(doctorId, request) {
+        return api.saveConsult({ doctorId }, request)
     }
 }

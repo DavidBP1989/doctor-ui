@@ -1,7 +1,9 @@
+import store from '@/store/store'
+
 export default class model {
     constructor(form) {
         this.__$ = {
-            PatientId: patientId,
+            PatientId: store.state.patient.id,
             Weight: form.weight,
             Size: form.size,
             Temperature: form.temperature,
@@ -20,9 +22,15 @@ export default class model {
             LaboratoryStudies: this.getArrayFormat(form.laboratory, false),
             Prognostic: form.prognostic,
             //datos del paciente
-            Allergies: patient.allergies,
-            Reserved: patient.reserved,
-            RelevantPathologies: patient.relevantPathologies
+            Allergies: store.state.patient.allergies,
+            Reserved: store.state.patient.reserved,
+            RelevantPathologies: store.state.patient.relevantPathologies
         }
+    }
+
+    getArrayFormat(array, isDiagnosticOrTreatment) {
+        return array.map((x) => {
+            return isDiagnosticOrTreatment ? x.text : x.name
+        })
     }
 }

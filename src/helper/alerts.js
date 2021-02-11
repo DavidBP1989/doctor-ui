@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import { router } from '../router/router'
 
-function alert(view, title, params = null) {
+function alert(view, title, params = null, showConfirmButton = null) {
     const componentToLoad = Vue.extend(view)
     let instance = null
     if (params !== null)
@@ -12,18 +12,25 @@ function alert(view, title, params = null) {
 
     instance.$mount()
 
-    Vue.swal({
+    let props = {
         title,
         html: '<div></div>',
         showCloseButton: true,        
-        showConfirmButton: false,
+        showConfirmButton: showConfirmButton != null,
         reverseButtons: true,
         onBeforeOpen: () => {
             Vue.swal.getContent()
             .querySelector('div')
             .append(instance.$el)
         }
-    })
+    }
+
+    if (showConfirmButton != null) {
+        props.confirmButtonText = 'Confirmar consulta'
+        props.confirmButtonColor = '#28a745'
+    }
+
+    return Vue.swal(props)
 }
 
 function saved(title, isConfirmed, route = null) {
@@ -44,12 +51,12 @@ function changePassword(view, title) {
     alert(view, title)
 }
 
-function showModalToDiagnosticsAndTreatments(view, title, params) {
-    alert(view, title, params)
+function showModalWithViewReference(view, title, params, showConfirmButton) {
+    return alert(view, title, params, showConfirmButton)
 }
 
 export {
     changePassword,
     saved,
-    showModalToDiagnosticsAndTreatments
+    showModalWithViewReference
 }

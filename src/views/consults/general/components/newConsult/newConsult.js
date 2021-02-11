@@ -1,15 +1,33 @@
+let currentLoader = null
 import { onlyNumber } from '@/helper/utilities'
+import { loader } from '@/helper/loader'
 import api from '@/api/consult-service'
 import diagnostics from './components/diagnostics.vue'
+import treatments from './components/treatments.vue'
+import addedItems from './shared/addedItems.vue'
+import laboratory from './components/laboratory.vue'
+import cabinet from './components/cabinet.vue'
+import prognostic from './components/prognostics.vue'
 import reqResources from './helper/reqResources'
 import map from './helper/map'
+import model from './helper/model'
+import { saved } from '@/helper/alerts'
+import eventBus from '@/helper/event-bus'
+import iFrame from '@/shared/i-frame.vue'
 
 export default {
     created() {
         this.getNecessaryResources()
+        eventBus.$on('save', () => this.save())
     },
     components: {
-        diagnostics
+        diagnostics,
+        treatments,
+        addedItems,
+        laboratory,
+        cabinet,
+        prognostic,
+        iFrame
     },
     data() {
         return {
@@ -32,7 +50,11 @@ export default {
                 laboratory: [],
                 cabinet: [],
                 prognostic: []
-            }
+            },
+            diagnostics: [],
+            treatments: [],
+            laboratory: [],
+            cabinet: []
         }
     },
     computed: {
@@ -49,24 +71,54 @@ export default {
     },
     methods: {
         getNecessaryResources() {
-            reqResources.getAllDiagnostics(this.doctorId).then(response => 
-                this.$store.commit('SET_CONSULTS_DIAGNOSTICS', map.mapForDiagnosticsAndTreatments(response))
+            reqResources.getAllDiagnostics(this.doctorId).then(response =>
+                this.diagnostics = map.mapForDiagnosticsAndTreatments(response)
             )
             reqResources.getAllTreatments(this.doctorId).then(response => 
-                this.$store.commit('SET_CONSULTS_TREATMENTS', map.mapForDiagnosticsAndTreatments(response))
+                this.treatments = map.mapForDiagnosticsAndTreatments(response)
             )
             reqResources.getLabStudies().then(response => 
-                this.$store.commit('SET_CONSULTS_LABORATORY', map.mapForLabAndCabinet(response))
+                this.laboratory = map.mapForLabAndCabinet(response)
             )
             reqResources.getCabinetStudies().then(response => 
-                this.$store.commit('SET_CONSULTS_CABINET', map.mapForLabAndCabinet(response))
+                this.cabinet = map.mapForLabAndCabinet(response)
             )
         },
         onlyDecimals(evt) {
             onlyNumber(evt, true)
         },
         save() {
+            const req = new model(this.form)
+            currentLoader = loader()
 
+            api.saveConsult(this.doctorId, req.__$).then(response => {
+                currentLoader.hide()
+                saved('Consulta agregada', true)
+                this.clear()
+                eventBus.$emit('putInPreviewConsult')
+            })
+            .catch(_error => {
+                currentLoader.hide()
+            })
+        },
+        clear() {
+            form.weight = null
+            form.size = null
+            form.temperature = null
+            form.bloodPressure_a = null
+            form.bloodPressure_b = null
+            form.headCircuference = null
+            form.heartRate = null
+            form.breathingFrecuency = null
+            form.reasonForConsultation = null
+            form.physicalExploration = null
+            form.preventiveMeasures = null
+            form.observations = null
+            form.diagnostics = []
+            form.treatments = []
+            form.laboratory = []
+            form.cabinet = []
+            form.prognostic = []
         }
     }
 }

@@ -4,11 +4,11 @@
             <b-list-group-item
             class="d-flex justify-content-between list-saved-data"
             button
-            v-for="(x, index) in list"
+            v-for="(x, index) in listOfSavedValues"
             :key="index"
             :class="(index % 2) == 0 ? 'bg-gray-list-group-item' : ''"
             :disabled="x.disabled"
-            @click="addToNewValues(x.id)">
+            @click="add(x.id)">
                 <span class="text-left">
                     {{ x.name }}
                     <br>
@@ -21,17 +21,14 @@
 </template>
 
 <script>
-import store from '@/store/store'
 import eventBus from '@/helper/event-bus'
 import reqResources from '../../../helper/reqResources'
 
 export default {
-    props: ['isDiagnostic_andNot_treatment', 'newValues'],
+    props: ['isDiagnostic_andNot_treatment', 'savedValues', 'newValues'],
     data() {
         return {
-            list: this.isDiagnostic_andNot_treatment
-            ? store.state.consults.diagnostics
-            : store.state.consults.treatments,
+            listOfSavedValues: this.savedValues,
             listOfNewValues: this.newValues
         }
     },
@@ -41,9 +38,9 @@ export default {
         }
     },
     methods: {
-        addToNewValues(id) {
-            const index = this.list.findIndex(x => x.id === id)
-            this.list[index].list.forEach(x => {
+        add(id) {
+            const index = this.listOfSavedValues.findIndex(x => x.id === id)
+            this.listOfSavedValues[index].list.forEach(x => {
                 this.listOfNewValues.push({
                     id: this.getLastId(),
                     idSavedData: id,
@@ -52,12 +49,7 @@ export default {
                     exclusive: false
                 })
             })
-            store.commit(
-                this.isDiagnostic_andNot_treatment ?
-                'SET_CONSULTS_DIAGNOSTICS_DISABLEBYID' :
-                'SET_CONSULTS_TREATMENTS_DISABLEBYID',
-                index
-            )
+            this.listOfSavedValues[index].disabled = true
             eventBus.$emit('changeViewToNewValues')
         },
         getLastId() {
@@ -84,12 +76,8 @@ export default {
         },
         confirmDelete(status, id) {
             if (status === 200) {
-                store.commit(
-                    this.isDiagnostic_andNot_treatment ?
-                    'DELETE_CONSULTS_DIAGNOSTICS_BYID'
-                    : 'DELETE_CONSULTS_TREATMENTS_BYID',
-                    id
-                )
+                const index = this.listOfSavedValues.findIndex(x => x.id === id)
+                this.listOfSavedValues.splice(index, 1)
             }
             else {
                 this.$bvModal.msgBoxOk('No se puedo eliminar', {
@@ -100,7 +88,7 @@ export default {
             }
         },
         seeListOf(index) {
-            const item = this.saved_Data[index];
+            const item = this.listOfSavedValues[index]
 
             const h = this.$createElement
             let list = []

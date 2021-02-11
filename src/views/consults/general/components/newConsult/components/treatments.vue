@@ -1,5 +1,5 @@
 <template>
-    <b-button @click="showModal" class="mb-2" variant="outline-secondary">Diagnosticos</b-button>
+    <b-button @click="showModal" class="mb-2" variant="outline-secondary">Tratamientos</b-button>
 </template>
 
 <script>
@@ -19,8 +19,8 @@ export default {
     },
     methods: {
         showModal() {
-            showModalWithViewReference(modal, 'Diagnósticos', {
-                isDiagnostic_andNot_treatment: true,
+            showModalWithViewReference(modal, 'Tratamientos', {
+                isDiagnostic_andNot_treatment: false,
                 savedValues: this.savedValues,
                 newValues: this.newValues
             })

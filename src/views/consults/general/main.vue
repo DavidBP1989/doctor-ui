@@ -41,6 +41,7 @@
 <script>
 import consultPrevious from './components/consultPrevious/consultPrevious.vue'
 import newConsult from './components/newConsult/newConsult.vue'
+import eventBus from '@/helper/event-bus'
 
 export default {
     mounted() {
@@ -52,6 +53,9 @@ export default {
             }
         })
     },
+    created() {
+        eventBus.$on('putInPreviewConsult', () => this.refreshPreviewConsult())
+    },
     components: {
         consultPrevious,
         newConsult
@@ -61,6 +65,11 @@ export default {
             visiblePrevious: false,
             visibleNewConsult: true,
             consultationDates: []
+        }
+    },
+    methods: {
+        refreshPreviewConsult() {
+            
         }
     }
 }

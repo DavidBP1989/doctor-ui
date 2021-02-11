@@ -27,25 +27,31 @@
                 </b-button>
             </b-col>
         </b-row>
-        <new-items v-if="!showSavedValues"
+        <new-items
+        v-if="!showSavedValues"
         :isDiagnostic_andNot_treatment="isDiagnostic_andNot_treatment"
-        :dataResponse="dataResponse" :savedData="savedData" />
-        
-        <saved-values :isDiagnostic_andNot_treatment="isDiagnostic_andNot_treatment" :newValues="listOfNewValues" />
+        :newValues="listOfNewValues"
+        :savedValues="listOfSavedValues" />
+
+        <saved-values
+        v-else
+        :newValues="listOfNewValues"
+        :savedValues="listOfSavedValues"
+        :isDiagnostic_andNot_treatment="isDiagnostic_andNot_treatment" />
     </b-container>
 </template>
 
 <script>
+let count = 1
 import newItems from './components/newItems.vue'
 import savedValues from './components/savedValues.vue'
 import eventBus from '@/helper/event-bus'
-import store from '@/store/store'
 
 export default {
     created() {
         eventBus.$on('changeViewToNewValues', () => this.showSavedValues = !this.showSavedValues)
     },
-    props: ['isDiagnostic_andNot_treatment', 'newValues'],
+    props: ['isDiagnostic_andNot_treatment', 'savedValues', 'newValues'],
     components: {
         newItems,
         savedValues
@@ -54,12 +60,13 @@ export default {
         return {
             input: '',
             showSavedValues: false,
+            listOfSavedValues: this.savedValues,
             listOfNewValues: this.newValues
         }
     },
     computed: {
         getTextType() {
-            return this.type ? 'diagnóstico' : 'tratamiento'
+            return this.isDiagnostic_andNot_treatment ? 'diagnóstico' : 'tratamiento'
         }
     },
     methods: {
@@ -79,7 +86,10 @@ export default {
             }
         },
         getLastId() {
-            return this.isDiagnostic_andNot_treatment ? store.getters.getLastIdDiagnostics : store.getters.getLastIdTreatments
+            if (this.listOfNewValues.length > 0) {
+                count = this.listOfNewValues[this.listOfNewValues.length - 1].id + 1
+            }
+            return count
         }
     }
 }

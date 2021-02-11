@@ -33,12 +33,6 @@ export default new Vuex.Store({
             groupRH: null,
             birthDate: null,
             sex: 'M'
-        },
-        consults: {
-            diagnostics: [],
-            treatments: [],
-            laboratory: [],
-            cabinet: []
         }
     },
     actions,

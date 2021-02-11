@@ -2,7 +2,7 @@
     <div class="_modalnewitem">
         <b-card no-body :header="`${isDiagnostic_andNot_treatment ? 'Diagnóstico' : 'Tratamiento'} del Paciente`">
             <b-list-group flush>
-                <b-list-group-item v-for="d in dataRes" :key="d.id">
+                <b-list-group-item v-for="d in listOfNewValues" :key="d.id">
                     <b-row class="align-items-center">
                         <b-col col md="9" class="text-left">
                             <div v-if="d.edit">
@@ -21,13 +21,13 @@
                         </b-col>
                     </b-row>
                 </b-list-group-item>
-                <b-list-group-item v-if="dataRes.length === 0" class="font-weight-bold">{{ `Ningún ${getTextType} agregado` }}</b-list-group-item>
+                <b-list-group-item v-if="listOfNewValues.length === 0" class="font-weight-bold">{{ `Ningún ${getTextType} agregado` }}</b-list-group-item>
             </b-list-group>
         </b-card>
-        <b-row class="mt-1 mb-1" v-if="dataRes.length > 0">
+        <b-row class="mt-1 mb-1" v-if="listOfNewValues.length > 0">
             <b-col class="text-right">
                 <b-button variant="secondary" @click="deleteItem(-1)">Eliminar todo</b-button>
-                <b-button variant="secondary" v-if="dataRes.length > 0" v-b-modal.saveas>Guardar como</b-button>
+                <b-button variant="secondary" v-if="listOfNewValues.length > 0" v-b-modal.saveas>Guardar como</b-button>
             </b-col>
         </b-row>
 
@@ -46,10 +46,11 @@ import store from '@/store/store'
 import reqResources from '../../../helper/reqResources'
 
 export default {
-    props: ['isDiagnostic_andNot_treatment', 'newValues'],
+    props: ['isDiagnostic_andNot_treatment', 'savedValues', 'newValues'],
     data() {
         return {
             doctorId: store.state.doctor.id,
+            listOfSavedValues: this.savedValues,
             listOfNewValues: this.newValues,
             groupName: '',
             nameState: null
@@ -69,16 +70,13 @@ export default {
 
             this.$delete(this.listOfNewValues, this.listOfNewValues.findIndex(x => x.id == id))
             if (idSavedData !== null) {
-                this.saved_Data[this.saved_Data.findIndex(x => x.id == idSavedData)].disabled = false
+                const index = this.listOfSavedValues.findIndex(x => x.id == idSavedData)
+                this.listOfSavedValues[index].disabled = false
             }
         },
         deleteAll() {
             this.listOfNewValues.splice(0)
-            store.commit(
-                this.isDiagnostic_andNot_treatment ?
-                'SET_CONSULTS_DIAGNOSTICS_ENABLE'
-                : 'SET_CONSULTS_TREATMENTS_ENABLE'
-            )
+            this.listOfSavedValues.forEach(x => x.disabled = false)
         },
         checkFormValidity() {
             const valid = this.$refs.form.checkValidity()
@@ -109,17 +107,16 @@ export default {
             }
 
             if (this.isDiagnostic_andNot_treatment)
-                reqResources.saveDiagnostic(this.doctorId, req).then(response => 
+                reqResources.saveDiagnostic(this.doctorId, req).then(response =>
                     this.pushInSavedData(response, list)
                 )
-            else reqResources.saveTreatment(this.doctorId, req).then(response => 
+            else reqResources.saveTreatment(this.doctorId, req).then(response =>
                 this.pushInSavedData(response, list)
             )
         },
         pushInSavedData(result, list) {
-            if (result.Id !== null && result.Id !== '')
-            {
-                this.saved_Data.unshift({
+            if (result.Id !== null && result.Id !== '') {
+                this.listOfSavedValues.unshift({
                     id: result.Id,
                     name: this.groupName,
                     disabled: true,
