@@ -42,10 +42,11 @@
 import consultPrevious from './components/consultPrevious/consultPrevious.vue'
 import newConsult from './components/newConsult/newConsult.vue'
 import eventBus from '@/helper/event-bus'
+import api from '@/api/consult-service'
 
 export default {
     mounted() {
-        this.$root.$on('bv::collapse::state', (collapseId, isJustShown) => {
+        this.$root.$on('bv::collapse::state', () => {
             //siempre mantener uno abierto
             if (!this.visibleNewConsult && !this.visiblePrevious) {
                 this.visibleNewConsult = true
@@ -54,6 +55,7 @@ export default {
         })
     },
     created() {
+        this.getConsultationDates()
         eventBus.$on('putInPreviewConsult', () => this.refreshPreviewConsult())
     },
     components: {
@@ -64,12 +66,27 @@ export default {
         return {
             visiblePrevious: false,
             visibleNewConsult: true,
-            consultationDates: []
+            consultationDates: [],
+            patientId: this.$route.params.id,
         }
     },
     methods: {
+        getConsultationDates() {
+            api.getConsultationDates(this.patientId).then(response => {
+                if (response.body) {
+                    let array = []
+                    response.body.forEach(element => {
+                        array.push({
+                            value: element.Id,
+                            text: this.$moment(element.ConsultationDate).format('dddd DD [de] MMMM [de] YYYY')
+                        })
+                    })
+                    this.consultationDates = array           
+                }
+            })
+        },
         refreshPreviewConsult() {
-            
+            this.getConsultationDates()
         }
     }
 }

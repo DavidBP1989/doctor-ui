@@ -11,6 +11,10 @@ const actions = {
     saveConsult: {
         method: 'POST',
         url: `${API_URL}/consults/general/{doctorId}`
+    },
+    getConsultById: {
+        method: 'GET',
+        url: `${API_URL}/consults/general/{consultId}`
     }
 }
 
@@ -24,5 +28,10 @@ export default {
     },
     saveConsult(doctorId, request) {
         return api.saveConsult({ doctorId }, request)
+    },
+    getConsultById(consultId) {
+        return api.getConsultById({
+            consultId
+        })
     }
 }

@@ -1,53 +1,135 @@
 <template>
-    <b-card v-if="consultationDates.length > 0" no-body class="mb-1">
-        <b-card-header header-tag="header" class="p-0" role="tab">
-            <b-button block v-b-toggle._previous class="text-left p-2">
-                <fa-icon class="mr-2" :icon="['fas', (visible_previous ? 'caret-down' : 'caret-right')]" size="lg" />
-                Consulta anterior
-            </b-button>
-        </b-card-header>
-        <b-collapse
-        id="_previous"
-        v-model="visible_previous"
-        accordion="consult-accordion"
-        role="tabpanel">
-            <b-card-body>
-                
-            </b-card-body>
-        </b-collapse>
-    </b-card>
+    <div v-if="consult != null">
+        <b-row class="align-items-center">
+            <b-col md="6" lg="8">
+                <div class="mb-1">
+                    <fa-icon class="mr-2" :icon="['fas', 'print']" size="lg" />
+                    <b-link>Imprimir consulta</b-link>
+                </div>
+                <div>
+                    <fa-icon class="mr-2" :icon="['fas', 'edit']" size="lg" />
+                    <b-link @click="goToStudyReport">Editar reporte de estudios de gabinete y otros.</b-link>
+                </div>
+            </b-col>
+            <b-col class="mt-2 mt-md-0" md="6" lg="4">
+                <b-form-group class="mt-2 mt-md-0 nlegend" label="Buscar consulta">
+                    <b-form-select v-model="selectedDate" :options="dates" @change="getConsult" />
+                </b-form-group>
+            </b-col>
+        </b-row>
+        <b-row class="mt-3 align-items-center">
+            <b-col cols="3" md="4" lg="2">
+                <b-form-group label="Peso">
+                    <span>{{ consult.Weight }} kg</span>
+                </b-form-group>
+            </b-col>
+            <b-col cols="3" md="4" lg="2">
+                <b-form-group label="Talla">
+                    <span>{{ consult.Size }} m</span>
+                </b-form-group>
+            </b-col>
+            <b-col cols="6" md="4" lg="3">
+                <b-form-group label="Indice de masa corporal">
+                    <span>{{ mass }} kg/m2</span>
+                </b-form-group>
+            </b-col>
+            <b-col cols="6" md="4" lg="2">
+                <b-form-group label="Temperatura">
+                    <span>{{ consult.Temperature }} c</span>
+                </b-form-group>
+            </b-col>
+            <b-col>
+                <b-form-group label="Presión arterial">
+                    <span>{{ consult.BloodPressure_A }}/{{ consult.BloodPressure_B }} mm Hg</span>
+                </b-form-group>
+            </b-col>
+        </b-row>
+        <b-row>
+            <b-col cols="6" sm="4">
+                <b-form-group label="Perímetro cefálico">
+                    <span>{{ consult.HeadCircuference }} cm</span>
+                </b-form-group>
+            </b-col>
+            <b-col>
+                <b-form-group label="Frecuencia cardiaca">
+                    <span>{{ consult.HeartRate }} lpm</span>
+                </b-form-group>
+            </b-col>
+            <b-col>
+                <b-form-group label="Frecuencia respiratoria">
+                    <span>{{ consult.BreathingFrecuency }} lpm</span>
+                </b-form-group>
+            </b-col>
+        </b-row>
+        <b-row>
+            <b-col md="6">
+                <b-form-group label="Motivo de la consulta">
+                    <span>{{ consult.ReasonForConsultation }}</span>
+                </b-form-group>
+            </b-col>
+            <b-col md="6">
+                <b-form-group label="Exploración física">
+                    <span>{{ consult.PhysicalExploration }}</span>
+                </b-form-group>
+            </b-col>
+            <b-col md="6">
+                <b-form-group label="Medidas preventivas">
+                    <span>{{ consult.PreventiveMeasures }}</span>
+                </b-form-group>
+            </b-col>
+            <b-col>
+                <b-form-group label="Observaciones">
+                    <span>{{ consult.Observations }}</span>
+                </b-form-group>
+            </b-col>
+        </b-row>
+        <hr>
+        <b-row>
+            <b-col md="6">
+                <b-form-group label="Diagnosticos">
+                    <b-list-group>
+                        <b-list-group-item class="pl-0" v-for="c in consult.Diagnostics" :key="c">
+                            {{ c }}
+                        </b-list-group-item>
+                    </b-list-group>
+                </b-form-group>
+            </b-col>
+            <b-col>
+                <b-form-group label="Tratamientos">
+                    <b-list-group>
+                        <b-list-group-item class="pl-0" v-for="c in consult.Treatments" :key="c">
+                            {{ c }}
+                        </b-list-group-item>
+                    </b-list-group>
+                </b-form-group>
+            </b-col>
+        </b-row>
+        <b-row>
+            <b-col md="6">
+                <b-form-group label="Estudios de laboratorio">
+                    <b-list-group class="pl-0" v-for="c in consult.LaboratoryStudies" :key="c">
+                        {{ c }}
+                    </b-list-group>
+                </b-form-group>
+            </b-col>
+            <b-col>
+                <b-form-group label="Estudios de gabinete">
+                    <b-list-group class="pl-0" v-for="c in consult.CabinetStudies" :key="c">
+                        {{ c }}
+                    </b-list-group>
+                </b-form-group>
+            </b-col>
+        </b-row>
+        <b-row v-if="consult.Prognostic.length > 0">
+            <b-col>
+                <b-form-group label="Pronóstico">
+                    <b-list-group class="pl-0" v-for="c in consult.Prognostic" :key="c">
+                        {{ c }}
+                    </b-list-group>
+                </b-form-group>
+            </b-col>
+        </b-row>
+    </div>
 </template>
 
-<script>
-import api from '@/api/consult-service'
-
-export default {
-    created() {
-        this.getConsultationDates()
-    },
-    props: ['visiblePrev'],
-    data() {
-        return {
-            visible_previous: this.visiblePrev,
-            patientId: this.$route.params.id,
-            consultationDates: []
-        }
-    },
-    methods: {
-        getConsultationDates() {
-            api.getConsultationDates(this.patientId).then(response => {
-                if (response.body) {
-                    let array = []
-                    response.body.forEach(element => {
-                        array.push({
-                            value: element.Id,
-                            text: this.$moment(element.ConsultationDate).format('dddd DD [de] MMMM [de] YYYY')
-                        })
-                    })
-                    this.consultationDates = array           
-                }
-            })
-        }
-    }
-}
-</script>
+<script src="./consultPrevious.js"></script>

@@ -91,34 +91,40 @@ export default {
             const req = new model(this.form)
             currentLoader = loader()
 
-            api.saveConsult(this.doctorId, req.__$).then(response => {
+            let success = false
+            api.saveConsult(this.doctorId, req.__$).then(() => {
+                success = true
                 currentLoader.hide()
                 saved('Consulta agregada', true)
-                this.clear()
-                eventBus.$emit('putInPreviewConsult')
             })
             .catch(_error => {
                 currentLoader.hide()
             })
+            .finally(() => {
+                if (success) {
+                    this.clear()
+                    eventBus.$emit('putInPreviewConsult')
+                }
+            })
         },
         clear() {
-            form.weight = null
-            form.size = null
-            form.temperature = null
-            form.bloodPressure_a = null
-            form.bloodPressure_b = null
-            form.headCircuference = null
-            form.heartRate = null
-            form.breathingFrecuency = null
-            form.reasonForConsultation = null
-            form.physicalExploration = null
-            form.preventiveMeasures = null
-            form.observations = null
-            form.diagnostics = []
-            form.treatments = []
-            form.laboratory = []
-            form.cabinet = []
-            form.prognostic = []
+            this.form.weight = null
+            this.form.size = null
+            this.form.temperature = null
+            this.form.bloodPressure_a = null
+            this.form.bloodPressure_b = null
+            this.form.headCircuference = null
+            this.form.heartRate = null
+            this.form.breathingFrecuency = null
+            this.form.reasonForConsultation = null
+            this.form.physicalExploration = null
+            this.form.preventiveMeasures = null
+            this.form.observations = null
+            this.form.diagnostics = []
+            this.form.treatments = []
+            this.form.laboratory = []
+            this.form.cabinet = []
+            this.form.prognostic = []
         }
     }
 }

@@ -12,8 +12,8 @@ import header from '@/shared/header/header.vue'
 
 export default {
     beforeCreate() {
-        const loggedIn = localStorage.getItem('emecitoken') != null
-        document.body.className = loggedIn ? 'main_body' : 'register_body'
+        const isAuthenticated = this.$store.getters.isAuthenticated
+        document.body.className = isAuthenticated ? 'main_body' : 'register_body'
     },
     components: {
         'main-header': header
