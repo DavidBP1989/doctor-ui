@@ -41,6 +41,8 @@ export default {
     },
     created() {
         this.getPatient()
+        const path = this.$route.path
+        this.consultType = path.split('/')[path.split('/').length - 1]
     },
     components: {
         'main-header': header,

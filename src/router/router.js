@@ -80,6 +80,18 @@ export const router = new Router({
                         ],
                         typeMenu: 'consult'
                     }
+                },
+                {
+                    path: 'obstetric',
+                    component: () => import(/**/ '../views/consults/obstetric/main.vue'),
+                    name: 'Consulta obstétrica',
+                    meta: {
+                        breadcrumb: [
+                            { text: 'Pacientes', to: '/' },
+                            { text: 'Consulta obstétrica', to: '#', active: true }
+                        ],
+                        typeMenu: 'consult'
+                    }
                 }
             ]
         }
