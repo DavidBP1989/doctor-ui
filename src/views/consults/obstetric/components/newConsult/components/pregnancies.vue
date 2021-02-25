@@ -25,7 +25,7 @@
         :md="(!preg.ectopic && !preg.previous && !preg.perinatal) ? 5 : 12"
         order-md="0"
         :lg="(!preg.ectopic && !preg.previous && !preg.perinatal) ? 4 : 12">
-            <b-form-group label="Complicaciones de embarazo previou">
+            <b-form-group label="Complicaciones de embarazo previos">
                 <div class="d-flex">
                     <span>No</span>
                     <b-form-checkbox v-model="preg.previous" class="ml-2" switch>Si</b-form-checkbox>

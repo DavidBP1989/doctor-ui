@@ -16,10 +16,14 @@ const actions = {
         method: 'GET',
         url: `${API_URL}/consults/general/{consultId}`
     },
+    getObstetricConsultationDates: {
+        method: 'GET',
+        url: `${API_URL}/consults/obstetric/dates/{pacientId}`
+    },
     saveConsultObstetric: {
         method: 'POST',
         url: `${API_URL}/consults/obstetric/{doctorId}`
-    },
+    }
 }
 
 const api = Vue.resource(API_URL, {}, actions)
@@ -36,6 +40,11 @@ export default {
     getConsultById(consultId) {
         return api.getConsultById({
             consultId
+        })
+    },
+    getObstetricConsultationDates(pacientId) {
+        return api.getObstetricConsultationDates({
+            pacientId
         })
     },
     saveConsultObstetric(doctorId, request) {

@@ -1,8 +1,8 @@
 <template>
     <div role="tablist" class="mb-3">
         <b-card no-body class="mb-1">
-            <b-card-header class="p-0" role="tab">
-                <b-button block v-b-toggle.__preview class="text-left p-2">
+            <b-card-header header-tag="header" class="p-0" role="tab">
+                <b-button block v-b-toggle._previous class="text-left p-2">
                     <fa-icon class="mr-2" :icon="['fas', (visiblePrevious ? 'caret-down' : 'caret-right')]" size="lg" />
                     Consulta anterior
                 </b-button>
@@ -13,13 +13,14 @@
             accordion="consult-accordion"
             role="tabpanel">
                 <b-card-body>
-                    <consult-previous />
+                    <consult-previous :consultationDates="consultationDates" />
                 </b-card-body>
             </b-collapse>
         </b-card>
+        
         <b-card no-body class="mb-1">
-            <b-card-header class="p-0" role="tab">
-                <b-button block v-b-toggle.new class="text-left p-2">
+            <b-card-header header-tag="header" class="p-0" role="tab">
+                <b-button block v-b-toggle._consult class="text-left p-2">
                     <fa-icon class="mr-2" :icon="['fas', (visibleNewConsult ? 'caret-down' : 'caret-right')]" size="lg" />
                     Nueva consulta
                 </b-button>
@@ -41,6 +42,7 @@
 import consultPrevious from './components/consultPrevious/consultPrevious.vue'
 import newConsult from './components/newConsult/newConsult.vue'
 import eventBus from '@/helper/event-bus'
+import api from '@/api/obstetric-consult-service'
 
 export default {
     mounted() {
@@ -53,6 +55,7 @@ export default {
         })
     },
     created() {
+        this.getConsultationDates()
         eventBus.$on('putInPreviewObstetricConsult', () => this.refreshPreviewConsult())
     },
     components: {
@@ -62,12 +65,28 @@ export default {
     data() {
         return {
             visiblePrevious: false,
-            visibleNewConsult: true
+            visibleNewConsult: true,
+            consultationDates: [],
+            patientId: this.$route.params.id
         }
     },
     methods: {
+        getConsultationDates() {
+            api.getDatesPreviousConsult(this.patientId).then(response => {
+                if (response.body) {
+                    let array = []
+                    response.body.forEach(element => {
+                        array.push({
+                            value: element.Id,
+                            text: this.$moment(element.ConsultationDate).format('dddd DD [de] MMMM [de] YYYY')
+                        })
+                    })
+                    this.consultationDates = array           
+                }
+            })
+        },
         refreshPreviewConsult() {
-            //this.getConsultationDates()
+            this.getConsultationDates()
         }
     }
 }

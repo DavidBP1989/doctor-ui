@@ -36,7 +36,7 @@ function mapForLabAndCabinet(response) {
     return result
 }
 
-export default{
+export default {
     mapForDiagnosticsAndTreatments,
     mapForLabAndCabinet
 }

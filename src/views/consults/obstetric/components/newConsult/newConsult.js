@@ -5,14 +5,12 @@ import model from './helper/model'
 import distocias from './components/distocias.vue'
 import pregnancies from './components/pregnancies.vue'
 import pregnancyControl from './components/pregnancyControl.vue'
-import api from '@/api/consult-service'
+import api from '@/api/obstetric-consult-service'
 import { saved } from '@/helper/alerts'
 import eventBus from '@/helper/event-bus'
+import operations from '../../helper/operations'
 
 export default {
-    created() {
-        eventBus.$on('_calculeMothersWeight', () => this.calculeMothersWeight())
-    },
     components: {
         distocias,
         pregnancies,
@@ -75,7 +73,8 @@ export default {
                     edema: null,
                     madeUf: false,
                     ultrasound: null,
-                    gestationWeek: null
+                    gestationWeek: null,
+                    estimatedDueDate: null
                 },
                 reasonForConsultation: null,
                 exploration: null
@@ -105,40 +104,25 @@ export default {
         numberFormat(evt) {
             onlyNumber(evt, false)
         },
-        calculeGestationWeek() {
+        firstDayMenstruationSelected() {
             if (this.form.firstDayMenstruation !== null) {
-
-                const diffDays = this.$moment(new Date()).diff(this.form.firstDayMenstruation, 'days')
-
-                if (diffDays > 0) {
-                    const weeks = Math.floor(diffDays / 7)
-                    const days = diffDays % 7
-                    let s = ''
-                    if (weeks > 0 && days > 0) s = `${weeks} semana(s) / ${days} día(s)`
-                    else if (weeks > 0 && days <= 0) s = `${weeks} semana(s)`
-                    else if (weeks <= 0 && days > 0) s = `${days} día(s)`
-
-                    this.form.pregnancyControl.gestationWeek = s
-                } else this.form.pregnancyControl.gestationWeek = null
-            }
+                this.form.pregnancyControl.gestationWeek = operations.calculeGestationWeek(this.form.firstDayMenstruation)
+                this.form.pregnancyControl.estimatedDueDate = operations.estimatedDueDate(this.form.firstDayMenstruation)
+            }   
         },
         calculeMothersWeight() {
             this.form.pregnancyControl.mothersWeight = null
-
-            if (!isNaN(this.form.weight) && !isNaN(this.form.pregnancyControl.weight)) {
-                const weight = parseFloat(this.form.weight)
-                const productWeight = parseFloat(this.form.pregnancyControl.weight)
-                if (weight > 0 && productWeight > 0) {
-                    this.form.pregnancyControl.mothersWeight = (weight - productWeight).toFixed(2)
-                }
-            }
+            this.form.pregnancyControl.mothersWeight = operations.calculeMothersWeight(
+                this.form.weight,
+                this.form.pregnancyControl.weight
+            )
         },
         saveConsult() {
             const req = new model(this.form)
             currentLoader = loader()
 
             let success = false
-            api.saveConsultObstetric(this.doctorId, req.__$).then(() => {
+            api.saveConsult(this.doctorId, req.__$).then(() => {
                 success = true
                 currentLoader.hide()
                 saved('Consulta agregada', true)

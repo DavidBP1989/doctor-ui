@@ -10,7 +10,7 @@
             </b-col>
             <b-col cols="6" md="4">
                 <b-form-group label="Fecha probable de parto">
-                    <b-form-input disabled />
+                    <b-form-input disabled v-model="pregnancy.estimatedDueDate" />
                 </b-form-group>
             </b-col>
             <b-col cols="4" md="2">
@@ -74,7 +74,7 @@
             </b-col>
             <b-col cols="7" sm="6" md="4" lg="3">
                 <b-form-group label="Peso aproximado producto">
-                    <b-input-group append="Kg">
+                    <b-input-group append="g">
                         <b-form-input v-model="pregnancy.weight" @blur="calculeMothersWeight" />
                     </b-input-group>
                 </b-form-group>
@@ -121,23 +121,24 @@
 </template>
 
 <script>
-import eventBus from '@/helper/event-bus'
+import operations from '../../../helper/operations'
 
 export default {
     props: {
-        pregnancyControl: {
+        form: {
             type: Object,
             required: true
         }
     },
     data() {
         return {
-            pregnancy: this.pregnancyControl
+            pregnancy: this.form.pregnancyControl
         }
     },
     methods: {
         calculeMothersWeight() {
-            eventBus.$emit('_calculeMothersWeight')
+            this.pregnancy.mothersWeight = null
+            this.pregnancy.mothersWeight = operations.calculeMothersWeight(this.form.weight, this.pregnancy.weight)
         }
     }
 }

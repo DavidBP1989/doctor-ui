@@ -101,7 +101,7 @@
                         <v-date-picker
                         class="form-control p-0"
                         v-model="form.firstDayMenstruation"
-                        :input="calculeGestationWeek()"
+                        :input="firstDayMenstruationSelected()"
                         :input-props="{ readonly: true }"
                         :max-date="new Date()"
                         color="pink"
@@ -170,7 +170,7 @@
                 </b-form-group>
             </b-col>
         </b-row>
-        <pregnancy-control :pregnancyControl="form.pregnancyControl" />
+        <pregnancy-control :form="form" />
         <b-row>
             <b-col cols="12" lg="6">
                 <b-form-group label="Motivo de la consulta">
