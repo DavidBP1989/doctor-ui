@@ -82,6 +82,18 @@ export const router = new Router({
                     }
                 },
                 {
+                    path: 'gynecology',
+                    component: () => import(/**/ '../views/consults/gynecology/main.vue'),
+                    name: 'Consulta ginecologica',
+                    meta: {
+                        breadcrumb: [
+                            { text: 'Pacientes', to: '/' },
+                            { text: 'Consulta ginecologica', to: '#', active: true }
+                        ],
+                        typeMenu: 'consult'
+                    }
+                },
+                {
                     path: 'obstetric',
                     component: () => import(/**/ '../views/consults/obstetric/main.vue'),
                     name: 'Consulta obstétrica',
