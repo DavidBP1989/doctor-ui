@@ -92,12 +92,12 @@
                     <span>{{ consult.PregnancyControl.FCM }}</span>
                 </b-form-group>
             </b-col>
-            <b-col lg="3">
+            <b-col cols="6" md="3">
                 <b-form-group label="Edema">
                     <span>{{ consult.PregnancyControl.Edema }}</span>
                 </b-form-group>
             </b-col>
-            <b-col lg="3">
+            <b-col cols="6" md="3">
                 <b-form-group label="Se hizo us">
                     <span>{{ consult.PregnancyControl.MadeUf }}</span>
                 </b-form-group>

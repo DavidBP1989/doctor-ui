@@ -1,7 +1,6 @@
 <template>
     <b-row class="align-items-center">
         <b-col
-        :cols="(!preg.ectopic && !preg.previous) ? 6 : 12"
         :sm="(!preg.ectopic && !preg.perinatal) ? 6 : 12"
         :md="(!preg.ectopic && !preg.previous && !preg.perinatal) ? 3 : 12"
         :lg="(!preg.ectopic && !preg.previous && !preg.perinatal) ? 4 : 12">
@@ -20,7 +19,6 @@
             </b-collapse>
         </b-col>
         <b-col
-        :cols="(!preg.ectopic && !preg.previous) ? 6 : 12"
         sm="12" order-sm="1"
         :md="(!preg.ectopic && !preg.previous && !preg.perinatal) ? 5 : 12"
         order-md="0"

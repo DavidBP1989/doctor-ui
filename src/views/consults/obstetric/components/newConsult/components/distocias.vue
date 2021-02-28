@@ -2,7 +2,7 @@
     <b-collapse class="w-100 ml-3 mr-3" v-model="show">
         <b-card class="pl-3 pr-3" title="Partos">
             <b-row>
-                <b-col cols="12" :sm="(!showCollapseType && !showCollapseReason) ? 6 : 12">
+                <b-col :cols="(!showCollapseType && !showCollapseReason) ? 6 : 12">
                     <b-form-group label="Tipo de distocia">
                         <b-form-select v-model="distociaM.type" :options="types" />
                     </b-form-group>
@@ -14,7 +14,7 @@
                         </b-card>
                     </b-collapse>
                 </b-col>
-                <b-col cols="12" :sm="(!showCollapseType && !showCollapseReason) ? 6 : 12">
+                <b-col :cols="(!showCollapseType && !showCollapseReason) ? 6 : 12">
                     <b-form-group label="Motivo de la distocia">
                         <b-form-select v-model="distociaM.reason" :options="reasons" />
                     </b-form-group>

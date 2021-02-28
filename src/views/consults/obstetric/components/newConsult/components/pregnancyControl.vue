@@ -66,13 +66,13 @@
                 </b-form-group>
             </b-col>
         </b-row>
-        <b-row>
-            <b-col cols="5" sm="6" md="4" lg="2">
+        <b-row class="align-items-center">
+            <b-col cols="6" md="4" lg="2">
                 <b-form-group label="Movimientos fetales">
                     <b-form-input v-model="pregnancy.fetalMovements" />
                 </b-form-group>
             </b-col>
-            <b-col cols="7" sm="6" md="4" lg="3">
+            <b-col cols="6" md="4" lg="3">
                 <b-form-group label="Peso aproximado producto">
                     <b-input-group append="g">
                         <b-form-input v-model="pregnancy.weight" @blur="calculeMothersWeight" />

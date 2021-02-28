@@ -122,13 +122,15 @@ export default {
             currentLoader = loader()
 
             let success = false
-            api.saveConsult(this.doctorId, req.__$).then(() => {
-                success = true
+            api.saveConsult(this.doctorId, req.__$).then((response) => {
+                success = response.body.IsSuccess
                 currentLoader.hide()
-                saved('Consulta agregada', true)
+                const title = success ? 'Consulta agregada' : 'Error al confirmar la consulta'
+                saved(title, success)
             })
             .catch(() => {
                 currentLoader.hide()
+                saved('Error al confirmar la consulta', false)
             })
             .finally(() => {
                 if (success) {

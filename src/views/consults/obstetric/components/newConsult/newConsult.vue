@@ -1,7 +1,7 @@
 <template>
     <div class="obste">
         <b-row class="align-items-lg-center">
-            <b-col cols="6" sm="6" md="3" lg="2">
+            <b-col cols="6" md="3" lg="2">
                 <b-form-group label="Peso">
                     <b-input-group append="kg">
                         <b-form-input
@@ -11,21 +11,21 @@
                     </b-input-group>
                 </b-form-group>
             </b-col>
-            <b-col cols="6" sm="6" md="3" lg="2">
+            <b-col cols="6" md="3" lg="2">
                 <b-form-group label="Talla">
                     <b-input-group append="m">
                         <b-form-input v-model="form.size" @keypress="onlyDecimals" />
                     </b-input-group>
                 </b-form-group>
             </b-col>
-            <b-col cols="7" sm="6" md="4" lg="3">
+            <b-col cols="6" md="4" lg="3">
                 <b-form-group label="Índice de masa corporal">
                     <b-input-group append="kg/m2">
                         <b-form-input disabled :value="mass" />
                     </b-input-group>
                 </b-form-group>
             </b-col>
-            <b-col cols="5" sm="6" md="2" lg="3">
+            <b-col cols="6" md="2" lg="3">
                 <b-form-group label="Temperatura">
                     <b-input-group append="c">
                         <b-form-input v-model="form.temperature" @keypress="onlyDecimals" />
@@ -42,7 +42,7 @@
             </b-col>
         </b-row>
         <b-row class="align-items-center">
-            <b-col cols="7" sm="5" md="4" lg="3">
+            <b-col cols="6" sm="5" md="4" lg="3">
                 <b-form-group label="Número de embarazos">
                     <b-form-input v-model="form.pregnancyNumber" type="number" />
                 </b-form-group>
@@ -65,7 +65,7 @@
                     <b-form-input @keypress="numberFormat" v-model="form.bloodPressure_B" />
                 </b-form-group>
             </b-col>
-            <b-col cols="5" sm="3" md="4" lg="3">
+            <b-col cols="6" sm="3" md="4" lg="3">
                 <b-form-group label="Abortos">
                     <b-form-input type="number" v-model="form.abortions" />
                 </b-form-group>

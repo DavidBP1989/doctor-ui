@@ -1,34 +1,34 @@
 <template>
     <div v-if="consult !== null">
-        <b-row class="align-items-center">
-            <b-col offset-md="6" offset-lg="8" md="6" lg="4">
-                <b-form-group label="Buscar consulta">
+        <b-row>
+            <b-col offset-sm="4" offset-lg="8" class="text-right">
+                <b-form-group class="nlegend" label="Buscar consulta">
                     <b-form-select v-model="selectedDate" :options="dates" @change="getConsult" />
                 </b-form-group>
             </b-col>
         </b-row>
         <b-row class="mt-3 align-items-center">
-            <b-col cols="3" md="3" lg="2">
+            <b-col cols="3" md="4" lg="2">
                 <b-form-group label="Peso">
                     <span>{{ consult.BasicConsult.Weight }} kg</span>
                 </b-form-group>
             </b-col>
-            <b-col cols="3" md="3" lg="2">
+            <b-col cols="3" md="4" lg="2">
                 <b-form-group label="Talla">
                     <span>{{ consult.BasicConsult.Size }} m</span>
                 </b-form-group>
             </b-col>
-            <b-col cols="6" md="6" lg="3">
+            <b-col cols="6" md="4" lg="3">
                 <b-form-group label="Indice de masa corporal">
                     <span>{{ mass }} kg/m2</span>
                 </b-form-group>
             </b-col>
-            <b-col cols="6" md="3" lg="2">
+            <b-col cols="6" md="4" lg="2">
                 <b-form-group label="Temperatura">
                     <span>{{ consult.BasicConsult.Temperature }} c</span>
                 </b-form-group>
             </b-col>
-            <b-col>
+            <b-col cols="6" md="4" lg="3">
                 <b-form-group label="Presión arterial">
                     <span>{{ consult.BasicConsult.BloodPressure_A }}/{{ consult.BasicConsult.BloodPressure_B }} mm Hg</span>
                 </b-form-group>
