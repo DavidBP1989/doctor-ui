@@ -9,8 +9,8 @@ export default {
     },
     props: {
         consultationDates: {
-            required: true,
-            type: Array
+            type: Array,
+            required: true
         }
     },
     data() {

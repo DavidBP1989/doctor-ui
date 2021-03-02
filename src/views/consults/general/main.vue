@@ -1,6 +1,6 @@
 <template>
     <div role="tablist" class="mb-3">
-        <b-card v-if="consultationDates.length > 0" no-body class="mb-1">
+        <b-card no-body class="mb-1">
             <b-card-header header-tag="header" class="p-0" role="tab">
                 <b-button block v-b-toggle._previous class="text-left p-2">
                     <fa-icon class="mr-2" :icon="['fas', (visiblePrevious ? 'caret-down' : 'caret-right')]" size="lg" />
@@ -42,7 +42,7 @@
 import consultPrevious from './components/consultPrevious/consultPrevious.vue'
 import newConsult from './components/newConsult/newConsult.vue'
 import eventBus from '@/helper/event-bus'
-import api from '@/api/consult-service'
+import api from '@/api/general-consult-service'
 
 export default {
     mounted() {
@@ -72,7 +72,7 @@ export default {
     },
     methods: {
         getConsultationDates() {
-            api.getConsultationDates(this.patientId).then(response => {
+            api.getDatesPreviousConsult(this.patientId).then(response => {
                 if (response.body) {
                     let array = []
                     response.body.forEach(element => {

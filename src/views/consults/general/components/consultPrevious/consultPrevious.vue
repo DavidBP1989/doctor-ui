@@ -20,12 +20,12 @@
         <b-row class="mt-3 align-items-center">
             <b-col cols="3" md="4" lg="2">
                 <b-form-group label="Peso">
-                    <span>{{ consult.Weight }} kg</span>
+                    <span>{{ consult.BasicConsult.Weight }} kg</span>
                 </b-form-group>
             </b-col>
             <b-col cols="3" md="4" lg="2">
                 <b-form-group label="Talla">
-                    <span>{{ consult.Size }} m</span>
+                    <span>{{ consult.BasicConsult.Size }} m</span>
                 </b-form-group>
             </b-col>
             <b-col cols="6" md="4" lg="3">
@@ -35,44 +35,44 @@
             </b-col>
             <b-col cols="6" md="4" lg="2">
                 <b-form-group label="Temperatura">
-                    <span>{{ consult.Temperature }} c</span>
+                    <span>{{ consult.BasicConsult.Temperature }} c</span>
                 </b-form-group>
             </b-col>
             <b-col>
                 <b-form-group label="Presión arterial">
-                    <span>{{ consult.BloodPressure_A }}/{{ consult.BloodPressure_B }} mm Hg</span>
+                    <span>{{ consult.BasicConsult.BloodPressure_A }}/{{ consult.BasicConsult.BloodPressure_B }} mm Hg</span>
                 </b-form-group>
             </b-col>
         </b-row>
         <b-row>
-            <b-col cols="6" sm="4">
+            <b-col cols="12" sm="6" lg="4">
                 <b-form-group label="Perímetro cefálico">
                     <span>{{ consult.HeadCircuference }} cm</span>
                 </b-form-group>
             </b-col>
-            <b-col>
+            <b-col cols="6" lg="4">
                 <b-form-group label="Frecuencia cardiaca">
                     <span>{{ consult.HeartRate }} lpm</span>
                 </b-form-group>
             </b-col>
-            <b-col>
+            <b-col cols="6" sm="12" lg="4">
                 <b-form-group label="Frecuencia respiratoria">
                     <span>{{ consult.BreathingFrecuency }} lpm</span>
                 </b-form-group>
             </b-col>
         </b-row>
         <b-row>
-            <b-col md="6">
+            <b-col sm="6">
                 <b-form-group label="Motivo de la consulta">
                     <span>{{ consult.ReasonForConsultation }}</span>
                 </b-form-group>
             </b-col>
-            <b-col md="6">
+            <b-col sm="6">
                 <b-form-group label="Exploración física">
                     <span>{{ consult.PhysicalExploration }}</span>
                 </b-form-group>
             </b-col>
-            <b-col md="6">
+            <b-col sm="6">
                 <b-form-group label="Medidas preventivas">
                     <span>{{ consult.PreventiveMeasures }}</span>
                 </b-form-group>

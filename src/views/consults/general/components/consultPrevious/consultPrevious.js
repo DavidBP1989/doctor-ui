@@ -1,4 +1,4 @@
-import api from '@/api/consult-service'
+import api from '@/api/general-consult-service'
 import { urlFileEmeci } from '@/helper/utilities'
 
 export default {
@@ -7,9 +7,6 @@ export default {
             this.dates = newDate
             this.init()
         })
-    },
-    created() {
-        if (this.dates.length > 0) this.init()
     },
     props: {
         consultationDates: {
@@ -26,7 +23,9 @@ export default {
     },
     computed: {
         mass() {
-            return this.consult.Mass > 0 ? this.consult.Mass.toFixed(2) : this.consult.Mass
+            return this.consult.BasicConsult.Mass > 0 ? 
+            this.consult.BasicConsult.Mass.toFixed(2) :
+            this.consult.BasicConsult.Mass
         }
     },
     methods: {

@@ -1,28 +1,28 @@
 <template>
     <div class="newconsult">
         <b-row>
-            <b-col sm="6" md="3">
+            <b-col cols="6" md="3">
                 <b-form-group label="Peso">
                     <b-input-group append="kg">
                         <b-form-input v-model="form.weight" @keypress="onlyDecimals" />
                     </b-input-group>
                 </b-form-group>
             </b-col>
-            <b-col sm="6" md="3">
+            <b-col cols="6" md="3">
                 <b-form-group label="Talla">
                     <b-input-group append="m">
                         <b-form-input v-model="form.size" @keypress="onlyDecimals" />
                     </b-input-group>
                 </b-form-group>
             </b-col>
-            <b-col sm="6" md="4" lg="3">
+            <b-col cols="6" md="4" lg="3">
                 <b-form-group label="Índice de masa corporal">
                     <b-input-group append="kg/m2">
                         <b-form-input disabled :value="mass" />
                     </b-input-group>
                 </b-form-group>
             </b-col>
-            <b-col sm="6" md="2" lg="3">
+            <b-col cols="6" md="2" lg="3">
                 <b-form-group label="Temperatura">
                     <b-input-group append="c">
                         <b-form-input v-model="form.temperature" @keypress="onlyDecimals" />
@@ -31,29 +31,29 @@
             </b-col>
         </b-row>
         <b-row>
-            <b-col sm="6" md="3">
+            <b-col cols="6" lg="3">
                 <b-form-group label="Tensión arterial">
                     <div class="d-flex">
-                        <b-form-input v-model="form.bloodPressure_a" @keypress="onlyDecimals" class="mr-2"/>
-                        <b-form-input v-model="form.bloodPressure_b" @keypress="onlyDecimals" />
+                        <b-form-input v-model="form.bloodPressure_a" @keypress="numberFormat" class="mr-2"/>
+                        <b-form-input v-model="form.bloodPressure_b" @keypress="numberFormat" />
                     </div>
                 </b-form-group>
             </b-col>
-            <b-col sm="6" md="3">
+            <b-col cols="6" lg="3">
                 <b-form-group label="Perímetro cefálico">
                     <b-input-group append="cm">
                         <b-form-input v-model="form.headCircuference" @keypress="onlyDecimals" />
                     </b-input-group>
                 </b-form-group>
             </b-col>
-            <b-col sm="6" md="6" lg="3">
+            <b-col cols="6" lg="3">
                 <b-form-group label="Frecuencia cardiaca">
                     <b-input-group append="lpm">
                         <b-form-input v-model="form.heartRate" @keypress="onlyDecimals" />
                     </b-input-group>
                 </b-form-group>
             </b-col>
-            <b-col sm="6" md="6" lg="3">
+            <b-col cols="6" lg="3">
                 <b-form-group label="Frecuencia respiratoria">
                     <b-input-group append="lpm">
                         <b-form-input v-model="form.breathingFrecuency" @keypress="onlyDecimals" />
@@ -86,7 +86,7 @@
             </b-col>
         </b-row>
         <b-row class="mt-2">
-            <b-col class="text-md-right">
+            <b-col class="text-right">
                 <diagnostics :savedValues="diagnostics" :newValues="form.diagnostics" />
                 <treatments :savedValues="treatments" :newValues="form.treatments" />
                 <laboratory :savedValues="laboratory" :newValues="form.laboratory" />

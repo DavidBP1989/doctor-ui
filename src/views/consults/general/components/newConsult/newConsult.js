@@ -1,7 +1,7 @@
 let currentLoader = null
 import { onlyNumber } from '@/helper/utilities'
 import { loader } from '@/helper/loader'
-import api from '@/api/consult-service'
+import api from '@/api/general-consult-service'
 import diagnostics from './components/diagnostics.vue'
 import treatments from './components/treatments.vue'
 import addedItems from './shared/addedItems.vue'
@@ -18,7 +18,7 @@ import iFrame from '@/shared/i-frame.vue'
 export default {
     created() {
         this.getNecessaryResources()
-        eventBus.$on('save', () => this.save())
+        eventBus.$on('save', () => this.saveConsult())
     },
     components: {
         diagnostics,
@@ -87,18 +87,23 @@ export default {
         onlyDecimals(evt) {
             onlyNumber(evt, true)
         },
-        save() {
+        numberFormat(evt) {
+            onlyNumber(evt, false)
+        },
+        saveConsult() {
             const req = new model(this.form)
             currentLoader = loader()
 
             let success = false
-            api.saveConsult(this.doctorId, req.__$).then(() => {
-                success = true
+            api.saveConsult(this.doctorId, req.__$).then((response) => {
+                success = response.body.IsSuccess
                 currentLoader.hide()
-                saved('Consulta agregada', true)
+                const title = success ? 'Consulta agregada' : 'Error al confirmar la consulta'
+                saved(title, success)
             })
             .catch(_error => {
                 currentLoader.hide()
+                saved('Error al confirmar la consulta', false)
             })
             .finally(() => {
                 if (success) {
