@@ -4,30 +4,46 @@ import store from '../store/store'
 
 Vue.use(Router)
 
+import auth from '../views/authentication/main.vue'
+import logIn from '../views/authentication/components/logIn.vue'
+import forgotPwd from '../views/authentication/components/rememberPassword.vue'
+
+import patients from '../views/patients/main.vue'
+import patientList from '../views/patients/patientList/patientList.vue'
+import newPatient from '../views/patients/newPatient/newPatient.vue'
+
+import register from '../views/doctor/register/main.vue'
+
+import consults from '../views/consults/main.vue'
+import generalConsult from '../views/consults/general/main.vue'
+import gynecologyConsult from '../views/consults/gynecology/main.vue'
+import obstetricConsult from '../views/consults/obstetric/main.vue'
+
 export const router = new Router({
     mode: 'history',
+    base: `${BASE_URL}`,
     routes: [
         {
             path: '/auth',
-            component: () => import(/**/ '../views/authentication/main.vue'),
+            component: auth,
             children: [
                 {
                     path: '',
-                    component: () => import(/**/ '../views/authentication/components/logIn.vue')
+                    component: logIn
                 },
                 {
                     path: 'forgotPwd',
-                    component: () => import(/**/ '../views/authentication/components/rememberPassword.vue')
+                    component: () => forgotPwd
                 }
             ]
         }, //patients
         {
             path: '/',
-            component: () => import(/**/ '../views/patients/main.vue'),
+            component: patients,
             children: [
                 {
                     path: '',
-                    component: () => import(/**/ '../views/patients/patientList/patientList.vue'),
+                    component: patientList,
                     name: 'Pacientes',
                     meta: {
                         showPatientInfo: false,
@@ -36,7 +52,7 @@ export const router = new Router({
                 },
                 {
                     path: 'newPatient',
-                    component: () => import(/**/ '../views/patients/newPatient/newPatient.vue'),
+                    component: newPatient,
                     name: 'Nuevo paciente',
                     meta: { 
                         breadcrumb: [
@@ -49,11 +65,11 @@ export const router = new Router({
         }, //doctor
         {
             path: '/register',
-            component: () => import(/**/ '../views/doctor/main.vue'),
+            component: register,
             children: [
                 {
                     path: '',
-                    component: () => import(/**/ '../views/doctor/register/main.vue'),
+                    component: register,
                     name: store.getters.isAuthenticated ? 'Mis datos médicos' : 'Registro médico',
                     meta: {
                         breadcrumb: [],
@@ -64,14 +80,14 @@ export const router = new Router({
         }, //consults
         {
             path: '/consults/:id',
-            component: () => import(/**/ '../views/consults/main.vue'),
+            component: consults,
             meta: {
                 menu: 'consults'
             },
             children: [
                 {
                     path: '',
-                    component: () => import(/**/ '../views/consults/general/main.vue'),
+                    component: generalConsult,
                     name: 'Consulta general',
                     meta: {
                         breadcrumb: [
@@ -83,7 +99,7 @@ export const router = new Router({
                 },
                 {
                     path: 'gynecology',
-                    component: () => import(/**/ '../views/consults/gynecology/main.vue'),
+                    component: gynecologyConsult,
                     name: 'Consulta ginecologica',
                     meta: {
                         breadcrumb: [
@@ -95,7 +111,7 @@ export const router = new Router({
                 },
                 {
                     path: 'obstetric',
-                    component: () => import(/**/ '../views/consults/obstetric/main.vue'),
+                    component: obstetricConsult,
                     name: 'Consulta obstétrica',
                     meta: {
                         breadcrumb: [

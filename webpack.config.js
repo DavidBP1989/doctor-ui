@@ -2,11 +2,13 @@ var path = require('path')
 var VueLoaderPlugin = require('vue-loader/lib/plugin')
 var webpack = require('webpack')
 
+const publicPath = process.env.NODE_ENV === 'production' ? '/doctor/' : '/'
+
 module.exports = {
     entry: './src/main.js',
     output: {
         path: path.resolve(__dirname, './dist'),
-        //publicPath: '/dist/',
+        publicPath: publicPath,
         filename: 'build.js'
     },
     module: {
@@ -57,14 +59,16 @@ if (process.env.NODE_ENV === 'production') {
     module.exports.plugins = (module.exports.plugins || []).concat([
         new webpack.DefinePlugin({
             'API_URL_AUTHENTICATION': JSON.stringify('https://emeci.com/doctorapi'),
-            'API_URL': JSON.stringify('https://emeci.com/doctorapi/api')
+            'API_URL': JSON.stringify('https://emeci.com/doctorapi/api'),
+            'BASE_URL': JSON.stringify('/doctor')
         })
     ])
 } else {
     module.exports.plugins = (module.exports.plugins || []).concat([
         new webpack.DefinePlugin({
             'API_URL_AUTHENTICATION': JSON.stringify('https://localhost:44323'),
-            'API_URL': JSON.stringify('https://localhost:44323/api')
+            'API_URL': JSON.stringify('https://localhost:44323/api'),
+            'BASE_URL': JSON.stringify('/')
         })
     ])
 }
