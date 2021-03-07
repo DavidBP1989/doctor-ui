@@ -2,12 +2,13 @@ var path = require('path')
 var VueLoaderPlugin = require('vue-loader/lib/plugin')
 var webpack = require('webpack')
 
-const publicPath = process.env.NODE_ENV === 'production' ? '/doctor/' : '/'
+const publicPath = process.env.NODE_ENV === 'production' ? '/doctor/dist/' : '/'
 
 module.exports = {
     entry: './src/main.js',
     output: {
         path: path.resolve(__dirname, './dist'),
+        chunkFilename: 'chunk/[id].js',
         publicPath: publicPath,
         filename: 'build.js'
     },
@@ -15,7 +16,7 @@ module.exports = {
         rules: [
             { 
                 test: /\.js$/,
-                exclude: /(node_modules)/,
+                exclude: /node_modules/,
                 use: {
                     loader: 'babel-loader'
                 }
