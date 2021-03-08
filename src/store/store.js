@@ -33,7 +33,8 @@ export default new Vuex.Store({
             groupRH: null,
             birthDate: null,
             sex: 'M'
-        }
+        },
+        doctorRegister: false
     },
     actions,
     getters,

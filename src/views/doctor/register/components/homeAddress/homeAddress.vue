@@ -2,7 +2,7 @@
     <div>
         <h5 class="mt-3 mb-4">Domicilio particular</h5>
         <b-form-row>
-            <b-col md="6" lg="4">
+            <b-col sm="6" lg="4">
                 <b-form-group label="Estado">
                     <vue-bootstrap-typeahead
                     v-model="stateSelected"
@@ -20,7 +20,7 @@
                     </vue-bootstrap-typeahead>
                 </b-form-group>
             </b-col>
-            <b-col>
+            <b-col sm="6" lg="4">
                 <b-form-group label="Ciudad">
                     <vue-bootstrap-typeahead
                     v-model="citySelected"
@@ -45,18 +45,18 @@
             </b-col>
         </b-form-row>
         <b-form-row>
-            <b-col md="8" lg="6">
+            <b-col cols="12" md="8" lg="6">
                 <b-form-group label="Calles">
                     <b-form-input v-model="form.address" />
                 </b-form-group>
             </b-col>
-            <b-col md="4" lg="3">
+            <b-col cols="6" md="4" lg="3">
                 <b-form-group label="Código postal">
-                    <b-form-input v-model="form.cp" @keypress="numberFormat" class="f-text" />
+                    <b-form-input v-model="form.cp" maxlength="5" @keypress="numberFormat" class="f-text" />
                     <div class="invalid-feedback">Este campo es requerido</div>
                 </b-form-group>
             </b-col>
-            <b-col md="6" lg="3">
+            <b-col cols="6" lg="3">
                 <b-form-group label="Teléfono de consultorio">
                     <b-input-group>
                         <b-form-input v-model="form.officePhone" @keypress="numberFormat" class="f-text" />

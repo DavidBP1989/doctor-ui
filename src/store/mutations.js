@@ -54,6 +54,10 @@ const SET_LOGOUT = state => {
     localStorage.removeItem('emecitoken')
 }
 
+const SET_DOCTOR_REGISTER_POST = (state, payload) => {
+    state.doctorRegister = payload
+}
+
 export default {
     SET_DOCTOR_INFORMATION,
     SET_PATIENT_INFORMATION,
@@ -61,5 +65,6 @@ export default {
     SET_PATIENT_RESERVED,
     SET_PATIENT_RELEVENTPATHOLOGIES,
     SET_AUTHENTICATION,
-    SET_LOGOUT
+    SET_LOGOUT,
+    SET_DOCTOR_REGISTER_POST
 }

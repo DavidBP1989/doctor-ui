@@ -42,7 +42,7 @@
                         </b-nav-item>
                     </b-navbar-nav>
 
-                    <h3 class="title ml-auto mt-2" v-if="!$store.getters.isAuthenticated">{{ title }}</h3>
+                    <h3 class="title ml-auto mt-2 text-center" v-if="!$store.getters.isAuthenticated">{{ title }}</h3>
                 </b-collapse>
             </b-container>
         </b-navbar>

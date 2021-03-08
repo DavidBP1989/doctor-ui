@@ -39,14 +39,17 @@ export default {
 
             if (this.emeci !== '') {
                 api.forgotPwd(this.emeci).then(response => {
-                    this.showError = false
-                    this.showSuccess = true
-                    this.emeci = ''
-                }).catch(_error => {
-                    this.showSuccess = false
-                    this.showError = true
-                })
+                    if (response.body.IsSuccess) {
+                        this.showError = false
+                        this.showSuccess = true
+                        this.emeci = ''
+                    } else this.onError()
+                }).catch(() => this.onError())
             }
+        },
+        onError() {
+            this.showSuccess = false
+            this.showError = true
         }
     },
     watch: {

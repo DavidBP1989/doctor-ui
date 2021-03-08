@@ -67,8 +67,8 @@ if (process.env.NODE_ENV === 'production') {
 } else {
     module.exports.plugins = (module.exports.plugins || []).concat([
         new webpack.DefinePlugin({
-            'API_URL_AUTHENTICATION': JSON.stringify('https://localhost:44323'),
-            'API_URL': JSON.stringify('https://localhost:44323/api'),
+            'API_URL_AUTHENTICATION': JSON.stringify('https://localhost:44347'),
+            'API_URL': JSON.stringify('https://localhost:44347/api'),
             'BASE_URL': JSON.stringify('/')
         })
     ])

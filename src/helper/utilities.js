@@ -39,7 +39,7 @@ function onlyLetter(evt) {
     } else return true
 }
 
-const urlFileEmeci = 'https://www.emeci.com/PacienteExpediente/AccesEmeci.aspx';
+const urlFileEmeci = 'https://www.emeci.com/PacienteExpediente/AccesEmeci.aspx'
 
 export {
     userFormat,

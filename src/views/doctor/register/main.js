@@ -9,9 +9,32 @@ import api from '@/api/doctor-service'
 import eventBus from '@/helper/event-bus'
 import model from './helper/model'
 import { saved } from '@/helper/alerts'
+import $ from 'jquery'
 
 export default {
+    mounted() {
+        const _vue = this
+        this.$nextTick(function () {
+            $('.form-control*').on('keyup', function () {
+                if (_vue.$store.getters.isDoctorRegisterSend) {
+                    if ($(this).hasClass('f-text')) {
+                        if (!$(this).hasClass('stateorcity')) {
+                            formValidation.inputSelected = $(this)
+                            formValidation.typeValidations.text()
+                        }
+                    }
+                }
+            })
+
+            $('.politics input').on('change', function () {
+                if (!$(this).prop('checked'))
+                    $(this).removeClass('is-valid').addClass('is-invalid')
+                else $(this).removeClass('is-invalid').addClass('is-valid')
+            })
+        })
+    },
     created() {
+        this.$store.commit('SET_DOCTOR_REGISTER_POST', false)
         if (this.isAuthenticated) this.getDoctorInformation()
     },
     components: {
@@ -61,6 +84,9 @@ export default {
         },
         textButton() {
             return this.isAuthenticated ? 'Actualizar información' : 'Finalizar registro'
+        },
+        isDoctorRegisterSend() {
+            return this.$store.getters.isDoctorRegisterSend
         }
     },
     methods: {
@@ -97,6 +123,7 @@ export default {
         onSubmit(evt) {
             evt.preventDefault()
 
+            this.$store.commit('SET_DOCTOR_REGISTER_POST', true)
             if (!formValidation.check('form_doctorregister'))
                 return
             this.isAuthenticated ? this.update() : this.register()
@@ -108,7 +135,7 @@ export default {
             const modelReq = new model(this.form) 
             api.register(modelReq.__$).then(response => {
                 currentLoader.hide()
-                if (response.status == 200) {
+                if (response.body.IsSuccess) {
                     saved('Registro médico guardado', true)
                     window.location.href = 'https://emeci.com/'
                 } else this.failure(textError)
@@ -124,7 +151,7 @@ export default {
             const modelReq = new model(this.form) 
             api.updateRegisterInfo(this.$store.state.doctor.id, modelReq.__$).then(response => {
                 currentLoader.hide()
-                if (response.status === 200) {
+                if (response.body.IsSuccess) {
                     saved('La información ha sido actualizada', true)
                 } else this.failure(textError)
             })

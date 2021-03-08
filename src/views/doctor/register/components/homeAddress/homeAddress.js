@@ -12,7 +12,7 @@ export default {
     mounted() {
         this.$nextTick(() => {
             $('.ec :input')
-            .addClass('f-text')
+            .addClass('f-text stateorcity')
             .after('<div class="invalid-feedback">Este campo es requerido</div>')
         })
     },
