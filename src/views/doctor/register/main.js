@@ -91,7 +91,7 @@ export default {
     },
     methods: {
         getDoctorInformation() {
-            currentLoader = loader
+            currentLoader = loader()
             api.getRegister(this.$store.state.doctor.id).then(response => {
                 if (response.body) {
                     this.form.doctorInformation.name = response.body.Name
@@ -115,8 +115,8 @@ export default {
                     this.form.contact.cellphone = response.body.CellPhone
                     this.form.contact.email = response.body.Email
 
-                    eventBus.$emit('setStateAndCity', { state: response.body.State, city: response.body.City })
                     currentLoader.hide()
+                    eventBus.$emit('setStateAndCity', { state: response.body.State, city: response.body.City })
                 }
             })
         },

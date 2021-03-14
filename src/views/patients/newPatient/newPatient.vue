@@ -105,9 +105,10 @@
                             label="Fecha de nacimiento">
                                 <b-input-group>
                                     <v-date-picker
-                                    class="form-control p-0 f-text"
+                                    class="form-control p-0 f-date"
                                     v-model="form.birthDate"
-                                    :input-props="{ disabled: visibleCollapse }"
+                                    :input="birthDateSelected()"
+                                    :input-props="{ disabled: visibleCollapse, readonly: true }"
                                     color="pink"
                                     :popover="{ placement: 'bottom', visibility: 'click' }">
                                     </v-date-picker>

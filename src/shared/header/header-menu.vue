@@ -50,7 +50,7 @@
 
 <script>
 import logo from '@/assets/images/logo-emeci.png'
-
+import { urlFileEmeci } from '../../helper/utilities'
 export default {
     data() {
         return {
@@ -78,11 +78,7 @@ export default {
             window.open(this.getUrl('E'))
         },
         getUrl(type) {
-            return `${urlFileEmeci}?
-            opt=${type}
-            &emeci=${this.$store.state.patient.emeci}
-            &posicion=${this.$store.state.patient.coordinate}
-            &dato=${this.$store.state.patient.coordinateValue}`
+            return `${urlFileEmeci}?opt=${type}&emeci=${this.$store.state.patient.emeci}&posicion=${this.$store.state.patient.coordinate}&dato=${this.$store.state.patient.coordinateValue}`
         },
         goToPatients() {
             this.$router.push('/')

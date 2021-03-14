@@ -35,6 +35,9 @@ import api from '@/api/patient-service'
 import { userFormat, onlyNumber, emeciNumber } from '@/helper/utilities'
 
 export default {
+    created() {
+        this.key()
+    },
     data() {
         return {
             emeci: '',
@@ -59,8 +62,8 @@ export default {
                 api.newExistingPatient(this.doctorId, this.emeci, this.coordinate, this.value)
                 .then(response => {
                     currentLoader.hide()
-                    const patientId = response.body.PatientId
-                    if (patientId != null) {
+                    if (response.body.IsSuccess) {
+                        const patientId = response.body.PatientId
                         this.$router.push(`/consults/${patientId}`)
                     } else this.error = true
 

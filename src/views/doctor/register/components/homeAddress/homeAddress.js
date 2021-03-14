@@ -42,6 +42,9 @@ export default {
     },
     methods: {
         getStates(state = null, city = null) {
+            state = state === '' ? null : state
+            city = city === '' ? null : city
+
             api.getStates().then(response => {
                 if (response.body) {
                     this.states = response.body
@@ -51,7 +54,7 @@ export default {
                     })
                     this.autocompleteStates = array
 
-                    if (this.isAuthenticated && state != null && city!= null) {
+                    if (this.isAuthenticated && state != null && city != null) {
                         this.stateSelected = this.states.find(x => x.Id === state).Name
                         this.$refs.stateTypeahead.inputValue = this.stateSelected
 
@@ -78,7 +81,7 @@ export default {
                     })
                     this.autocompleteCities = array
 
-                    if (this.isAuthenticated) {
+                    if (this.isAuthenticated && city) {
                         this.citySelected = this.cities.find(x => x.Id == city).Name
                         this.$refs.cityTypeahead.inputValue = this.citySelected
                     }

@@ -4,9 +4,25 @@ import api from '@/api/patient-service'
 import existingPatient from './components/existingPatient.vue'
 import { onlyLetter } from '@/helper/utilities'
 import formValidation from '@/helper/formValidation'
+import $ from 'jquery'
+import model from './helper/model'
+import { saved } from '@/helper/alerts'
 
 export default {
+    mounted() {
+        const _vue = this
+        this.$nextTick(function () {
+            $('#formPatients .form-control*').on('keyup', function () {
+                if (_vue.$store.getters.isPatientRegisterSend) {
+                    formValidation.inputSelected = $(this)
+                    if ($(this).hasClass('f-text')) formValidation.typeValidations.text()
+                    else if ($(this).hasClass('f-email')) formValidation.typeValidations.email()
+                }
+            })
+        })
+    },
     created() {
+        this.$store.commit('SET_PATIENT_REGISTER_POST', false)
         this.getLastPatient()
     },
     components: {
@@ -48,28 +64,33 @@ export default {
             })
         },
         activateCard() {
+            this.$store.commit('SET_PATIENT_REGISTER_POST', true)
             if (!formValidation.check('formPatients'))
                 return
             
-            const req = model(this.form)
+            const req = new model(this.form)
             currentLoader = loader()
+            let success = false
             api.saveNewPatient(this.doctorId, req.__$).then(response => {
+                success = response.body.IsSuccess
                 currentLoader.hide()
-                const patientId = response.body.PatientId
-                if (patientId != null) {
-                    saved('Paciente agregado', true, `/consults/${patientId}`)
-                } this.failure()
+                const title = success ? 'Paciente agregado' : 'Error al guardar el paciente'
+                const param = success ? `/consults/${response.body.PatientId}` : null
+                saved(title, success, param)
             })
             .catch(() => {
-                this.failure()
+                currentLoader.hide()
+                saved('Error al guardar el paciente', false)
             })
-        },
-        failure() {
-            currentLoader.hide()
-            saved('Hubó un error al guardar el paciente', false)
         },
         format(evt) {
             onlyLetter(evt)
+        },
+        birthDateSelected() {
+            if (this.$store.getters.isPatientRegisterSend) {
+                formValidation.inputSelected = $('#formPatients .f-date')
+                formValidation.typeValidations.date(this.form.birthDate)
+            }
         }
     }
 }

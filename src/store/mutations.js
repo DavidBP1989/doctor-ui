@@ -58,6 +58,10 @@ const SET_DOCTOR_REGISTER_POST = (state, payload) => {
     state.doctorRegister = payload
 }
 
+const SET_PATIENT_REGISTER_POST = (state, payload) => {
+    state.patientRegister = payload
+}
+
 export default {
     SET_DOCTOR_INFORMATION,
     SET_PATIENT_INFORMATION,
@@ -66,5 +70,6 @@ export default {
     SET_PATIENT_RELEVENTPATHOLOGIES,
     SET_AUTHENTICATION,
     SET_LOGOUT,
-    SET_DOCTOR_REGISTER_POST
+    SET_DOCTOR_REGISTER_POST,
+    SET_PATIENT_REGISTER_POST
 }

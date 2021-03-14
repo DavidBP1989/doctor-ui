@@ -1,6 +1,6 @@
 <template>
     <div role="tablist" class="mb-3">
-        <b-card no-body class="mb-1">
+        <b-card no-body v-if="consultationDates.length > 0" class="mb-1">
             <b-card-header header-tag="header" class="p-0" role="tab">
                 <b-button block v-b-toggle._previous class="text-left p-2">
                     <fa-icon class="mr-2" :icon="['fas', (visiblePrevious ? 'caret-down' : 'caret-right')]" size="lg" />
@@ -68,6 +68,7 @@ export default {
             visibleNewConsult: true,
             consultationDates: [],
             patientId: this.$route.params.id,
+            componentKey: 0
         }
     },
     methods: {
@@ -81,12 +82,13 @@ export default {
                             text: this.$moment(element.ConsultationDate).format('dddd DD [de] MMMM [de] YYYY')
                         })
                     })
-                    this.consultationDates = array           
+                    this.consultationDates = array
+                    this.componentKey += 1     
                 }
             })
         },
         refreshPreviewConsult() {
-            this.getConsultationDates()
+            this.getConsultationDates()   
         }
     }
 }

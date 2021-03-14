@@ -146,12 +146,12 @@
         <b-row>
             <b-col cols="12" sm="6">
                 <b-form-group label="Motivo de la consulta">
-                    <span>{{ consult.PregnancyControl.PhysicalExploration }}</span>
+                    <span>{{ consult.BasicConsult.ReasonForConsultation }}</span>
                 </b-form-group>
             </b-col>
             <b-col>
                 <b-form-group label="Exploración física">
-                    <span>{{ consult.BasicConsult.ReasonForConsultation }}</span>
+                    <span>{{ consult.PregnancyControl.PhysicalExploration }}</span>
                 </b-form-group>
             </b-col>
         </b-row>

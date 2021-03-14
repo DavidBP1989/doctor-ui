@@ -34,7 +34,8 @@ export default new Vuex.Store({
             birthDate: null,
             sex: 'M'
         },
-        doctorRegister: false
+        doctorRegister: false,
+        patientRegister: false
     },
     actions,
     getters,

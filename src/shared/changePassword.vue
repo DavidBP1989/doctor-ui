@@ -67,7 +67,7 @@ export default {
                 }
 
                 api.changePwd(this.doctorId, req).then(response => {
-                    if (response.body.Error === '') {
+                    if (response.body.IsSuccess) {
                         currentLoader.hide()
                         Vue.swal.close()
                         store.dispatch('logout')

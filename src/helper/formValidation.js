@@ -15,6 +15,8 @@ const validate = {
                 inputStatus = validate.typeValidations.text()
             if (validate.inputSelected.hasClass('f-email'))
                 inputStatus = validate.typeValidations.email()
+            if (validate.inputSelected.hasClass('f-date'))
+                inputStatus = validate.typeValidations.date()
 
             if (firstInputWithError == null && !inputStatus)
             {
@@ -36,6 +38,10 @@ const validate = {
         return success
     },
     typeValidations: {
+        date(v) {
+            const value = validate.inputSelected.find('input').val()
+            return (value !== '' || v !== null) ? validate.statusClass.success() : validate.statusClass.error()
+        },
         text() {
             return validate.inputSelected.val() != '' ? validate.statusClass.success() : validate.statusClass.error()
         },

@@ -1,6 +1,7 @@
 const isAuthenticated = state => !!state.token
 
 const isDoctorRegisterSend = state => state.doctorRegister
+const isPatientRegisterSend = state => state.patientRegister
 
 const getLastIdDiagnostics = state => {
     if (state.consults.diagnostics.length > 0) {
@@ -19,6 +20,7 @@ const getLastIdTreatments = state => {
 export default {
     isAuthenticated,
     isDoctorRegisterSend,
+    isPatientRegisterSend,
     getLastIdDiagnostics,
     getLastIdTreatments
 }

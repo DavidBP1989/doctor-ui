@@ -9,7 +9,7 @@ export default class model {
             FathersName: form.fathersName,
             Phone: form.phone,
             Sex: form.sex,
-            Emails: form.emails,
+            Emails: form.email,
             BirthDate: Vue.moment(form.birthDate).format('YYYY-MM-DD'),
             Allergy: form.allergy,
             Password: form.password

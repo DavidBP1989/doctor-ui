@@ -8,6 +8,9 @@ export default {
             this.init()
         })
     },
+    created() {
+        if (this.dates.length > 0) this.init()
+    },
     props: {
         consultationDates: {
             type: Array,
