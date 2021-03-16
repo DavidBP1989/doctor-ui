@@ -50,7 +50,7 @@ export const router = new Router({
         }, //doctor
         {
             path: '/register',
-            component: () => import(/* webpackChunkName: "routes" */ '../views/doctor/main.vue'),
+            component: () => import(/**  */ '../views/doctor/main.vue'),
             children: [
                 {
                     path: '',
@@ -121,7 +121,6 @@ router.beforeEach((to, from, next) => {
     if (authRequired && !loggedIn) {
         return next('/auth')
     } else if (loggedIn && to.path === '/auth') {
-        console.log('frompath')
         return next(from.path)
     }
 
