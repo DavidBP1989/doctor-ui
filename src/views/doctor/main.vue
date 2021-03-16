@@ -1,7 +1,7 @@
 <template>
     <div class="main">
         <main-header />
-        <b-container class="mt-4" :fluid="!$store.getters.isAuthenticated">
+        <b-container class="mt-4 mb-5" :fluid="!$store.getters.isAuthenticated">
             <router-view />
         </b-container>
     </div>

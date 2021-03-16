@@ -21,10 +21,28 @@
                 </b-form>
             </b-col>
             <b-col class="text-left mt-2">
-                <fa-icon :icon="['fas', showSavedValues ? 'times' : 'caret-right']" size="lg" />
-                <b-button @click="showSavedValues = !showSavedValues" variant="link" class="pl-0">
-                    {{ showSavedValues ? 'Cerrar' : `Ver ${getTextType}s guardados`}}
-                </b-button>
+                <b-row class="align-items-center">
+                    <b-col :class="showSavedValues ? 'col-md-4' : ''">
+                        <div class="mt-2">
+                            <fa-icon :icon="['fas', showSavedValues ? 'times' : 'caret-right']" size="lg" />
+                            <b-button @click="showSavedValues = !showSavedValues" variant="link" class="pl-0">
+                                {{ showSavedValues ? 'Cerrar' : `Buscar en ${getTextType}s guardados`}}
+                            </b-button>
+                        </div>
+                    </b-col>
+                    <b-col v-if="showSavedValues">
+                        <b-form-group label="Buscar">
+                            <b-input-group>
+                                <b-form-input placeholder="..." v-model="searchText" />
+                                <template v-slot:prepend>
+                                    <b-input-group-text>
+                                        <fa-icon :icon="['fas', 'search']" size="sm" />
+                                    </b-input-group-text>
+                                </template>
+                            </b-input-group>
+                        </b-form-group>
+                    </b-col>
+                </b-row>
             </b-col>
         </b-row>
         <new-items
@@ -36,7 +54,8 @@
         <saved-values
         v-else
         :newValues="listOfNewValues"
-        :savedValues="listOfSavedValues"
+        :savedValues="filter"
+        :key="keyComponent"
         :isDiagnostic_andNot_treatment="isDiagnostic_andNot_treatment" />
     </b-container>
 </template>
@@ -59,6 +78,8 @@ export default {
     data() {
         return {
             input: '',
+            keyComponent: 0,
+            searchText: '',
             showSavedValues: false,
             listOfSavedValues: this.savedValues,
             listOfNewValues: this.newValues
@@ -67,6 +88,14 @@ export default {
     computed: {
         getTextType() {
             return this.isDiagnostic_andNot_treatment ? 'diagnóstico' : 'tratamiento'
+        },
+        filter() {
+            if (this.searchText) {
+                return this.listOfSavedValues.filter((item) => {
+                    return this.searchText.toLowerCase().split(' ')
+                    .every(v => item.name.toLowerCase().includes(v))
+                })
+            } else return this.listOfSavedValues
         }
     },
     methods: {
@@ -90,6 +119,11 @@ export default {
                 count = this.listOfNewValues[this.listOfNewValues.length - 1].id + 1
             }
             return count
+        }
+    },
+    watch: {
+        searchText() {
+            this.keyComponent +=1
         }
     }
 }

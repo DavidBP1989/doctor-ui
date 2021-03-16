@@ -1,7 +1,7 @@
 <template>
     <div class="main">
         <main-header />
-        <b-container class="mt-4">
+        <b-container class="mt-4 mb-5">
             <b-sidebar
             title="Paciente"
             id="sidebar-info-patient"

@@ -2,7 +2,7 @@
     <div>
         <div class="main">
             <main-header />
-            <b-container>
+            <b-container class="mb-5">
                 <router-view />
             </b-container>
         </div>
