@@ -17,7 +17,7 @@
                         <strong>Grupo y RH: </strong> {{ $store.state.patient.groupRH }}
                     </b-list-group-item>
                     <b-list-group-item>
-                        <strong>Vencimiento: </strong>25/diciembre/2019
+                        <strong>Vencimiento: </strong> {{ expirationDate }}
                     </b-list-group-item>
                 </b-list-group>
             </b-col>
@@ -55,6 +55,9 @@ export default {
         },
         birthDate() {
             return this.$moment(this.$store.state.patient.birthDate).format('D/MMM/YYYY')
+        },
+        expirationDate() {
+            return this.$moment(this.$store.state.patient.expirationDate).format('D/MMM/YYYY')
         },
         allergies: {
             get() { return this.$store.state.patient.allergies },

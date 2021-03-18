@@ -16,6 +16,7 @@ const SET_PATIENT_INFORMATION = (state, payload) => {
     state.patient.groupRH = payload.GroupRH
     state.patient.birthDate = payload.BirthDate
     state.patient.sex = payload.Sex
+    state.patient.expirationDate = payload.ExpirationDate
 }
 
 const SET_PATIENT_ALLERGIES = (state, payload) => {

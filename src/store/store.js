@@ -32,6 +32,7 @@ export default new Vuex.Store({
             coordinateValue: null,
             groupRH: null,
             birthDate: null,
+            expirationDate: null,
             sex: 'M'
         },
         doctorRegister: false,
