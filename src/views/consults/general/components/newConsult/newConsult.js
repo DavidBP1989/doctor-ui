@@ -71,18 +71,25 @@ export default {
     },
     methods: {
         getNecessaryResources() {
-            reqResources.getAllDiagnostics(this.doctorId).then(response =>
-                this.diagnostics = map.mapForDiagnosticsAndTreatments(response)
-            )
-            reqResources.getAllTreatments(this.doctorId).then(response => 
-                this.treatments = map.mapForDiagnosticsAndTreatments(response)
-            )
-            reqResources.getLabStudies().then(response => 
-                this.laboratory = map.mapForLabAndCabinet(response)
-            )
-            reqResources.getCabinetStudies().then(response => 
-                this.cabinet = map.mapForLabAndCabinet(response)
-            )
+            currentLoader = loader()
+            Promise.all([
+                reqResources.getAllDiagnostics(this.doctorId).then(response =>
+                    this.diagnostics = map.mapForDiagnosticsAndTreatments(response)
+                ),
+                reqResources.getAllTreatments(this.doctorId).then(response => 
+                    this.treatments = map.mapForDiagnosticsAndTreatments(response)
+                ),
+                reqResources.getLabStudies().then(response => 
+                    this.laboratory = map.mapForLabAndCabinet(response)
+                ),
+                reqResources.getCabinetStudies().then(response => 
+                    this.cabinet = map.mapForLabAndCabinet(response)
+                )
+            ]).then(() => {
+                currentLoader.hide()
+            }).catch(() => {
+                currentLoader.hide()
+            })
         },
         onlyDecimals(evt) {
             onlyNumber(evt, true)
