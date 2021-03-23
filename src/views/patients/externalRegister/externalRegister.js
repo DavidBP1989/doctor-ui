@@ -1,19 +1,17 @@
 let currentLoader = null
 import { loader } from '@/helper/loader'
 import api from '@/api/patient-service'
-import existingPatient from './components/existingPatient.vue'
 import { onlyLetter } from '@/helper/utilities'
 import formValidation from '@/helper/formValidation'
 import $ from 'jquery'
 import model from '../helper/model'
-import { saved } from '@/helper/alerts'
 
 export default {
     mounted() {
         const _vue = this
         this.$nextTick(function () {
             $('#formPatients .form-control*').on('keyup', function () {
-                if (_vue.$store.getters.isPatientRegisterSend) {
+                if (_vue.isPatientRegisterSend) {
                     formValidation.inputSelected = $(this)
                     if ($(this).hasClass('f-text')) formValidation.typeValidations.text()
                     else if ($(this).hasClass('f-email')) formValidation.typeValidations.email()
@@ -21,22 +19,13 @@ export default {
             })
         })
     },
-    created() {
-        this.$store.commit('SET_PATIENT_REGISTER_POST', false)
-        this.getLastPatient()
-    },
-    components: {
-        existingPatient
-    },
     data() {
         return {
-            doctorId: this.$store.state.doctor.id,
-            visibleCollapse: false,
+            isPatientRegisterSend: false,
             options: [
                 { value: 'F', text: 'Mujer' },
                 { value: 'M', text: 'Hombre' }
             ],
-            emeci: null,
             form: {
                 name: '',
                 lastName: '',
@@ -52,22 +41,21 @@ export default {
             }
         }
     },
-    computed: {
-        txtLink() {
-            return this.visibleCollapse ? 'Cerrar' : 'Agregar paciente existente'
-        }
-    },
     methods: {
-        getLastPatient() {
-            api.getLastEmeci(this.doctorId).then(response => {
-                this.emeci = response.body
-            })
+        format(evt) {
+            onlyLetter(evt)
         },
-        activateCard() {
-            this.$store.commit('SET_PATIENT_REGISTER_POST', true)
+        birthDateSelected() {
+            if (this.isPatientRegisterSend) {
+                formValidation.inputSelected = $('#formPatients .f-date')
+                formValidation.typeValidations.date(this.form.birthDate)
+            }
+        },
+        register() {
+            this.isPatientRegisterSend = true
             if (!formValidation.check('formPatients'))
                 return
-            
+
             const req = new model(this.form)
             currentLoader = loader()
             let success = false
@@ -82,15 +70,6 @@ export default {
                 currentLoader.hide()
                 saved('Error al guardar el paciente', false)
             })
-        },
-        format(evt) {
-            onlyLetter(evt)
-        },
-        birthDateSelected() {
-            if (this.$store.getters.isPatientRegisterSend) {
-                formValidation.inputSelected = $('#formPatients .f-date')
-                formValidation.typeValidations.date(this.form.birthDate)
-            }
         }
     }
 }

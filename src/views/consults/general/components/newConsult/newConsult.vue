@@ -118,10 +118,6 @@
         title="Estudios de gabinete"
         type="cabinet"
         :dataList="form.cabinet" />
-
-        <i-frame>
-
-        </i-frame>
     </div>
 </template>
 

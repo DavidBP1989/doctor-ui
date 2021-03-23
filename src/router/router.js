@@ -45,6 +45,11 @@ export const router = new Router({
                             { text: 'Nuevo paciente', to: '#', active: true }
                         ]
                     }
+                },
+                {
+                    path: 'externalRegister',
+                    component: () => import(/** */ '../views/patients/externalRegister/externalRegister.vue'),
+                    name: 'Registro de paciente'
                 }
             ]
         }, //doctor
@@ -114,7 +119,7 @@ export const router = new Router({
 router.beforeEach((to, from, next) => {
     //redirect to login page if not logged in
 
-    const publicPages = ['/auth', '/auth/forgotPwd', '/register']
+    const publicPages = ['/auth', '/auth/forgotPwd', '/register', '/externalRegister']
     const authRequired = !publicPages.includes(to.path)
     const loggedIn = store.getters.isAuthenticated
 

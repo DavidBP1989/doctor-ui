@@ -13,7 +13,6 @@ import map from './helper/map'
 import model from './helper/model'
 import { saved } from '@/helper/alerts'
 import eventBus from '@/helper/event-bus'
-import iFrame from '@/shared/i-frame.vue'
 
 export default {
     created() {
@@ -26,8 +25,7 @@ export default {
         addedItems,
         laboratory,
         cabinet,
-        prognostic,
-        iFrame
+        prognostic
     },
     data() {
         return {
