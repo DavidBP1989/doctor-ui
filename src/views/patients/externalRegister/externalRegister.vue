@@ -8,8 +8,8 @@
                         <b-form-group label="Seleccionar médico">
                             <b-input-group>
                                 <b-form-select
-                                v-model="form.sex"
-                                :options="options"></b-form-select>
+                                v-model="doctor"
+                                :options="doctors" />
                                 <template v-slot:prepend>
                                     <b-input-group-text>
                                         <fa-icon :icon="['fas', 'user-md']" size="lg" />
@@ -19,7 +19,12 @@
                         </b-form-group>
                     </b-col>
                 </b-form-row>
-                <h5 class="mt-4">Informaci&oacute;n del paciente</h5>
+                <b-alert class="text-center"
+                :show="doctor === null && isPatientRegisterSend"
+                variant="danger">
+                    Debe seleccinar un m&eacute;dico
+                </b-alert>
+                <h5 class="mt-5">Informaci&oacute;n del paciente</h5>
                 <b-form-row >
                     <b-col md="6">
                         <b-form-group label="Nombre(s)">
@@ -165,6 +170,9 @@
                         </b-form-group>
                     </b-col>
                 </b-form-row>
+                <b-alert variant="danger" :show="showErrorPassword">
+                    Las contrase&ntilde;as no coinciden
+                </b-alert>
                 <b-form-row class="mt-2 mb-2">
                     <b-col class="text-right">
                         <b-button

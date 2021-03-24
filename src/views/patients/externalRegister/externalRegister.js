@@ -1,10 +1,12 @@
 let currentLoader = null
 import { loader } from '@/helper/loader'
 import api from '@/api/patient-service'
+import api_doctor from '@/api/doctor-service'
 import { onlyLetter } from '@/helper/utilities'
 import formValidation from '@/helper/formValidation'
 import $ from 'jquery'
 import model from '../helper/model'
+import { saved } from '@/helper/alerts'
 
 export default {
     mounted() {
@@ -19,9 +21,15 @@ export default {
             })
         })
     },
+    created() {
+        this.getListOfDoctors()
+    },
     data() {
         return {
+            associationId: this.$route.params.id,
             isPatientRegisterSend: false,
+            doctor: null,
+            doctors: [],
             options: [
                 { value: 'F', text: 'Mujer' },
                 { value: 'M', text: 'Hombre' }
@@ -38,7 +46,8 @@ export default {
                 allergy: '',
                 password: '',
                 confirmPassword: '',
-            }
+            },
+            showErrorPassword: false
         }
     },
     methods: {
@@ -51,25 +60,49 @@ export default {
                 formValidation.typeValidations.date(this.form.birthDate)
             }
         },
+        getListOfDoctors() {
+            api_doctor.getListOfDoctorByAssociation(this.associationId).then((response) => {
+                if (response.body) {
+                    let array = [{
+                        value: null,
+                        text: '-- Seleccionar --'
+                    }]
+                    response.body.forEach(element => {
+                        array.push({
+                            value: element.DoctorId,
+                            text: element.Name
+                        })
+                    })
+                    this.doctors = array
+                }
+            })
+        },
         register() {
             this.isPatientRegisterSend = true
             if (!formValidation.check('formPatients'))
                 return
+            if (this.doctor === null)
+                return
+            if (this.form.password !== this.form.confirmPassword) {
+                this.showErrorPassword = true
+                return
+            }
 
             const req = new model(this.form)
             currentLoader = loader()
-            let success = false
-            api.saveNewPatient(this.doctorId, req.__$).then(response => {
-                success = response.body.IsSuccess
+            api.saveNewPatientFromExternalRegister(this.doctor, req.__$).then(response => {
                 currentLoader.hide()
-                const title = success ? 'Paciente agregado' : 'Error al guardar el paciente'
-                const param = success ? `/consults/${response.body.PatientId}` : null
-                saved(title, success, param)
+                if (response.body.IsSuccess)
+                    this.$router.push('/successfulRegistration')
+                else this.error()     
             })
             .catch(() => {
                 currentLoader.hide()
-                saved('Error al guardar el paciente', false)
+                this.error()
             })
+        },
+        error() {
+            saved('Error al guardar el paciente', false)
         }
     }
 }

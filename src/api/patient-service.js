@@ -23,6 +23,10 @@ const actions = {
     getById: {
         method: 'GET',
         url: `${API_URL}/patient/byId/{patientId}`
+    },
+    saveNewPatientFromExternalRegister: {
+        method: 'POST',
+        url: `${API_URL}/wAuthority/patientregister/{doctorId}`
     }
 }
 
@@ -57,5 +61,8 @@ export default {
         return api.getById({
             patientId
         })
+    },
+    saveNewPatientFromExternalRegister(doctorId, request) {
+        return api.saveNewPatientFromExternalRegister({ doctorId }, request)
     }
 }

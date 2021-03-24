@@ -35,6 +35,10 @@ const actions = {
     changePwd: {
         method: 'PUT',
         url: `${API_URL}/doctor/{doctorId}/changePwd`
+    },
+    getListOfDoctorByAssociation: {
+        method: 'GET',
+        url: `${API_URL}/wAuthority/doctorsByAssociation/{associationId}`
     }
 }
 
@@ -64,6 +68,9 @@ export default {
     },
     changePwd(doctorId, request) {
         return api.changePwd({ doctorId }, request)
+    },
+    getListOfDoctorByAssociation(associationId) {
+        return api.getListOfDoctorByAssociation({ associationId })
     }
 }
 
