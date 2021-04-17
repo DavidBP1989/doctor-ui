@@ -25,6 +25,15 @@ Vue.use(VCalendar)
 new Vue({
     store,
     router,
+    mounted: () => {
+        try {
+            Function("() => {};");
+            console.log('ES6')
+            //soporta ES6
+        } catch (e) {
+            window.location.href = 'https://google.com'
+        }
+    },
     render: h => h(view)
 }).$mount('#app')
 
