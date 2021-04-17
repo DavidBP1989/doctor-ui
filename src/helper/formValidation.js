@@ -1,5 +1,5 @@
 import $ from 'jquery'
-const regEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
+const regEmail = /^([\w+-.%]+@[\w-.]+\.[A-Za-z]{2,4};?)+$/
 
 const validate = {
     inputSelected: null,
