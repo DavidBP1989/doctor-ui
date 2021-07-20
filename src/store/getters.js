@@ -17,10 +17,19 @@ const getLastIdTreatments = state => {
     return 0
 }
 
+const getPrintConfigTextColor = state => state.printConfig.textColor
+const getPrintConfigBgPrimaryColor = state => state.printConfig.bgPrimaryColor
+const getPrintConfigBgSecondaryColor = state => state.printConfig.bgSecondaryColor
+const getPrintConfigLogoUrl = state => state.printConfig.logo.url
+
 export default {
     isAuthenticated,
     isDoctorRegisterSend,
     isPatientRegisterSend,
     getLastIdDiagnostics,
-    getLastIdTreatments
+    getLastIdTreatments,
+    getPrintConfigTextColor,
+    getPrintConfigBgPrimaryColor,
+    getPrintConfigBgSecondaryColor,
+    getPrintConfigLogoUrl
 }

@@ -156,6 +156,9 @@
             </b-col>
         </b-row>
     </div>
+    <div class="p-4 text-center" v-else>
+        <h5>No hay consultas previas por mostrar</h5>
+    </div>
 </template>
 
 <script src='./consultPrevious.js'></script>

@@ -39,6 +39,10 @@
                                     <fa-icon :icon="['fas', 'unlock-alt']" size="lg" />
                                     <span class="ml-2">Cambiar contrase&ntilde;a</span>
                                 </b-dropdown-item-button>
+                                <b-dropdown-item-button @click="toPrintDesign">
+                                    <fa-icon :icon="['fas', 'edit']" size="lg" />
+                                    <span class="ml-2">Editar hoja de impresi&oacute;n</span>
+                                </b-dropdown-item-button>
                                 <b-dropdown-item-button @click="logout">
                                     <fa-icon :icon="['fas', 'sign-out-alt']" size="lg" />
                                     <span class="ml-2">Cerrar sesi&oacute;n</span>
@@ -72,8 +76,11 @@ export default {
         changePwd() {
             changePassword(changePasswordView, 'Cambiar contraseña')
         },
+        toPrintDesign() {
+            if (this.$router.currentRoute.path !== '/print') this.$router.push('/print')
+        },
         toRegister() {
-            this.$router.push('/register')
+            if (this.$router.currentRoute.path !== '/register') this.$router.push('/register')
         }
     }
 }

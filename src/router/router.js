@@ -9,6 +9,14 @@ export const router = new Router({
     base: `${BASE_URL}`,
     routes: [
         {
+            path: '/print',
+            component: () => import(/** */ '../shared/print/print.vue'),
+            name: 'Editar hoja de impresión',
+            meta: {
+                typeMenu: 'print'
+            }  
+        },
+        {
             path: '/auth',
             component: () => import(/** */ '../views/authentication/main.vue'),
             children: [

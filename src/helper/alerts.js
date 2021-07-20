@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import { router } from '../router/router'
+import printView from '../shared/print/print.vue'
 
 function alert(view, title, params = null, showConfirmButton = null) {
     const componentToLoad = Vue.extend(view)
@@ -33,6 +34,31 @@ function alert(view, title, params = null, showConfirmButton = null) {
     return Vue.swal(props)
 }
 
+function windowPrint(params = null) {
+    const componentToLoad = Vue.extend(printView)
+    const instance = new componentToLoad({
+        propsData: params
+    })
+    instance.$mount()
+
+    let props = {
+        html: '<div></div>',
+        backdrop: false,
+        timerProgressBar: true,
+        showConfirmButton: false,
+        didOpen: () => {
+            Vue.swal.showLoading()
+        },
+        onBeforeOpen: () => {
+            Vue.swal.getContent()
+            .querySelector('div')
+            .append(instance.$el)
+        }
+    }
+
+    return Vue.swal(props)
+}
+
 function saved(title, isConfirmed, route = null) {
     Vue.swal({
         position: 'top-end',
@@ -57,6 +83,7 @@ function showModalWithViewReference(view, title, params, showConfirmButton) {
 
 export {
     changePassword,
+    windowPrint,
     saved,
     showModalWithViewReference
 }

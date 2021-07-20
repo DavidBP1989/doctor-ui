@@ -21,7 +21,8 @@ export default {
         showModal() {
             showModalWithViewReference(modal, 'Estudios de laboratorio', {
                 savedValues: this.savedValues,
-                newValues: this.newValues
+                newValues: this.newValues,
+                type: 'laboratory'
             })
         }
     }

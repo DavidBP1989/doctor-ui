@@ -11,13 +11,14 @@ import prognostic from './components/prognostics.vue'
 import reqResources from './helper/reqResources'
 import map from './helper/map'
 import model from './helper/model'
-import { saved } from '@/helper/alerts'
+import { saved, windowPrint } from '@/helper/alerts'
 import eventBus from '@/helper/event-bus'
 
 export default {
     created() {
         this.getNecessaryResources()
         eventBus.$on('save', () => this.saveConsult())
+        eventBus.$on('__print', (type) => this.print(type))
     },
     components: {
         diagnostics,
@@ -115,6 +116,12 @@ export default {
                     this.clear()
                     eventBus.$emit('putInPreviewConsult')
                 }
+            })
+        },
+        print(type) {
+            windowPrint({
+                editPage: false,
+                arrayToPrint: type === 'laboratory' ? this.form.laboratory : this.form.cabinet
             })
         },
         clear() {

@@ -21,7 +21,8 @@ export default {
         showModal() {
             showModalWithViewReference(modal, 'Estudios de gabinete', {
                 savedValues: this.savedValues,
-                newValues: this.newValues
+                newValues: this.newValues,
+                type: 'cabinet'
             })
         }
     }

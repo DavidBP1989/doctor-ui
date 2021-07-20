@@ -36,7 +36,17 @@ export default new Vuex.Store({
             sex: 'M'
         },
         doctorRegister: false,
-        patientRegister: false
+        patientRegister: false,
+        printConfig: {
+            textColor: '#ffffff',
+            bgPrimaryColor: '#ffffff',
+            bgSecondaryColor: '#418AE0',
+            logo: {
+                url: '',
+                base64: null,
+                title: null
+            },
+        }
     },
     actions,
     getters,

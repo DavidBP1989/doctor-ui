@@ -61,6 +61,7 @@ if (process.env.NODE_ENV === 'production') {
         new webpack.DefinePlugin({
             'API_URL_AUTHENTICATION': JSON.stringify('https://emeci.com/doctorapi'),
             'API_URL': JSON.stringify('https://emeci.com/doctorapi/api'),
+            'SITE_URL': JSON.stringify('https://emeci.com/doctor'),
             'BASE_URL': JSON.stringify('/doctor')
         })
     ])
@@ -69,6 +70,7 @@ if (process.env.NODE_ENV === 'production') {
         new webpack.DefinePlugin({
             'API_URL_AUTHENTICATION': JSON.stringify('https://localhost:44347'),
             'API_URL': JSON.stringify('https://localhost:44347/api'),
+            'SITE_URL': JSON.stringify('http://localhost:8080'),
             'BASE_URL': JSON.stringify('/')
         })
     ])

@@ -1,5 +1,5 @@
 <template>
-    <div v-if="consult != null">
+    <div v-if="consult !== null">
         <b-row>
             <b-col offset-sm="4" offset-lg="8" class="text-right">
                 <b-form-group class="nlegend" label="Buscar consulta">
@@ -171,6 +171,9 @@
                 </b-form-group>
             </b-col>
         </b-row>
+    </div>
+    <div class="p-4 text-center" v-else>
+        <h5>No hay consultas previas por mostrar</h5>
     </div>
 </template>
 

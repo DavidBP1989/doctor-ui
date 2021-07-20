@@ -63,6 +63,30 @@ const SET_PATIENT_REGISTER_POST = (state, payload) => {
     state.patientRegister = payload
 }
 
+const SET_TEXTCOLOR_PRINTCONFIG = (state, payload) => {
+    state.printConfig.textColor = payload
+}
+
+const SET_BGPRIMARYCOLOR_PRINTCONFIG = (state, payload) => {
+    state.printConfig.bgPrimaryColor = payload
+}
+
+const SET_BGSECONDARYCOLOR_PRINTCONFIG = (state, payload) => {
+    state.printConfig.bgSecondaryColor = payload
+}
+
+const SET_LOGOURL_PRINTCONFIG = (state, payload) => {
+    state.printConfig.logo.url = payload
+}
+
+const SET_LOGOBASE64_PRINTCONFIG = (state, payload) => {
+    state.printConfig.logo.base64 = payload
+}
+
+const SET_LOGOTITLE_PRINTCONFIG = (state, payload) => {
+    state.printConfig.logo.title = payload
+}
+
 export default {
     SET_DOCTOR_INFORMATION,
     SET_PATIENT_INFORMATION,
@@ -72,5 +96,11 @@ export default {
     SET_AUTHENTICATION,
     SET_LOGOUT,
     SET_DOCTOR_REGISTER_POST,
-    SET_PATIENT_REGISTER_POST
+    SET_PATIENT_REGISTER_POST,
+    SET_TEXTCOLOR_PRINTCONFIG,
+    SET_BGPRIMARYCOLOR_PRINTCONFIG,
+    SET_BGSECONDARYCOLOR_PRINTCONFIG,
+    SET_LOGOURL_PRINTCONFIG,
+    SET_LOGOBASE64_PRINTCONFIG,
+    SET_LOGOTITLE_PRINTCONFIG
 }

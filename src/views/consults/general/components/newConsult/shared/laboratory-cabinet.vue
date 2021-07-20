@@ -7,8 +7,8 @@
                     haga click sobre el nombre del estudio para seleccionarlo.
                 </p>
             </b-col>
-            <b-col class="text-right mb-2">
-                <b-button variant="outline-secondary">Imprimir estudios seleccionados</b-button>
+            <b-col v-if="listOfNewValues.length > 0" class="text-right mb-2">
+                <b-button @click="print" variant="outline-secondary">Imprimir estudios seleccionados</b-button>
             </b-col>
         </b-row>
         <b-row>
@@ -59,8 +59,11 @@
 </template>
 
 <script>
+import Vue from 'vue'
+import eventBus from '@/helper/event-bus'
+
 export default {
-    props: ['savedValues', 'newValues'],
+    props: ['savedValues', 'newValues', 'type'],
     data() {
         return {
             listOfSavedValues: this.savedValues,
@@ -79,8 +82,6 @@ export default {
             this.addValues()
         },
         addValues() {
-            let result = []
-
             let group = this.listOfSavedValues.filter(x => {
                 return x.style
             })
@@ -95,6 +96,10 @@ export default {
                     })
                 })
             })
+        },
+        print() {
+            Vue.swal.close()
+            eventBus.$emit('__print', this.type)
         }
     }
 }

@@ -1,0 +1,57 @@
+.print-header {
+    background-color: red;
+}
+
+.header-print {
+    position: relative;
+    height: 250px;
+    overflow: hidden;
+}
+  
+.header__bg {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /*background-image: linear-gradient(#ff9d2f, #ff6126);*/
+    background-image: linear-gradient(black, white);
+    transform: skewY(-6deg);
+    transform-origin: top left;
+}
+  
+h1 {
+    margin: 0;
+    padding: 100px 0;
+    font: 44px "Arial";
+    text-align: center;
+}
+
+.header-print h1 {
+    position: relative;
+    color: white;
+}
+
+.cprev legend { 
+    font-weight: 600;
+    font-size: 15px !important;
+}
+
+.cprev .list-group-item {
+    padding: 0.45rem 1rem 0 0 !important;
+    border: none !important;
+}
+
+footer hr {
+    height: 5px;
+    border: 1px solid;
+}
+
+
+@media (max-width:768px) {
+    .header-print {
+        height: 330px;
+    }
+}

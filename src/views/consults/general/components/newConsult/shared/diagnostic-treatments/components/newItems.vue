@@ -24,7 +24,7 @@
                 <b-list-group-item v-if="listOfNewValues.length === 0" class="font-weight-bold">{{ `Ningún ${getTextType} agregado` }}</b-list-group-item>
             </b-list-group>
         </b-card>
-        <b-row class="mt-1 mb-1" v-if="listOfNewValues.length > 0">
+        <b-row class="mt-3 mb-1" v-if="listOfNewValues.length > 0">
             <b-col class="text-right">
                 <b-button variant="secondary" @click="deleteItem(-1)">Eliminar todo</b-button>
                 <b-button variant="secondary" v-if="listOfNewValues.length > 0" v-b-modal.saveas>Guardar como</b-button>

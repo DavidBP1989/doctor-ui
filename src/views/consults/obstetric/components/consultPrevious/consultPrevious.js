@@ -35,8 +35,10 @@ export default {
     },
     methods: {
         init() {
-            this.selectedDate = this.dates[0].value
-            this.getConsult()
+            if (this.dates.length > 0) {
+                this.selectedDate = this.dates[0].value
+                this.getConsult()
+            }
         },
         getConsult() {
             api.getConsultById(this.selectedDate).then(response => {

@@ -1,5 +1,7 @@
 import api from '@/api/general-consult-service'
 import { urlFileEmeci } from '@/helper/utilities'
+import { windowPrint } from '@/helper/alerts'
+import consultView from './consult.vue'
 
 export default {
     mounted() {
@@ -17,6 +19,9 @@ export default {
             required: true
         }
     },
+    components: {
+        consultView
+    },
     data() {
         return {
             dates: this.consultationDates,
@@ -33,8 +38,10 @@ export default {
     },
     methods: {
         init() {
-            this.selectedDate = this.dates[0].value
-            this.getConsult()
+            if (this.dates.length > 0) {
+                this.selectedDate = this.dates[0].value
+                this.getConsult()
+            }
         },
         getConsult() {
             api.getConsultById(this.selectedDate).then(response => {
@@ -43,6 +50,13 @@ export default {
         },
         goToStudyReport() {
             window.open(`${urlFileEmeci}?opt=EST&emeci=${this.$store.state.patient.emeci}&posicion=${this.$store.state.patient.coordinate}&dato=${this.$store.state.patient.coordinateValue}`)
+        },
+        print() {
+            windowPrint({
+                editPage: false,
+                printConsult: true,
+                consultPreviousId: this.selectedDate
+            })
         }
     }
 }

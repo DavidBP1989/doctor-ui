@@ -34,7 +34,7 @@
                         </b-nav-item>
                     </b-navbar-nav>
 
-                    <b-navbar-nav v-if="menu === 'register'" class="ml-auto pl-3">
+                    <b-navbar-nav v-if="menu === 'register' || menu === 'print'" class="ml-auto pl-3">
                         <b-nav-item @click="goToPatients" class="text-md-center ml-3">
                             <fa-icon :icon="['fas', 'user']" class="mb-md-2" size="2x"/>
                             <br class="d-none d-md-block">
