@@ -18,14 +18,14 @@
                     </b-input-group>
                 </b-form-group>
             </b-col>
-            <b-col cols="6" md="4" lg="3">
+            <b-col cols="7" md="4" lg="3">
                 <b-form-group label="Índice de masa corporal">
                     <b-input-group append="kg/m2">
                         <b-form-input disabled :value="mass" />
                     </b-input-group>
                 </b-form-group>
             </b-col>
-            <b-col cols="6" md="2" lg="3">
+            <b-col cols="5" md="2" lg="3">
                 <b-form-group label="Temperatura">
                     <b-input-group append="c">
                         <b-form-input v-model="form.temperature" @keypress="onlyDecimals" />
@@ -42,7 +42,7 @@
             </b-col>
         </b-row>
         <b-row class="align-items-center">
-            <b-col cols="6" sm="5" md="4" lg="3">
+            <b-col cols="7" sm="5" md="4" lg="3">
                 <b-form-group label="Número de embarazos">
                     <b-form-input v-model="form.pregnancyNumber" type="number" />
                 </b-form-group>
@@ -65,14 +65,14 @@
                     <b-form-input @keypress="numberFormat" v-model="form.bloodPressure_B" />
                 </b-form-group>
             </b-col>
-            <b-col cols="6" sm="3" md="4" lg="3">
+            <b-col cols="5" sm="3" md="4" lg="3">
                 <b-form-group label="Abortos">
                     <b-form-input type="number" v-model="form.abortions" />
                 </b-form-group>
             </b-col>
         </b-row>
         <b-row>
-            <b-col cols="6" md="4" lg="3">
+            <b-col cols="12" md="4" lg="3">
                 <b-form-group
                 label="Fecha último parto"
                 description="Puede cambiar el mes y año en la parte superior del calendario">
@@ -133,7 +133,7 @@
                     <b-form-textarea rows="3" v-model="form.specifyToxemias" />
                 </b-form-group>
             </b-col>
-            <b-col cols="6" :lg="form.toxemias ? 4 : 3">
+            <b-col cols="12" :lg="form.toxemias ? 4 : 3">
                 <b-form-group label="Partos">
                     <b-form-select v-model="form.parturition" :options="parturitionOptions" />
                 </b-form-group>

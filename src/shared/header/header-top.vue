@@ -21,7 +21,7 @@
                             </b-link>
                         </b-list-group-item>
                         <b-list-group-item class="mb-0 d-none d-md-block">
-                            <b-link target="_blank" href="#">
+                            <b-link target="_blank" href="https://twitter.com/emecimx?lang=es">
                                 <fa-icon :icon="['fab', 'twitter']" size="lg" />
                             </b-link>
                         </b-list-group-item>

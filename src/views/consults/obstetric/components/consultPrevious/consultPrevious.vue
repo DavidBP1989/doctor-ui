@@ -8,17 +8,17 @@
             </b-col>
         </b-row>
         <b-row class="mt-3 align-items-center">
-            <b-col cols="3" md="4" lg="2">
+            <b-col cols="6" md="4" lg="2">
                 <b-form-group label="Peso">
                     <span>{{ consult.BasicConsult.Weight }} kg</span>
                 </b-form-group>
             </b-col>
-            <b-col cols="3" md="4" lg="2">
+            <b-col cols="6" md="4" lg="2">
                 <b-form-group label="Talla">
                     <span>{{ consult.BasicConsult.Size }} m</span>
                 </b-form-group>
             </b-col>
-            <b-col cols="6" md="4" lg="3">
+            <b-col cols="12" md="4" lg="3">
                 <b-form-group label="Indice de masa corporal">
                     <span>{{ mass }} kg/m2</span>
                 </b-form-group>
@@ -35,7 +35,7 @@
             </b-col>
         </b-row>
         <b-row>
-            <b-col cols="6" md="3">
+            <b-col cols="12" md="3">
                 <b-form-group label="Activa sexualmente">
                     <div class="d-flex">
                         <span>No</span>
@@ -43,7 +43,7 @@
                     </div>
                 </b-form-group>
             </b-col>
-            <b-col cols="6" md="4">
+            <b-col cols="12" md="4">
                 <b-form-group label="Número de embarazos">
                     <span>{{ consult.PregnancyNumber }}</span>
                 </b-form-group>
@@ -120,7 +120,7 @@
             </b-col>
             <b-col cols="6" md="3">
                 <b-form-group label="Uso de forceps">
-                    <span>{{ consult.PreviousCesarean }}</span>
+                    <span>{{ consult.Forceps }}</span>
                 </b-form-group>
             </b-col>
             <b-col cols="6" md="3">

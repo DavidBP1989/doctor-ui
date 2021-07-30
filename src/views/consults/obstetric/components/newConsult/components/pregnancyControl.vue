@@ -57,7 +57,7 @@
             </b-col>
             <b-col cols="6" md="3">
                 <b-form-group label="Situación">
-                    <b-form-input v-model="pregnancy.situation"/>
+                    <b-form-input v-model="pregnancy.situtation"/>
                 </b-form-group>
             </b-col>
             <b-col cols="6" md="3">
@@ -72,7 +72,7 @@
                     <b-form-input v-model="pregnancy.fetalMovements" />
                 </b-form-group>
             </b-col>
-            <b-col cols="6" md="4" lg="3">
+            <b-col cols="12" md="4" lg="3">
                 <b-form-group label="Peso aproximado producto">
                     <b-input-group append="g">
                         <b-form-input v-model="pregnancy.weight" @blur="calculeMothersWeight" />

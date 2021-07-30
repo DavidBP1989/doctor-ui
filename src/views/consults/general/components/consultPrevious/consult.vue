@@ -15,7 +15,7 @@
                     <span>{{ consult.BasicConsult.Size }} m</span>
                 </b-form-group>
             </b-col>
-            <b-col cols="6" md="4" lg="3">
+            <b-col cols="12" md="4" lg="3">
                 <b-form-group label="Indice de masa corporal">
                     <span>{{ mass }} kg/m2</span>
                 </b-form-group>

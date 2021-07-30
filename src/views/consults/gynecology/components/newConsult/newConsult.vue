@@ -15,14 +15,14 @@
                     </b-input-group>
                 </b-form-group>
             </b-col>
-            <b-col cols="6" md="4" lg="3">
+            <b-col cols="7" md="4" lg="3">
                 <b-form-group label="Índice de masa corporal">
                     <b-input-group append="kg/m2">
                         <b-form-input disabled :value="mass" />
                     </b-input-group>
                 </b-form-group>
             </b-col>
-            <b-col cols="6" md="2" lg="3">
+            <b-col cols="5" md="2" lg="3">
                 <b-form-group label="Temperatura">
                     <b-input-group append="c">
                         <b-form-input v-model="form.temperature" @keypress="onlyDecimals" />
@@ -68,42 +68,42 @@
             </b-col>
         </b-row>
         <b-row>
-            <b-col cols="4" md="2">
+            <b-col cols="6" md="2">
                 <b-form-group label="Gestas">
                     <b-form-input type="number" min="0" v-model="form.gestas" />
                 </b-form-group>
             </b-col>
-            <b-col cols="4" md="2">
+            <b-col cols="6" md="2">
                 <b-form-group label="Paragestas">
                     <b-form-input type="number" min="0" v-model="form.paragestas" />
                 </b-form-group>
             </b-col>
-            <b-col cols="4" md="2">
+            <b-col cols="6" md="2">
                 <b-form-group label="Cesáreas">
                     <b-form-input type="number" min="0" v-model="form.cesareans" />
                 </b-form-group>
             </b-col>
-            <b-col cols="4" md="2">
+            <b-col cols="6" md="2">
                 <b-form-group label="Abortos">
                     <b-form-input type="number" min="0" v-model="form.abortions" />
                 </b-form-group>
             </b-col>
-            <b-col cols="4" lg="2">
+            <b-col cols="6" md="4" lg="2">
                 <b-form-group label="Recién nacidos">
                     <b-form-input type="number" min="0" v-model="form.newlyBorn" />
                 </b-form-group>
             </b-col>
-            <b-col cols="4" md="2">
+            <b-col cols="6" md="2">
                 <b-form-group label="Mortinatos">
                     <b-form-input type="number" min="0" v-model="form.stillbirth" />
                 </b-form-group>
             </b-col>
-            <b-col cols="9" sm="8" md="6">
+            <b-col cols="12" sm="8" md="6">
                 <b-form-group label="Edad de inicio de vida sexual activa">
                     <b-form-input v-model="form.ageOfOnsetOfActiveSexualLife" @keypress="onlyDecimals"/>
                 </b-form-group>
             </b-col>
-            <b-col cols="3" sm="4">
+            <b-col cols="6" sm="4">
                 <b-form-group label="Menacmia">
                     <b-form-input v-model="form.menacma" />
                 </b-form-group>

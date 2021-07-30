@@ -15,14 +15,14 @@
                     </b-input-group>
                 </b-form-group>
             </b-col>
-            <b-col cols="6" md="4" lg="3">
+            <b-col cols="7" md="4" lg="3">
                 <b-form-group label="Índice de masa corporal">
                     <b-input-group append="kg/m2">
                         <b-form-input disabled :value="mass" />
                     </b-input-group>
                 </b-form-group>
             </b-col>
-            <b-col cols="6" md="2" lg="3">
+            <b-col cols="5" md="2" lg="3">
                 <b-form-group label="Temperatura">
                     <b-input-group append="c">
                         <b-form-input v-model="form.temperature" @keypress="onlyDecimals" />
@@ -46,14 +46,14 @@
                     </b-input-group>
                 </b-form-group>
             </b-col>
-            <b-col cols="6" lg="3">
+            <b-col cols="12" md="6" lg="3">
                 <b-form-group label="Frecuencia cardiaca">
                     <b-input-group append="lpm">
                         <b-form-input v-model="form.heartRate" @keypress="onlyDecimals" />
                     </b-input-group>
                 </b-form-group>
             </b-col>
-            <b-col cols="6" lg="3">
+            <b-col cols="12" md="6" lg="3">
                 <b-form-group label="Frecuencia respiratoria">
                     <b-input-group append="lpm">
                         <b-form-input v-model="form.breathingFrecuency" @keypress="onlyDecimals" />

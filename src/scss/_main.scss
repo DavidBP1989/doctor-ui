@@ -209,7 +209,13 @@ $txt-pink: #CA6CBD;
 .showExtraCol {
     display: block;
 }
+.showExtraCol2 {
+    display: block;
+}
 .hideExtracol {
+    display: none;
+}
+.hideExtracol2 {
     display: none;
 }
 
@@ -230,6 +236,13 @@ $txt-pink: #CA6CBD;
     header .navbar-brand {
         width: 100%;
         display: flex;
+    }
+
+    .showExtraCol2 {
+        display: none;
+    }
+    .hideExtracol2 {
+        display: block;
     }
 }
 

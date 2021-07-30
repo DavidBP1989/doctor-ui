@@ -82,8 +82,8 @@ export default {
                     this.professionalCertificate = response.body.NoSEP_ProfessionalCertificate
                     this.university = response.body.UniversitySpecialty
                     this.address = response.body.Address
-                    this.colony = response.body.Colony
-                    this.phone = response.body.CellPhone
+                    this.colony = response.body.OfficeAddress
+                    this.phone = response.body.OfficePhone
                 }
             })
         },

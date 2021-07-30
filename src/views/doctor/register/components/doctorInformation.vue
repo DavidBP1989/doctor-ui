@@ -48,7 +48,7 @@
                 </b-form-group>
             </b-col>
             <b-col sm="6" md="12" lg="4">
-                <b-form-group label="CMCP">
+                <b-form-group label="Consejo Méxicano de Certificación">
                     <b-form-input v-model="form.cmcp" />
                 </b-form-group>
             </b-col>
@@ -73,12 +73,12 @@
         </b-form-row>
         <b-form-row>
             <b-col sm="6" md="6">
-                <b-form-group label="Nombre del colegio estatal">
+                <b-form-group label="Nombre de Agrupación Médica Nacional">
                     <b-form-input v-model="form.school" />
                 </b-form-group>
             </b-col>
             <b-col sm="6">
-                <b-form-group label="Nombre de agrupación estatal">
+                <b-form-group label="Nombre de Agrupación Médica Estatal">
                     <b-form-input v-model="form.grouping" />
                 </b-form-group>
             </b-col>

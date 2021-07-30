@@ -8,17 +8,17 @@
             </b-col>
         </b-row>
         <b-row class="mt-3">
-            <b-col cols="3" md="4" lg="2">
+            <b-col cols="6" md="4" lg="2">
                 <b-form-group label="Peso">
                     <span>{{ consult.BasicConsult.Weight }} kg</span>
                 </b-form-group>
             </b-col>
-            <b-col cols="3" md="4" lg="2">
+            <b-col cols="6" md="4" lg="2">
                 <b-form-group label="Talla">
                     <span>{{ consult.BasicConsult.Size }} m</span>
                 </b-form-group>
             </b-col>
-            <b-col cols="6" md="4" lg="3">
+            <b-col cols="12" md="4" lg="3">
                 <b-form-group label="Índice de masa corporal">
                     <span>{{ consult.BasicConsult.Mass }} kg/m2</span>
                 </b-form-group>
@@ -33,12 +33,12 @@
                     <span>{{ consult.BasicConsult.BloodPressure_A }}/{{ consult.BasicConsult.BloodPressure_B }} mm Hg</span>
                 </b-form-group>
             </b-col>
-            <b-col cols="6" md="4" lg="3">
+            <b-col cols="7" md="4" lg="3">
                 <b-form-group label="Edad de su menarca">
                     <span>{{ consult.MenarcaAge }}</span>
                 </b-form-group>
             </b-col>
-            <b-col cols="6" md="2" order-md="1" order-lg="0" lg="2">
+            <b-col cols="5" md="2" order-md="1" order-lg="0" lg="2">
                 <b-form-group label="Menacmia">
                     <span>{{ consult.Menacma }}</span>
                 </b-form-group>
@@ -56,40 +56,40 @@
         </b-row>
         <hr>
         <b-row>
-            <b-col cols="4" lg="2">
+            <b-col cols="6" lg="2">
                 <b-form-group>
-                    <span class="fw">Gestas</span>
-                    <b-badge variant="default">{{ consult.Gestas }}</b-badge>
+                    <span class="fw">Gestas -</span>
+                    <b>{{ consult.Gestas }}</b>
                 </b-form-group>
             </b-col>
-            <b-col cols="4" lg="2">
+            <b-col cols="6" lg="2">
                 <b-form-group>
-                    <span class="fw">Paragestas</span>
-                    <b-badge variant="default">{{ consult.Paragestas }}</b-badge>
-                </b-form-group>
-            </b-col>
-            <b-col>
-                <b-form-group>
-                    <span class="fw">Cesáreas</span>
-                    <b-badge variant="default">{{ consult.Cesareans }}</b-badge>
-                </b-form-group>
-            </b-col>
-            <b-col cols="4" lg="2">
-                <b-form-group>
-                    <span class="fw">Abortos</span>
-                    <b-badge variant="default">{{ consult.Abortions }}</b-badge>
-                </b-form-group>
-            </b-col>
-            <b-col cols="4" lg="2">
-                <b-form-group>
-                    <span class="fw">Recién nacidos</span>
-                    <b-badge variant="default">{{ consult.NewlyBorn }}</b-badge>
+                    <span class="fw">Paragestas -</span>
+                    <b>{{ consult.Paragestas }}</b>
                 </b-form-group>
             </b-col>
             <b-col>
                 <b-form-group>
-                    <span class="fw">Mortinatos</span>
-                    <b-badge variant="default">{{ consult.Stillbirth }}</b-badge>
+                    <span class="fw">Cesáreas -</span>
+                    <b>{{ consult.Cesareans }}</b>
+                </b-form-group>
+            </b-col>
+            <b-col cols="6" lg="2">
+                <b-form-group>
+                    <span class="fw">Abortos -</span>
+                    <b>{{ consult.Abortions }}</b>
+                </b-form-group>
+            </b-col>
+            <b-col cols="6" lg="2">
+                <b-form-group>
+                    <span class="fw">Recién nacidos -</span>
+                    <b>{{ consult.NewlyBorn }}</b>
+                </b-form-group>
+            </b-col>
+            <b-col>
+                <b-form-group>
+                    <span class="fw">Mortinatos -</span>
+                    <b>{{ consult.Stillbirth }}</b>
                 </b-form-group>
             </b-col>
         </b-row>
@@ -107,7 +107,7 @@
                 </b-form-checkbox>
             </b-col>
             <b-col cols="12" class="mt-2" v-if="consult.Checkbox.Others">
-                <b-form-group label="Explique otros">
+                <b-form-group label="Explique">
                     <span>{{ consult.SpecifyOthers }}</span>
                 </b-form-group>
             </b-col>
@@ -126,17 +126,17 @@
                             <span>{{ consult.Partner.Name }}</span>
                         </b-form-group>
                     </b-col>
-                    <b-col cols="3" sm="4" md="3" lg="2">
+                    <b-col cols="6" sm="4" md="3" lg="2">
                         <b-form-group label="Sexo">
                             <span>{{ sex(consult.Partner.Sex) }}</span>
                         </b-form-group>
                     </b-col>
-                    <b-col cols="4" md="3" lg="2">
+                    <b-col cols="6" sm="4" md="3" lg="2">
                         <b-form-group label="Estado civil">
                             <span>{{ maritalStatus(consult.Partner.MaritalStatus) }}</span>
                         </b-form-group>
                     </b-col>
-                    <b-col cols="5" sm="4" lg="2">
+                    <b-col cols="12" sm="4" lg="2">
                         <b-form-group label="Grupo y RH">
                             <span>{{ consult.Partner.GroupRH }}</span>
                         </b-form-group>

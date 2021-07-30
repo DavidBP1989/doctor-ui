@@ -43,8 +43,7 @@ export default class model {
                 Situtation: form.pregnancyControl.situtation,
                 Attitude: form.pregnancyControl.attitude,
                 FetalMovements: form.pregnancyControl.fetalMovements,
-                ApproximateProductWeight: !isNaN(form.pregnancyControl.weight) ?
-                (form.pregnancyControl.weight / 1000) : 0,
+                ApproximateProductWeight: form.pregnancyControl.weight,
                 TA: form.pregnancyControl.ta,
                 FCM: form.pregnancyControl.fcm,
                 Edema: form.pregnancyControl.edema,

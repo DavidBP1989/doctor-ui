@@ -44,7 +44,7 @@
                         <b-row v-if="!printConsult" class="mt-5">
                             <b-col>
                                 <p v-for="(a,index) in arrayToPrint" :key="index">
-                                    {{ a.name }}
+                                    <b>{{ a.name }}</b><br />
                                     <span v-for="s in a.studies" :key="s.id">- {{ s.name }} <br /></span>
                                 </p>
                             </b-col>
@@ -64,8 +64,14 @@
                     <footer>
                         <hr class="h5" id="hhr" />
                         <div class="d-flex">
-                            <span>{{ address }} Col. {{ colony }}</span>
-                            <span class="ml-auto">Tel&eacute;fono: {{ phone }}</span>
+                            <span>
+                                <b>Domicilio del consultorio:</b>
+                                <br> {{ address }}
+                            </span>
+                            <span class="ml-auto">
+                                <b>Tel&eacute;fono del consultorio:</b>
+                                <br />{{ phone }}
+                            </span>
                         </div>
                     </footer>
                 </div>

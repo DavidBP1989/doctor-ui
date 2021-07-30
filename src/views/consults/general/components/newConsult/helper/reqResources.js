@@ -20,7 +20,7 @@ function getCabinetStudies() {
 }
 
 function deleteDiagnosticById(id) {
-    return api_diagnostic.deleteDiagnosticById(id).then(response => response.status)
+    return api_diagnostics.deleteDiagnosticById(id).then(response => response.status)
 }
 
 function deleteTreatmentById(id) {
