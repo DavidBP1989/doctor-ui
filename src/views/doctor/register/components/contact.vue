@@ -2,7 +2,7 @@
     <div>
         <h5 class="mt-3 mb-4">Contacto</h5>
         <b-form-row>
-            <b-col cols="6" lg="4">
+            <b-col md="6" lg="4">
                 <b-form-group label="Teléfono">
                     <b-input-group>
                         <b-form-input v-model="form.phone" @keypress="numberFormat" class="f-text" />
@@ -15,7 +15,7 @@
                     </b-input-group>
                 </b-form-group>
             </b-col>
-            <b-col cols="6" lg="4">
+            <b-col md="6" lg="4">
                 <b-form-group label="Celular">
                     <b-input-group>
                         <b-form-input v-model="form.cellphone" @keypress="numberFormat" class="f-text" />

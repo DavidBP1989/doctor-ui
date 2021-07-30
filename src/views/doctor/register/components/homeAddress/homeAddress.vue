@@ -50,13 +50,13 @@
                     <b-form-input v-model="form.address" />
                 </b-form-group>
             </b-col>
-            <b-col cols="6" md="4" lg="3">
+            <b-col cols="4" md="4" lg="3">
                 <b-form-group label="Código postal">
                     <b-form-input v-model="form.cp" maxlength="5" @keypress="numberFormat" class="f-text" />
                     <div class="invalid-feedback">Este campo es requerido</div>
                 </b-form-group>
             </b-col>
-            <b-col cols="6" lg="3">
+            <b-col cols="8" md="6" lg="3">
                 <b-form-group label="Teléfono de consultorio">
                     <b-input-group>
                         <b-form-input v-model="form.officePhone" @keypress="numberFormat" class="f-text" />

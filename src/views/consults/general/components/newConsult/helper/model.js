@@ -23,17 +23,35 @@ export default class model {
             PhysicalExploration: form.physicalExploration,
             PreventiveMeasures: form.preventiveMeasures,
             Observations: form.observations,
-            Diagnostics: this.getArrayFormat(form.diagnostics, true),
-            Treatments: this.getArrayFormat(form.treatments, true),
-            CabinetStudies: this.getArrayFormat(form.cabinet, false),
-            LaboratoryStudies: this.getArrayFormat(form.laboratory, false),
+            Diagnostics: this.getArrayFormatToDiagnosticsAndTreatments(form.diagnostics),
+            Treatments: this.getArrayFormatToDiagnosticsAndTreatments(form.treatments),
+            CabinetStudies: this.getArrayFormatToCabinetAndLaboratory(form.cabinet),
+            LaboratoryStudies: this.getArrayFormatToCabinetAndLaboratory(form.laboratory),
             Prognostic: form.prognostic
         }
     }
 
-    getArrayFormat(array, isDiagnosticOrTreatment) {
-        return array.map((x) => {
-            return isDiagnosticOrTreatment ? x.text : x.name
+    getArrayFormatToCabinetAndLaboratory(array) {
+        return array.map(x => {
+            return {
+                Name: x.name,
+                Studies: x.studies.map(s => {
+                    return s.name
+                })
+            }
         })
+    }
+
+    getArrayFormatToDiagnosticsAndTreatments(array) {
+        var studies = array.map(x => {
+            return x.text
+        })
+        return studies.length > 0 ? [
+            {
+                Name: '',
+                Studies: studies
+            }
+            
+        ] : []
     }
 }

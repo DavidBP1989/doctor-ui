@@ -75,8 +75,8 @@
             <b-col md="6">
                 <b-form-group label="Diagnosticos">
                     <b-list-group>
-                        <b-list-group-item class="pl-0" v-for="c in consult.Diagnostics" :key="c">
-                            {{ c }}
+                        <b-list-group-item class="pl-0" v-for="c in consult.Diagnostics[0].Studies" :key="c">
+                            - {{ c }}
                         </b-list-group-item>
                     </b-list-group>
                 </b-form-group>
@@ -84,8 +84,8 @@
             <b-col>
                 <b-form-group label="Tratamientos">
                     <b-list-group>
-                        <b-list-group-item class="pl-0" v-for="c in consult.Treatments" :key="c">
-                            {{ c }}
+                        <b-list-group-item class="pl-0" v-for="c in consult.Treatments[0].Studies" :key="c">
+                            - {{ c }}
                         </b-list-group-item>
                     </b-list-group>
                 </b-form-group>
@@ -94,15 +94,17 @@
         <b-row>
             <b-col md="6">
                 <b-form-group label="Estudios de laboratorio">
-                    <b-list-group class="pl-0" v-for="c in consult.LaboratoryStudies" :key="c">
-                        {{ c }}
+                    <b-list-group class="pl-0" v-for="c in consult.LaboratoryStudies" :key="c.Name">
+                        <span v-if="c.Name != ''">{{ c.Name }} <br  /></span> 
+                        <span v-for="s in c.Studies" :key="s">- {{ s }} <br /></span> 
                     </b-list-group>
                 </b-form-group>
             </b-col>
             <b-col>
                 <b-form-group label="Estudios de gabinete">
-                    <b-list-group class="pl-0" v-for="c in consult.CabinetStudies" :key="c">
-                        {{ c }}
+                    <b-list-group class="pl-0" v-for="c in consult.CabinetStudies" :key="c.Name">
+                        <span v-if="c.Name != ''">{{ c.Name }} <br  /></span> 
+                        <span v-for="s in c.Studies" :key="s">- {{ s }} <br /></span> 
                     </b-list-group>
                 </b-form-group>
             </b-col>

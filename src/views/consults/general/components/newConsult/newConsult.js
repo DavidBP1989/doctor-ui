@@ -99,7 +99,7 @@ export default {
         saveConsult() {
             const req = new model(this.form)
             currentLoader = loader()
-
+            
             let success = false
             api.saveConsult(this.doctorId, req.__$).then((response) => {
                 success = response.body.IsSuccess

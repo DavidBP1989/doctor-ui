@@ -21,13 +21,13 @@
                     <div class="invalid-feedback">Este campo es requerido</div>
                 </b-form-group>
             </b-col>
-            <b-col cols="6" md="6" lg="3">
+            <b-col md="6" lg="3">
                 <b-form-group label="RFC">
                     <b-form-input v-model="form.rfc" class="f-text" />
                     <div class="invalid-feedback">Este campo es requerido</div>
                 </b-form-group>
             </b-col>
-            <b-col cols="6" lg="3">
+            <b-col md="6" lg="3">
                 <b-form-group label="CURP">
                     <b-form-input v-model="form.curp" class="f-text" />
                     <div class="invalid-feedback">Este campo es requerido</div>
@@ -35,36 +35,46 @@
             </b-col>
         </b-form-row>
         <b-form-row>
-            <b-col cols="6" md="6" lg="4">
+            <b-col md="6" lg="3">
                 <b-form-group label="No. Cédula profesional SEP">
                     <b-form-input v-model="form.sepCertificate" class="f-text" />
                     <div class="invalid-feedback">Este campo es requerido</div>
                 </b-form-group>
             </b-col>
-            <b-col cols="6" lg="4">
+            <b-col cols="6" lg="2">
                 <b-form-group label="No. S.S.A.">
                     <b-form-input v-model="form.ssa" class="f-text" />
                     <div class="invalid-feedback">Este campo es requerido</div>
                 </b-form-group>
             </b-col>
-            <b-col sm="6" md="12" lg="4">
+            <b-col sm="6" lg="4">
                 <b-form-group label="Consejo Méxicano de Certificación">
                     <b-form-input v-model="form.cmcp" />
                 </b-form-group>
             </b-col>
+            <b-col md="6" lg="3">
+                <b-form-group label="Especialidad médica">
+                    <b-form-input />
+                </b-form-group>
+            </b-col>
         </b-form-row>
         <b-form-row>
-            <b-col sm="6" md="6" lg="4">
+            <b-col sm="6" lg="3">
+                <b-form-group label="Subespecialidad médica">
+                    <b-form-input />
+                </b-form-group>
+            </b-col>
+            <b-col sm="6" lg="3">
                 <b-form-group label="Hospital de residencia">
                     <b-form-input v-model="form.hospital" />
                 </b-form-group>
             </b-col>
-            <b-col sm="6" lg="4">
+            <b-col sm="6" lg="3">
                 <b-form-group label="Universidad que avala">
                     <b-form-input v-model="form.university" />
                 </b-form-group>
             </b-col>
-            <b-col sm="6" md="12" lg="4">
+            <b-col sm="6" lg="3">
                 <b-form-group label="Cédula de especialidad SEP">
                     <b-form-input v-model="form.certificate" class="f-text" />
                     <div class="invalid-feedback">Este campo es requerido</div>
