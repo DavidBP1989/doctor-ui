@@ -58,7 +58,9 @@ export default {
                     university: '',
                     certificate: '',
                     school: '',
-                    grouping: ''
+                    grouping: '',
+                    medicalSpeciality: '0',
+                    submedicalSpeciality: ''
                 },
                 homeAddress: {
                     address: '',
@@ -106,9 +108,13 @@ export default {
                     this.form.doctorInformation.certificate = response.body.SpecialtyCertificate
                     this.form.doctorInformation.school = response.body.NameStateSchool
                     this.form.doctorInformation.grouping = response.body.NameStateGrouping
+                    this.form.doctorInformation.medicalSpeciality = response.body.MedicalSpeciality ? response.body.MedicalSpeciality : '0'
+                    this.form.doctorInformation.submedicalSpeciality = response.body.SubmedicalSpeciality ? response.body.SubmedicalSpeciality : '0'
                     this.form.homeAddress.address = response.body.Address
                     this.form.homeAddress.colony = response.body.Colony
                     this.form.homeAddress.cp = response.body.PostalCode
+                    this.form.homeAddress.state = response.body.State
+                    this.form.homeAddress.city = response.body.City
                     this.form.homeAddress.officePhone = response.body.OfficePhone
                     this.form.homeAddress.officeAddress = response.body.OfficeAddress
                     this.form.contact.phone = response.body.Phone
@@ -117,6 +123,8 @@ export default {
 
                     currentLoader.hide()
                     eventBus.$emit('setStateAndCity', { state: response.body.State, city: response.body.City })
+                    if (response.body.MedicalSpeciality != null)
+                        eventBus.$emit('setSubmedicalSpecialties', response.body.MedicalSpeciality)
                 }
             })
         },

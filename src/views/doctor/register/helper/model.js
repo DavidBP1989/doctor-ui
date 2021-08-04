@@ -13,6 +13,8 @@ export default class model {
             SpecialtyCertificate: form.doctorInformation.certificate,
             NameStateSchool: form.doctorInformation.school,
             NameStateGrouping: form.doctorInformation.grouping,
+            MedicalSpeciality: form.doctorInformation.medicalSpeciality,
+            SubmedicalSpeciality: form.doctorInformation.submedicalSpeciality,
             Address: form.homeAddress.address,
             Colony: form.homeAddress.colony,
             PostalCode: form.homeAddress.cp,

@@ -17,6 +17,8 @@ const validate = {
                 inputStatus = validate.typeValidations.email()
             if (validate.inputSelected.hasClass('f-date'))
                 inputStatus = validate.typeValidations.date()
+            if (validate.inputSelected.hasClass('f-select'))
+                inputStatus = validate.typeValidations.selectValue()
 
             if (firstInputWithError == null && !inputStatus)
             {
@@ -47,6 +49,9 @@ const validate = {
         },
         email() {
             return regEmail.test(validate.inputSelected.val()) ? validate.statusClass.success() : validate.statusClass.error()
+        },
+        selectValue() {
+            return validate.inputSelected.val() != '0' ? validate.statusClass.success() : validate.statusClass.error()
         }
     },
     statusClass: {

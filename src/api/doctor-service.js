@@ -39,6 +39,14 @@ const actions = {
     getListOfDoctorByAssociation: {
         method: 'GET',
         url: `${API_URL}/wAuthority/doctorsByAssociation/{associationId}`
+    },
+    getMedicalSpecialties: {
+        method: 'GET',
+        url: `${API_URL}/wAuthority/medicalSpecialties`
+    },
+    getSubmedicalSpecialties: {
+        method: 'GET',
+        url: `${API_URL}/wAuthority/submedicalSpecialties/{medicalSpecialityId}`
     }
 }
 
@@ -71,6 +79,12 @@ export default {
     },
     getListOfDoctorByAssociation(associationId) {
         return api.getListOfDoctorByAssociation({ associationId })
+    },
+    getMedicalSpecialties() {
+        return api.getMedicalSpecialties()
+    },
+    getSubmedicalSpecialties(medicalSpecialityId) {
+        return api.getSubmedicalSpecialties({ medicalSpecialityId })
     }
 }
 
