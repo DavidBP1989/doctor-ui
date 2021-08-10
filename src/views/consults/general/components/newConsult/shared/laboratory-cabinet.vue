@@ -85,7 +85,6 @@ export default {
             let group = this.listOfSavedValues.filter(x => {
                 return x.style
             })
-            console.log('group', group)
             this.listOfNewValues.splice(0)
             group.forEach(x => {
                 this.listOfNewValues.push({
@@ -96,7 +95,6 @@ export default {
                     })
                 })
             })
-            console.log(this.listOfNewValues)
         },
         print() {
             Vue.swal.close()

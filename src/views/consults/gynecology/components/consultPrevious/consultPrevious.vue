@@ -1,180 +1,73 @@
 <template>
     <div v-if="consult !== null">
-        <b-row>
-            <b-col offset-sm="4" offset-lg="8" class="text-right">
+        <b-row class="align-items-center">
+            <b-col md="6" lg="8">
+                <div class="mb-1">
+                    <fa-icon class="mr-2" :icon="['fas', 'print']" size="lg" />
+                    <b-link @click="print">Imprimir consulta</b-link>
+                </div>
+            </b-col>
+            <b-col class="mt-2 mt-md-0" md="6" lg="4">
                 <b-form-group class="nlegend" label="Buscar consulta">
                     <b-form-select v-model="selectedDate" :options="dates" @change="getConsult" />
                 </b-form-group>
             </b-col>
         </b-row>
-        <b-row class="mt-3">
-            <b-col cols="6" md="4" lg="2">
-                <b-form-group label="Peso">
-                    <span>{{ consult.BasicConsult.Weight }} kg</span>
-                </b-form-group>
-            </b-col>
-            <b-col cols="6" md="4" lg="2">
-                <b-form-group label="Talla">
-                    <span>{{ consult.BasicConsult.Size }} m</span>
-                </b-form-group>
-            </b-col>
-            <b-col cols="12" md="4" lg="3">
-                <b-form-group label="Índice de masa corporal">
-                    <span>{{ consult.BasicConsult.Mass }} kg/m2</span>
-                </b-form-group>
-            </b-col>
-            <b-col cols="6" md="4" lg="2">
-                <b-form-group label="Temperatura">
-                    <span>{{ consult.BasicConsult.Temperature }} c</span>
-                </b-form-group>
-            </b-col>
-            <b-col cols="6" lg="3">
-                <b-form-group label="Presión arterial">
-                    <span>{{ consult.BasicConsult.BloodPressure_A }}/{{ consult.BasicConsult.BloodPressure_B }} mm Hg</span>
-                </b-form-group>
-            </b-col>
-            <b-col cols="7" md="4" lg="3">
-                <b-form-group label="Edad de su menarca">
-                    <span>{{ consult.MenarcaAge }}</span>
-                </b-form-group>
-            </b-col>
-            <b-col cols="5" md="2" order-md="1" order-lg="0" lg="2">
-                <b-form-group label="Menacmia">
-                    <span>{{ consult.Menacma }}</span>
-                </b-form-group>
-            </b-col>
-            <b-col md="4" lg="3">
-                <b-form-group label="Fecha última menstruación">
-                    <span>{{ getDateFormat(consult.LastMenstruationDate) }}</span>
-                </b-form-group>
-            </b-col>
-            <b-col md="5" lg="4">
-                <b-form-group label="Edad de inicio de vida sexual activa">
-                    <span>{{ consult.AgeOfOnsetOfActiveSexualLife }}</span>
-                </b-form-group>
-            </b-col>
-        </b-row>
-        <hr>
-        <b-row>
-            <b-col cols="6" lg="2">
-                <b-form-group>
-                    <span class="fw">Gestas -</span>
-                    <b>{{ consult.Gestas }}</b>
-                </b-form-group>
-            </b-col>
-            <b-col cols="6" lg="2">
-                <b-form-group>
-                    <span class="fw">Paragestas -</span>
-                    <b>{{ consult.Paragestas }}</b>
-                </b-form-group>
-            </b-col>
-            <b-col>
-                <b-form-group>
-                    <span class="fw">Cesáreas -</span>
-                    <b>{{ consult.Cesareans }}</b>
-                </b-form-group>
-            </b-col>
-            <b-col cols="6" lg="2">
-                <b-form-group>
-                    <span class="fw">Abortos -</span>
-                    <b>{{ consult.Abortions }}</b>
-                </b-form-group>
-            </b-col>
-            <b-col cols="6" lg="2">
-                <b-form-group>
-                    <span class="fw">Recién nacidos -</span>
-                    <b>{{ consult.NewlyBorn }}</b>
-                </b-form-group>
-            </b-col>
-            <b-col>
-                <b-form-group>
-                    <span class="fw">Mortinatos -</span>
-                    <b>{{ consult.Stillbirth }}</b>
-                </b-form-group>
-            </b-col>
-        </b-row>
-        <b-row class="mt-2">
-            <b-col
-            cols="6"
-            md="4"
-            lg="3"
-            v-for="(o, index) in options"
-            :key="index">
-                <b-form-checkbox
-                disabled
-                :checked="o.value">
-                    {{ o.text }}
-                </b-form-checkbox>
-            </b-col>
-            <b-col cols="12" class="mt-2" v-if="consult.Checkbox.Others">
-                <b-form-group label="Explique">
-                    <span>{{ consult.SpecifyOthers }}</span>
-                </b-form-group>
-            </b-col>
-        </b-row>
-        <b-row class="mt-3" v-if="!consult.Partner.HasAPartner">
-            <b-col>
-                <b-form-group style="color:indianred" label="No tiene pareja" />
-            </b-col>
-        </b-row>
-        <b-card no-body v-else class="mt-3">
-            <b-card-body>
-                <p>Datos de la pareja</p>
-                <b-row>
-                    <b-col md="6" lg="6">
-                        <b-form-group label="Nombre y apellido">
-                            <span>{{ consult.Partner.Name }}</span>
-                        </b-form-group>
-                    </b-col>
-                    <b-col cols="6" sm="4" md="3" lg="2">
-                        <b-form-group label="Sexo">
-                            <span>{{ sex(consult.Partner.Sex) }}</span>
-                        </b-form-group>
-                    </b-col>
-                    <b-col cols="6" sm="4" md="3" lg="2">
-                        <b-form-group label="Estado civil">
-                            <span>{{ maritalStatus(consult.Partner.MaritalStatus) }}</span>
-                        </b-form-group>
-                    </b-col>
-                    <b-col cols="12" sm="4" lg="2">
-                        <b-form-group label="Grupo y RH">
-                            <span>{{ consult.Partner.GroupRH }}</span>
-                        </b-form-group>
-                    </b-col>
-                    <b-col cols="8" md="4" lg="3">
-                        <b-form-group label="Fecha de nacimiento">
-                            <span>{{ getDateFormat(consult.Partner.BirthDate) }}</span>
-                        </b-form-group>
-                    </b-col>
-                    <b-col cols="4" sm="2" lg="3">
-                        <b-form-group label="Edad">
-                            <span>{{ consult.Partner.Age }}</span>
-                        </b-form-group>
-                    </b-col>
-                    <b-col cols="6" md="6" lg="3">
-                        <b-form-group label="Ocupación">
-                            <span>{{ consult.Partner.Occupation }}</span>
-                        </b-form-group>
-                    </b-col>
-                    <b-col md="6" lg="3">
-                        <b-form-group label="Teléfono(s)">
-                            <span>{{ consult.Partner.Phone }}</span>
-                        </b-form-group>
-                    </b-col>
-                </b-row>
-            </b-card-body>
-        </b-card>
-        <b-row v-if="consult.Checkbox.Others" class="mt-2">
-            <b-col>
-                <b-form-group label="Motivo de la consulta">
-                    <span>{{ consult.BasicConsult.ReasonForConsultation }}</span>
-                </b-form-group>
-            </b-col>
-        </b-row>
+        <consult-view :consult="consult" />
     </div>
     <div class="p-4 text-center" v-else>
         <h5>No hay consultas previas por mostrar</h5>
     </div>
 </template>
 
-<script src='./consultPrevious.js'></script>
+<script>
+import api from '@/api/gynecology-consult-service'
+import { windowPrint } from '@/helper/alerts'
+import consultView from './consult.vue'
+
+export default {
+    mounted() {
+        this.$watch('consultationDates', newDate => {
+            this.dates = newDate
+            this.init()
+        })
+    },
+    props: {
+        consultationDates: {
+            type: Array,
+            required: true
+        }
+    },
+    components: {
+        consultView
+    },
+    data() {
+        return {
+            dates: this.consultationDates,
+            selectedDate: null,
+            consult: null
+        }
+    },
+    methods: {
+        init() {
+            if (this.dates.length > 0) {
+                this.selectedDate = this.dates[0].value
+                this.getConsult()
+            }    
+        },
+        getConsult() {
+            api.getConsultById(this.selectedDate).then(response => {
+                this.consult = response.body
+            })
+        },
+        print() {
+            windowPrint({
+                editPage: false,
+                printConsult: true,
+                printingType: 'gynecology-consult',
+                consultPreviousId: this.selectedDate
+            })
+        }
+    }
+}
+</script>

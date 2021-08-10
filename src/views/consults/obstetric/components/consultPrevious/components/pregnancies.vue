@@ -5,10 +5,7 @@
         :md="mdEctopicPregnancies"
         :lg="lgEctopicPregnancies">
             <b-form-group label="Embarazos ectópicos">
-                <div class="d-flex">
-                    <span>No</span>
-                    <b-form-checkbox class="ml-2" disabled :checked="consult.EctopicPregnancies" switch>Si</b-form-checkbox>
-                </div>
+                <span>{{ consult.EctopicPregnancies ? 'Si' : 'No' }}</span>
             </b-form-group>
             <b-row v-if="consult.EctopicPregnancies">
                 <b-col>
@@ -22,10 +19,7 @@
         :md="mdPreviousPregnacyComplications"
         :lg="lgPreviousPregnacyComplications">
             <b-form-group label="Complicaciones de embarazo previo">
-                <div class="d-flex">
-                    <span>No</span>
-                    <b-form-checkbox class="ml-2" disabled :checked="consult.PreviousPregnacyComplications" switch>Si</b-form-checkbox>
-                </div>
+                <span>{{ consult.PreviousPregnacyComplications ? 'Si' : 'No' }}</span>
             </b-form-group>
             <b-row v-if="consult.PreviousPregnacyComplications">
                 <b-col>
@@ -37,10 +31,7 @@
         </b-col>
         <b-col cols="12" :sm="consult.PerinatalComplications ? 12 : 6" :md="mdPerinatalComplications">
             <b-form-group label="Complicaciones perinatales">
-                <div class="d-flex">
-                    <span>No</span>
-                    <b-form-checkbox class="ml-2" disabled :checked="consult.PerinatalComplications" switch>Si</b-form-checkbox>
-                </div>
+                <span>{{ consult.PerinatalComplications ? 'Si' : 'No' }}</span>
             </b-form-group>
             <b-row v-if="consult.PerinatalComplications">
                 <b-col>
@@ -52,10 +43,7 @@
         </b-col>
         <b-col cols="12" order-sm="0" :md="mdAbnormalPregnancies">
             <b-form-group label="Embarazos anormales: Mola H, Anembriónicos, etc.">
-                <div class="d-flex">
-                    <span>No</span>
-                    <b-form-checkbox class="ml-2" disabled :checked="consult.AbnormalPregnancies" switch>Si</b-form-checkbox>
-                </div>
+                <span>{{ consult.AbnormalPregnancies ? 'Si' : 'No' }}</span>
             </b-form-group>
             <b-row v-if="consult.AbnormalPregnancies">
                 <b-col>

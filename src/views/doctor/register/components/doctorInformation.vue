@@ -56,7 +56,6 @@
                 <b-form-group label="Especialidad médica">
                     <b-form-select
                     class="form-control f-select"
-                    @change="changeMedicalSpeciality" 
                     :options="medicalSpecialties" v-model="form.medicalSpeciality" />
                     <div class="invalid-feedback">Este campo es requerido</div>
                 </b-form-group>
@@ -65,7 +64,7 @@
         <b-form-row>
             <b-col sm="6" lg="3">
                 <b-form-group label="Subespecialidad médica">
-                    <b-form-select :options="submedicalSpecialties" v-model="form.submedicalSpeciality" />
+                    <b-form-input v-model="form.submedicalSpeciality" />
                 </b-form-group>
             </b-col>
             <b-col sm="6" lg="3">
@@ -103,7 +102,6 @@
 <script>
 import { onlyLetter } from '@/helper/utilities'
 import api from '@/api/doctor-service'
-import eventBus from '@/helper/event-bus'
 
 export default {
     props: {
@@ -114,12 +112,10 @@ export default {
     },
     created() {
         this.getMedicalSpecialties()
-        eventBus.$on('setSubmedicalSpecialties', v => this.getSubmedicalSpecialties(v))
     },
     data() {
         return {
-            medicalSpecialties: [],
-            submedicalSpecialties: []
+            medicalSpecialties: []
         }
     },
     methods: {
@@ -142,29 +138,6 @@ export default {
                     })
                 }
             })
-        },
-        getSubmedicalSpecialties(id) {
-            this.submedicalSpecialties = []
-
-            api.getSubmedicalSpecialties(id).then(response => {
-                if (response.body && response.body.length > 0) {
-                    this.submedicalSpecialties.push({
-                        text: '-- seleccione --',
-                        value: '0'
-                    })
-
-                    response.body.forEach(element => {
-                        this.submedicalSpecialties.push({
-                            text: element.Name,
-                            value: element.Id
-                        })
-                    })
-                }
-            })
-        },
-        changeMedicalSpeciality() {
-            this.form.submedicalSpeciality = '0'
-            this.getSubmedicalSpecialties(this.form.medicalSpeciality)
         }
     }
 }

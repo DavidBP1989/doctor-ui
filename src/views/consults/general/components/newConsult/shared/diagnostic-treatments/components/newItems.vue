@@ -24,8 +24,14 @@
                 <b-list-group-item v-if="listOfNewValues.length === 0" class="font-weight-bold">{{ `Ningún ${getTextType} agregado` }}</b-list-group-item>
             </b-list-group>
         </b-card>
-        <b-row class="mt-3 mb-1" v-if="listOfNewValues.length > 0">
-            <b-col class="text-right">
+        <b-row class="mt-3 mb-1 text-right" v-if="listOfNewValues.length > 0">
+            <b-col v-if="!isDiagnostic_andNot_treatment" cols="12">
+                <div class="mb-4 mt-2">
+                    <fa-icon class="mr-2" :icon="['fas', 'print']" size="lg" />
+                    <b-link @click="print">Imprimir</b-link>
+                </div>
+            </b-col>
+            <b-col>
                 <b-button variant="secondary" @click="deleteItem(-1)">Eliminar todo</b-button>
                 <b-button variant="secondary" v-if="listOfNewValues.length > 0" v-b-modal.saveas>Guardar como</b-button>
             </b-col>
@@ -44,6 +50,7 @@
 <script>
 import store from '@/store/store'
 import reqResources from '../../../helper/reqResources'
+import { windowPrint } from '@/helper/alerts'
 
 export default {
     props: ['isDiagnostic_andNot_treatment', 'savedValues', 'newValues'],
@@ -128,6 +135,22 @@ export default {
                 title: 'Error',
                 centered: true,
                 id: 'modal-newGroup'
+            })
+        },
+        print() {
+            let toPrint = [{
+                name: '',
+                studies: []
+            }]
+            this.newValues.forEach(x => {
+                toPrint[0].studies.push({
+                    id: x.id,
+                    name: x.text
+                })
+            })
+            windowPrint({
+                editPage: false,
+                arrayToPrint: toPrint
             })
         }
     }

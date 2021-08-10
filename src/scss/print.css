@@ -44,6 +44,10 @@ h1 {
     border: none !important;
 }
 
+.smallsize {
+    font-size: 10px;
+}
+
 footer hr {
     height: 5px;
     border: 1px solid;

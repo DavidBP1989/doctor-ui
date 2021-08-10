@@ -49,7 +49,21 @@
                                 </p>
                             </b-col>
                         </b-row>
-                        <consult-previous class="mt-5" v-else :consult="consult" />
+                        
+                        <general-consult
+                        class="mt-5"
+                        v-if="printingType == 'general-consult'"
+                        :consult="consult" />
+
+                        <gynecology-consult
+                        v-if="printingType == 'gynecology-consult'" 
+                        class="mt-5"
+                        :consult="consult" />
+
+                        <obstetric-consult
+                        v-if="printingType == 'obstetric-consult'" 
+                        class="mt-5"
+                        :consult="consult" />
 
                         <b-row class="mt-5 mb-5">
                             <b-col cols="6" offset="3" class="text-center firma">

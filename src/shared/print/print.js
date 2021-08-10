@@ -3,13 +3,18 @@ import edit from './components/edit.vue'
 import Vue from 'vue'
 import store from '@/store/store'
 import api from '@/api/print-service'
-import api_consult from '@/api/general-consult-service'
+import apiGeneralConsult from '@/api/general-consult-service'
+import apiGinecologyConsult from '@/api/gynecology-consult-service'
+import apiObstetricConsult from '@/api/obstetric-consult-service'
 import model from './helper/model'
 import { loader } from '@/helper/loader'
 import { saved } from '@/helper/alerts'
 import eventBus from '@/helper/event-bus'
 import apiDoctor from '@/api/doctor-service'
-import consultPrevious from '@/views/consults/general/components/consultPrevious/consult.vue'
+
+import generalConsult from '@/views/consults/general/components/consultPrevious/consult.vue'
+import gynecologyConsult from '@/views/consults/gynecology/components/consultPrevious/consult.vue'
+import obstetricConsult from '@/views/consults/obstetric/components/consultPrevious/consult.vue'
 
 export default {
     mounted() {
@@ -22,7 +27,14 @@ export default {
         eventBus.$on('setColors', () => this.setColors())
         eventBus.$on('setLogo', (base64) => this.setLogo(base64))
         if (!this.editPage) {
-            if (this.printConsult) this.getConsult()
+            if (this.printConsult) {
+                switch (this.printingType) {
+                    case 'general-consult': this.getGeneralConsult(); break;
+                    case 'gynecology-consult': this.getGinecologyConsult(); break;
+                    case 'obstetric-consult': this.getObstetricConsult(); break;
+                }
+            }
+
             setTimeout(() => this.print(), 1000)
         }
     },
@@ -31,6 +43,10 @@ export default {
             required: false,
             type: Boolean,
             default: true
+        },
+        printingType: {
+            required: false,
+            type: String
         },
         printConsult: {
             type: Boolean,
@@ -49,7 +65,9 @@ export default {
     components: {      
         edit,
         'main-header': () => import('../header/header.vue'),
-        consultPrevious
+        generalConsult,
+        gynecologyConsult,
+        obstetricConsult
     },
     data() {
         return {
@@ -87,8 +105,18 @@ export default {
                 }
             })
         },
-        getConsult() {
-            api_consult.getConsultById(this.consultPreviousId).then(response => {
+        getGeneralConsult() {
+            apiGeneralConsult.getConsultById(this.consultPreviousId).then(response => {
+                this.consult = response.body
+            })
+        },
+        getGinecologyConsult() {
+            apiGinecologyConsult.getConsultById(this.consultPreviousId).then(response => {
+                this.consult = response.body
+            })
+        },
+        getObstetricConsult() {
+            apiObstetricConsult.getConsultById(this.consultPreviousId).then(response => {
                 this.consult = response.body
             })
         },
