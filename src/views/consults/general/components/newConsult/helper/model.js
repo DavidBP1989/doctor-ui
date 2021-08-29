@@ -1,4 +1,5 @@
 import store from '@/store/store'
+import format from '../../../../helper/format'
 
 export default class model {
     constructor(form) {
@@ -8,7 +9,11 @@ export default class model {
                 Size: form.size,
                 Temperature: form.temperature,
                 BloodPressure_A: form.bloodPressure_a,
-                BloodPressure_B: form.bloodPressure_b
+                BloodPressure_B: form.bloodPressure_b,
+                ReasonForConsultation: form.reasonForConsultation,
+                PhysicalExploration: form.physicalExploration,
+                PreventiveMeasures: form.preventiveMeasures,
+                Observations: form.observations,
             },
             PatientConsult: {
                 PatientId: store.state.patient.id,
@@ -19,39 +24,11 @@ export default class model {
             HeadCircuference: form.headCircuference,
             HeartRate: form.heartRate,
             BreathingFrecuency: form.breathingFrecuency,
-            ReasonForConsultation: form.reasonForConsultation,
-            PhysicalExploration: form.physicalExploration,
-            PreventiveMeasures: form.preventiveMeasures,
-            Observations: form.observations,
-            Diagnostics: this.getArrayFormatToDiagnosticsAndTreatments(form.diagnostics),
-            Treatments: this.getArrayFormatToDiagnosticsAndTreatments(form.treatments),
-            CabinetStudies: this.getArrayFormatToCabinetAndLaboratory(form.cabinet),
-            LaboratoryStudies: this.getArrayFormatToCabinetAndLaboratory(form.laboratory),
+            Diagnostics: format.getArrayFormatToDiagnosticsAndTreatments(form.diagnostics),
+            Treatments: format.getArrayFormatToDiagnosticsAndTreatments(form.treatments),
+            CabinetStudies: format.getArrayFormatToCabinetAndLaboratory(form.cabinet),
+            LaboratoryStudies: format.getArrayFormatToCabinetAndLaboratory(form.laboratory),
             Prognostic: form.prognostic
         }
-    }
-
-    getArrayFormatToCabinetAndLaboratory(array) {
-        return array.map(x => {
-            return {
-                Name: x.name,
-                Studies: x.studies.map(s => {
-                    return s.name
-                })
-            }
-        })
-    }
-
-    getArrayFormatToDiagnosticsAndTreatments(array) {
-        var studies = array.map(x => {
-            return x.text
-        })
-        return studies.length > 0 ? [
-            {
-                Name: '',
-                Studies: studies
-            }
-            
-        ] : []
     }
 }

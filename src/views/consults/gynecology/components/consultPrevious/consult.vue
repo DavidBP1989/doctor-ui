@@ -25,27 +25,32 @@
                     <span>{{ consult.BasicConsult.Temperature }} c</span>
                 </b-form-group>
             </b-col>
-            <b-col cols="6" lg="3">
+            <b-col cols="6" md="4" lg="3">
                 <b-form-group label="Presión arterial">
                     <span>{{ consult.BasicConsult.BloodPressure_A }}/{{ consult.BasicConsult.BloodPressure_B }} mm Hg</span>
                 </b-form-group>
             </b-col>
-            <b-col cols="7" md="4" lg="3">
-                <b-form-group label="Edad de su menarca">
+            <b-col cols="7" sm="6" md="4">
+                <b-form-group label="Edad de la menarca">
                     <span>{{ consult.MenarcaAge }}</span>
                 </b-form-group>
             </b-col>
-            <b-col cols="5" md="2" order-md="1" order-lg="0" lg="2">
+            <b-col cols="5" sm="6" md="4" order-lg="0">
                 <b-form-group label="Menacmia">
                     <span>{{ consult.Menacma }}</span>
                 </b-form-group>
             </b-col>
-            <b-col md="4" lg="3">
+            <b-col sm="6" md="4">
                 <b-form-group label="Fecha última menstruación">
                     <span>{{ getDateFormat(consult.LastMenstruationDate) }}</span>
                 </b-form-group>
             </b-col>
-            <b-col md="5" lg="4">
+            <b-col sm="6" md="4">
+                <b-form-group label="Activa sexualmente">
+                    <span>{{ consult.SexuallyActive ? 'Si' : 'No' }}</span>
+                </b-form-group>
+            </b-col>
+            <b-col lg="4">
                 <b-form-group label="Edad de inicio de vida sexual activa">
                     <span>{{ consult.AgeOfOnsetOfActiveSexualLife }}</span>
                 </b-form-group>
@@ -160,9 +165,63 @@
             </b-card-body>
         </b-card>
         <b-row class="mt-2">
-            <b-col>
+            <b-col sm="6">
                 <b-form-group label="Motivo de la consulta">
                     <span>{{ consult.BasicConsult.ReasonForConsultation }}</span>
+                </b-form-group>
+            </b-col>
+            <b-col sm="6">
+                <b-form-group label="Exploración física">
+                    <span>{{ consult.BasicConsult.PhysicalExploration }}</span>
+                </b-form-group>
+            </b-col>
+            <b-col sm="6">
+                <b-form-group label="Medidas preventivas">
+                    <span>{{ consult.BasicConsult.PreventiveMeasures }}</span>
+                </b-form-group>
+            </b-col>
+            <b-col>
+                <b-form-group label="Observaciones">
+                    <span>{{ consult.BasicConsult.Observations }}</span>
+                </b-form-group>
+            </b-col>
+        </b-row>
+        <hr>
+        <b-row>
+            <b-col md="6">
+                <b-form-group label="Diagnosticos">
+                    <b-list-group>
+                        <b-list-group-item class="pl-0" v-for="c in consult.Diagnostics[0].Studies" :key="c">
+                            - {{ c }}
+                        </b-list-group-item>
+                    </b-list-group>
+                </b-form-group>
+            </b-col>
+            <b-col>
+                <b-form-group label="Tratamientos">
+                    <b-list-group>
+                        <b-list-group-item class="pl-0" v-for="c in consult.Treatments[0].Studies" :key="c">
+                            - {{ c }}
+                        </b-list-group-item>
+                    </b-list-group>
+                </b-form-group>
+            </b-col>
+        </b-row>
+        <b-row>
+            <b-col md="6">
+                <b-form-group label="Estudios de laboratorio">
+                    <b-list-group class="pl-0" v-for="c in consult.LaboratoryStudies" :key="c.Name">
+                        <span v-if="c.Name != ''">{{ c.Name }} <br  /></span> 
+                        <span v-for="s in c.Studies" :key="s">- {{ s }} <br /></span> 
+                    </b-list-group>
+                </b-form-group>
+            </b-col>
+            <b-col>
+                <b-form-group label="Estudios de gabinete">
+                    <b-list-group class="pl-0" v-for="c in consult.CabinetStudies" :key="c.Name">
+                        <span v-if="c.Name != ''">{{ c.Name }} <br  /></span> 
+                        <span v-for="s in c.Studies" :key="s">- {{ s }} <br /></span> 
+                    </b-list-group>
                 </b-form-group>
             </b-col>
         </b-row>

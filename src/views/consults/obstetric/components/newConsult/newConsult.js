@@ -9,12 +9,27 @@ import api from '@/api/obstetric-consult-service'
 import { saved } from '@/helper/alerts'
 import eventBus from '@/helper/event-bus'
 import operations from '../../helper/operations'
+import diagnostics from '../../../shared/components/diagnostics.vue'
+import treatments from '../../../shared/components/treatments.vue'
+import addedItems from '../../../shared/addedItems.vue'
+import laboratory from '../../../shared/components/laboratory.vue'
+import cabinet from '../../../shared/components/cabinet.vue'
+import reqResources from '../../../helper/reqResources'
+import map from '../../../helper/map'
 
 export default {
+    created() {
+        this.getNecessaryResources()
+    },
     components: {
         distocias,
         pregnancies,
-        pregnancyControl
+        pregnancyControl,
+        diagnostics,
+        treatments,
+        addedItems,
+        laboratory,
+        cabinet
     },
     data() {
         return {
@@ -53,7 +68,6 @@ export default {
                     abnormal: false,
                     specifyAbnormal: null
                 },
-                observations: null,
                 pregnancyControl: {
                     fu: 0,
                     fcf: 0,
@@ -77,12 +91,22 @@ export default {
                     estimatedDueDate: null
                 },
                 reasonForConsultation: null,
-                exploration: null
+                physicalExploration: null,
+                preventiveMeasures: null,
+                observations: null,
+                diagnostics: [],
+                treatments: [],
+                laboratory: [],
+                cabinet: []
             },
             parturitionOptions: [
                 { text: 'Eutócico', value: '0' },
                 { text: 'Distocico', value: '1' }
-            ]
+            ],
+            diagnostics: [],
+            treatments: [],
+            laboratory: [],
+            cabinet: []
         }
     },
     computed: {
@@ -98,6 +122,27 @@ export default {
         }
     },
     methods: {
+        getNecessaryResources() {
+            currentLoader = loader()
+            Promise.all([
+                reqResources.getAllDiagnostics(this.doctorId).then(response =>
+                    this.diagnostics = map.mapForDiagnosticsAndTreatments(response)
+                ),
+                reqResources.getAllTreatments(this.doctorId).then(response => 
+                    this.treatments = map.mapForDiagnosticsAndTreatments(response)
+                ),
+                reqResources.getLabStudies().then(response => 
+                    this.laboratory = map.mapForLabAndCabinet(response)
+                ),
+                reqResources.getCabinetStudies().then(response => 
+                    this.cabinet = map.mapForLabAndCabinet(response)
+                )
+            ]).then(() => {
+                currentLoader.hide()
+            }).catch(() => {
+                currentLoader.hide()
+            })
+        },
         onlyDecimals(evt) {
             onlyNumber(evt, true)
         },
@@ -169,7 +214,10 @@ export default {
             this.form._pregnancies.specifyPerinatal = null
             this.form._pregnancies.abnormal = false
             this.form._pregnancies.specifyAbnormal = null
-            this.form.observations = null
+            this.form.reasonForConsultation = null
+            this.form.physicalExploration = null,
+            this.form.preventiveMeasures = null,
+            this.form.observations = null,
             this.form.pregnancyControl.fu = 0
             this.form.pregnancyControl.fcf = 0
             this.form.pregnancyControl.cc = 0
@@ -189,8 +237,11 @@ export default {
             this.form.pregnancyControl.madeUf = false
             this.form.pregnancyControl.ultrasound = null
             this.form.pregnancyControl.gestationWeek = null
-            this.form.reasonForConsultation = null
             this.form.exploration = null
+            this.form.diagnostics = []
+            this.form.treatments = []
+            this.form.laboratory = []
+            this.form.cabinet = []
         }
     }
 }

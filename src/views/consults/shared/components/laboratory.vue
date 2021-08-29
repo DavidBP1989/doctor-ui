@@ -1,10 +1,10 @@
 <template>
-    <b-button @click="showModal" class="mb-2" variant="outline-secondary">Diagnosticos</b-button>
+    <b-button @click="showModal" class="mb-2" variant="outline-secondary">Estudios de laboratorio</b-button>
 </template>
 
 <script>
 import { showModalWithViewReference } from '@/helper/alerts'
-import modal from '../shared/diagnostic-treatments/main.vue'
+import modal from '../laboratory-cabinet.vue'
 
 export default {
     props: {
@@ -19,10 +19,10 @@ export default {
     },
     methods: {
         showModal() {
-            showModalWithViewReference(modal, 'Diagnósticos', {
-                isDiagnostic_andNot_treatment: true,
+            showModalWithViewReference(modal, 'Estudios de laboratorio', {
                 savedValues: this.savedValues,
-                newValues: this.newValues
+                newValues: this.newValues,
+                type: 'laboratory'
             })
         }
     }

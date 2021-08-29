@@ -46,7 +46,7 @@
         </b-row>
         <b-row>
             <b-col cols="6" md="3">
-                <b-form-group label="Pocisión">
+                <b-form-group label="Posición">
                     <b-form-input v-model="pregnancy.position" />
                 </b-form-group>
             </b-col>

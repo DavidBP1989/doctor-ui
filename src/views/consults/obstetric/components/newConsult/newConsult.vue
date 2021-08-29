@@ -163,33 +163,66 @@
             </b-col>
         </b-row>
         <pregnancies :pregnancies="form._pregnancies" />
+        <pregnancy-control :form="form" />
         <b-row>
+            <b-col md="6">
+                <b-form-group label="Motivo de la consulta">
+                    <b-form-textarea v-model="form.reasonForConsultation"></b-form-textarea>
+                </b-form-group>
+            </b-col>
             <b-col>
-                <b-form-group label="Observaciones">
-                    <b-form-textarea rows="3" v-model="form.observations" />
+                <b-form-group label="Exploración física">
+                    <b-form-textarea v-model="form.physicalExploration"></b-form-textarea>
                 </b-form-group>
             </b-col>
         </b-row>
-        <pregnancy-control :form="form" />
         <b-row>
-            <b-col cols="12" lg="6">
-                <b-form-group label="Motivo de la consulta">
-                    <b-form-textarea rows="3" v-model="form.reasonForConsultation" />
+            <b-col md="6">
+                <b-form-group label="Medidas preventivas">
+                    <b-form-textarea v-model="form.preventiveMeasures"></b-form-textarea>
                 </b-form-group>
             </b-col>
-            <b-col cols="12" lg="6">
-                <b-form-group label="Exploración física">
-                    <b-form-textarea rows="3" v-model="form.exploration" />
+            <b-col>
+                <b-form-group label="Observaciones">
+                    <b-form-textarea v-model="form.observations"></b-form-textarea>
                 </b-form-group>
             </b-col>
         </b-row>
         <b-row class="mt-2">
-            <b-col class="text-md-right">
+            <b-col class="text-right">
+                <diagnostics :savedValues="diagnostics" :newValues="form.diagnostics" />
+                <treatments :savedValues="treatments" :newValues="form.treatments" />
+                <laboratory :savedValues="laboratory" :newValues="form.laboratory" />
+                <cabinet :savedValues="cabinet" :newValues="form.cabinet" />
                 <b-button class="mb-2"
                 @click="saveConsult"
                 variant="success">Guardar consulta</b-button>
             </b-col>
         </b-row>
+
+        <added-items
+        v-if="form.diagnostics.length > 0"
+        title="Diagnosticos"
+        type="diagnostic"
+        :dataList="form.diagnostics" />
+
+        <added-items
+        v-if="form.treatments.length > 0"
+        title="Tratamientos"
+        type="treatments"
+        :dataList="form.treatments" />
+
+        <added-items
+        v-if="form.laboratory.length > 0"
+        title="Estudios de laboratorio"
+        type="laboratory"
+        :dataList="form.laboratory" />
+
+        <added-items
+        v-if="form.cabinet.length > 0"
+        title="Estudios de gabinete"
+        type="cabinet"
+        :dataList="form.cabinet" />
     </div>
 </template>
 

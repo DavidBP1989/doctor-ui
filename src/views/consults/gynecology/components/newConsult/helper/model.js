@@ -1,5 +1,6 @@
 import store from '@/store/store'
 import Vue from 'vue'
+import format from '../../../../helper/format'
 
 export default class model {
     constructor(form) {
@@ -10,7 +11,10 @@ export default class model {
                 Temperature: form.temperature,
                 BloodPressure_A: form.bloodPressure_A,
                 BloodPressure_B: form.bloodPressure_B,
-                ReasonForConsultation: form.reasonForConsultation
+                ReasonForConsultation: form.reasonForConsultation,
+                PhysicalExploration: form.physicalExploration,
+                PreventiveMeasures: form.preventiveMeasures,
+                Observations: form.observations
             },
             PatientConsult: {
                 PatientId: store.state.patient.id,
@@ -28,6 +32,7 @@ export default class model {
             NewlyBorn: form.newlyBorn,
             Stillbirth: form.stillbirth,
             AgeOfOnsetOfActiveSexualLife: form.ageOfOnsetOfActiveSexualLife,
+            SexuallyActive: form.sexuallyActive,
             Menacma: form.menacma,
             Checkbox: {
                 Oligomenorrea: form.options[0].value,
@@ -53,7 +58,11 @@ export default class model {
                 Age: form.partner.age,
                 Occupation: form.partner.occupation,
                 Phone: form.partner.phone
-            }
+            },
+            Diagnostics: format.getArrayFormatToDiagnosticsAndTreatments(form.diagnostics),
+            Treatments: format.getArrayFormatToDiagnosticsAndTreatments(form.treatments),
+            CabinetStudies: format.getArrayFormatToCabinetAndLaboratory(form.cabinet),
+            LaboratoryStudies: format.getArrayFormatToCabinetAndLaboratory(form.laboratory)
         }
     }
 }

@@ -4,7 +4,7 @@
 
 <script>
 import { showModalWithViewReference } from '@/helper/alerts'
-import modal from '../shared/laboratory-cabinet.vue'
+import modal from '../laboratory-cabinet.vue'
 
 export default {
     props: {

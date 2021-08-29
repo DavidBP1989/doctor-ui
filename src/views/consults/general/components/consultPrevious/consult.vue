@@ -51,22 +51,22 @@
         <b-row>
             <b-col sm="6">
                 <b-form-group label="Motivo de la consulta">
-                    <span>{{ consult.ReasonForConsultation }}</span>
+                    <span>{{ consult.BasicConsult.ReasonForConsultation }}</span>
                 </b-form-group>
             </b-col>
             <b-col sm="6">
                 <b-form-group label="Exploración física">
-                    <span>{{ consult.PhysicalExploration }}</span>
+                    <span>{{ consult.BasicConsult.PhysicalExploration }}</span>
                 </b-form-group>
             </b-col>
             <b-col sm="6">
                 <b-form-group label="Medidas preventivas">
-                    <span>{{ consult.PreventiveMeasures }}</span>
+                    <span>{{ consult.BasicConsult.PreventiveMeasures }}</span>
                 </b-form-group>
             </b-col>
             <b-col>
                 <b-form-group label="Observaciones">
-                    <span>{{ consult.Observations }}</span>
+                    <span>{{ consult.BasicConsult.Observations }}</span>
                 </b-form-group>
             </b-col>
         </b-row>

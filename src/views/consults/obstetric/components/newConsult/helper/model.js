@@ -1,5 +1,6 @@
 import store from '@/store/store'
 import Vue from 'vue'
+import format from '../../../../helper/format'
 
 export default class model {
     constructor(form) {
@@ -30,7 +31,7 @@ export default class model {
             SpecifyPerinatalComplications: form._pregnancies.specifyPerinatal,
             AbnormalPregnancies: form._pregnancies.abnormal,
             SpecifyAbnormalPregnancies: form._pregnancies.specifyAbnormal,
-            Observations: form.observations,
+            //Observations: form.observations,
             PregnancyControl: {
                 FU: form.pregnancyControl.fu,
                 FCF: form.pregnancyControl.fcf,
@@ -58,13 +59,20 @@ export default class model {
                 BloodPressure_A: form.bloodPressure_A,
                 BloodPressure_B: form.bloodPressure_B,
                 ReasonForConsultation: form.reasonForConsultation,
+                PhysicalExploration: form.physicalExploration,
+                PreventiveMeasures: form.preventiveMeasures,
+                Observations: form.observations
             },
             PatientConsult: {
                 PatientId: store.state.patient.id,
                 Allergies: store.state.patient.allergies,
                 Reserved: store.state.patient.reserved,
                 RelevantPathologies: store.state.patient.relevantPathologies
-            }
+            },
+            Diagnostics: format.getArrayFormatToDiagnosticsAndTreatments(form.diagnostics),
+            Treatments: format.getArrayFormatToDiagnosticsAndTreatments(form.treatments),
+            CabinetStudies: format.getArrayFormatToCabinetAndLaboratory(form.cabinet),
+            LaboratoryStudies: format.getArrayFormatToCabinetAndLaboratory(form.laboratory)
         }
     }
 }

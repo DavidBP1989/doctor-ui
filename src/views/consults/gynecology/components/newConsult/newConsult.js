@@ -6,10 +6,25 @@ import model from './helper/model'
 import api from '@/api/gynecology-consult-service'
 import { saved } from '@/helper/alerts'
 import eventBus from '@/helper/event-bus'
+import addedItems from '../../../shared/addedItems.vue'
+import diagnostics from '../../../shared/components/diagnostics.vue'
+import treatments from '../../../shared/components/treatments.vue'
+import laboratory from '../../../shared/components/laboratory.vue'
+import cabinet from '../../../shared/components/cabinet.vue'
+import reqResources from '../../../helper/reqResources'
+import map from '../../../helper/map'
 
 export default {
+    created() {
+        this.getNecessaryResources()
+    },
     components: {
-        partner
+        partner,
+        addedItems,
+        diagnostics,
+        treatments,
+        laboratory,
+        cabinet
     },
     data() {
         return {
@@ -29,6 +44,7 @@ export default {
                 newlyBorn: 0,
                 stillbirth: 0,
                 ageOfOnsetOfActiveSexualLife: null,
+                sexuallyActive: false,
                 menacma: null,
                 options: [
                     { text: 'Oligomenorrea', value: false },
@@ -54,8 +70,19 @@ export default {
                     occupation: null,
                     phone: null
                 },
-                reasonForConsultation: null
-            }
+                reasonForConsultation: null,
+                physicalExploration: null,
+                preventiveMeasures: null,
+                observations: null,
+                diagnostics: [],
+                treatments: [],
+                laboratory: [],
+                cabinet: []
+            },
+            diagnostics: [],
+            treatments: [],
+            laboratory: [],
+            cabinet: []
         }
     },
     computed: {
@@ -71,6 +98,27 @@ export default {
         }
     },
     methods: {
+        getNecessaryResources() {
+            currentLoader = loader()
+            Promise.all([
+                reqResources.getAllDiagnostics(this.doctorId).then(response =>
+                    this.diagnostics = map.mapForDiagnosticsAndTreatments(response)
+                ),
+                reqResources.getAllTreatments(this.doctorId).then(response => 
+                    this.treatments = map.mapForDiagnosticsAndTreatments(response)
+                ),
+                reqResources.getLabStudies().then(response => 
+                    this.laboratory = map.mapForLabAndCabinet(response)
+                ),
+                reqResources.getCabinetStudies().then(response => 
+                    this.cabinet = map.mapForLabAndCabinet(response)
+                )
+            ]).then(() => {
+                currentLoader.hide()
+            }).catch(() => {
+                currentLoader.hide()
+            })
+        },
         onlyDecimals(evt) {
             onlyNumber(evt, true)
         },
@@ -114,6 +162,7 @@ export default {
             this.form.newlyBorn = 0
             this.form.stillbirth = 0
             this.form.ageOfOnsetOfActiveSexualLife = null
+            this.form.sexuallyActive = false
             this.form.menacma = null
             
             this.form.options.forEach(x => {
@@ -131,6 +180,13 @@ export default {
             this.form.partner.occupation = null
             this.form.partner.phone = null
             this.form.reasonForConsultation = null
+            this.form.physicalExploration = null,
+            this.form.preventiveMeasures = null,
+            this.form.observations = null,
+            this.form.diagnostics = []
+            this.form.treatments = []
+            this.form.laboratory = []
+            this.form.cabinet = []
         }
     }
 }

@@ -122,23 +122,65 @@
             </b-col>
         </b-row>
         <pregnancies :consult="consult" />
-        <b-row>
-            <b-col>
-                <b-form-group label="Observaciones">
-                    <span>{{ consult.Observations }}</span>
-                </b-form-group>
-            </b-col>
-        </b-row>
         <pregnancy-control :consult="consult" />
         <b-row>
-            <b-col cols="12" sm="6">
+            <b-col sm="6">
                 <b-form-group label="Motivo de la consulta">
                     <span>{{ consult.BasicConsult.ReasonForConsultation }}</span>
                 </b-form-group>
             </b-col>
-            <b-col>
+            <b-col sm="6">
                 <b-form-group label="Exploración física">
-                    <span>{{ consult.PregnancyControl.PhysicalExploration }}</span>
+                    <span>{{ consult.BasicConsult.PhysicalExploration }}</span>
+                </b-form-group>
+            </b-col>
+            <b-col sm="6">
+                <b-form-group label="Medidas preventivas">
+                    <span>{{ consult.BasicConsult.PreventiveMeasures }}</span>
+                </b-form-group>
+            </b-col>
+            <b-col>
+                <b-form-group label="Observaciones">
+                    <span>{{ consult.BasicConsult.Observations }}</span>
+                </b-form-group>
+            </b-col>
+        </b-row>
+        <hr>
+        <b-row>
+            <b-col md="6">
+                <b-form-group label="Diagnosticos">
+                    <b-list-group>
+                        <b-list-group-item class="pl-0" v-for="c in consult.Diagnostics[0].Studies" :key="c">
+                            - {{ c }}
+                        </b-list-group-item>
+                    </b-list-group>
+                </b-form-group>
+            </b-col>
+            <b-col>
+                <b-form-group label="Tratamientos">
+                    <b-list-group>
+                        <b-list-group-item class="pl-0" v-for="c in consult.Treatments[0].Studies" :key="c">
+                            - {{ c }}
+                        </b-list-group-item>
+                    </b-list-group>
+                </b-form-group>
+            </b-col>
+        </b-row>
+        <b-row>
+            <b-col md="6">
+                <b-form-group label="Estudios de laboratorio">
+                    <b-list-group class="pl-0" v-for="c in consult.LaboratoryStudies" :key="c.Name">
+                        <span v-if="c.Name != ''">{{ c.Name }} <br  /></span> 
+                        <span v-for="s in c.Studies" :key="s">- {{ s }} <br /></span> 
+                    </b-list-group>
+                </b-form-group>
+            </b-col>
+            <b-col>
+                <b-form-group label="Estudios de gabinete">
+                    <b-list-group class="pl-0" v-for="c in consult.CabinetStudies" :key="c.Name">
+                        <span v-if="c.Name != ''">{{ c.Name }} <br  /></span> 
+                        <span v-for="s in c.Studies" :key="s">- {{ s }} <br /></span> 
+                    </b-list-group>
                 </b-form-group>
             </b-col>
         </b-row>

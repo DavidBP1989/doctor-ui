@@ -4,7 +4,7 @@
 
 <script>
 import { showModalWithViewReference } from '@/helper/alerts'
-import modal from '../shared/prognostics.vue'
+import modal from '../prognostics.vue'
 import eventBus from '@/helper/event-bus'
 
 export default {
