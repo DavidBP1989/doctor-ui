@@ -11,6 +11,13 @@ body.main_body {
     font-size: 14px;
     overflow-x: hidden;
 }
+body.print_body {
+    display: flex !important;
+    -webkit-box-orient: vertical !important;
+    -webkit-box-direction: normal !important;
+    -ms-flex-direction: column !important;
+    flex-direction: column !important;
+}
 body.register_body {
     background-color: #f8f9fa;
     font-size: 14px;

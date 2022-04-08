@@ -29,6 +29,7 @@ import api from '@/api/general-consult-service'
 import { urlFileEmeci } from '@/helper/utilities'
 import { windowPrint } from '@/helper/alerts'
 import consultView from './consult.vue'
+import $ from 'jquery'
 
 export default {
     mounted() {
@@ -79,12 +80,16 @@ export default {
             window.open(`${urlFileEmeci}?opt=EST&emeci=${this.$store.state.patient.emeci}&posicion=${this.$store.state.patient.coordinate}&dato=${this.$store.state.patient.coordinateValue}`)
         },
         print() {
-            windowPrint({
+            /*windowPrint({
                 editPage: false,
                 printConsult: true,
                 printingType: 'general-consult',
                 consultPreviousId: this.selectedDate
-            })
+            })*/
+
+            this.$store.commit('SET_HTML_PRINTCONFIG', $('.cprev').html())
+            let routeData = this.$router.resolve({ name: 'imprimir', query: { data: 'hola'} })
+            window.open(routeData.href, '_blank')
         }
     }
 }

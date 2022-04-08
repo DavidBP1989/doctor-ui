@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import { router } from '../router/router'
-import printView from '../shared/print/print.vue'
+import printView from '../shared/print/mainPrint.vue'
 
 function alert(view, title, params = null, showConfirmButton = null) {
     const componentToLoad = Vue.extend(view)

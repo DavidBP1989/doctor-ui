@@ -34,6 +34,7 @@
 import api from '@/api/patient-service'
 import header from '@/shared/header/header.vue'
 import pacientInfo from './shared/pacientInfo.vue'
+import eventBus from '@/helper/event-bus'
 
 export default {
     beforeCreate() {
@@ -43,6 +44,11 @@ export default {
         this.getPatient()
         const path = this.$route.path
         this.consultType = path.split('/')[path.split('/').length - 1]
+        
+        eventBus.$on('isPendingInformation', (val) => this.changePendingInformation(val))
+    },
+    mounted()  {
+        this.$el.addEventListener('beforeunload', this.beforeunload)
     },
     components: {
         'main-header': header,
@@ -58,7 +64,8 @@ export default {
                 { value: '', text: 'General' }
                 
             ],
-            consultType: 'gynecology'
+            consultType: 'gynecology',
+            pendingInformation: false
         }
     },
     computed: {
@@ -75,6 +82,16 @@ export default {
         },
         changeRoute(value) {
             this.$router.push({ path: `/consults/${this.patientId}/${value}` })
+        },
+        changePendingInformation(val) {
+            this.pendingInformation = val
+        },
+        beforeunload() {
+            return 'ddd'
+            console.log('we')
+            if (this.pendingInformation) {
+                return 'Tienes una consulta pendiente por terminar'
+            }
         }
     },
     beforeRouteEnter(to, from, next) {
@@ -88,6 +105,9 @@ export default {
                 vm.sidebar = true
             }
         })
+    },
+    beforeRouteLeave(to, from, next) {
+        next()
     }
 }
 </script>

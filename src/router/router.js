@@ -17,6 +17,22 @@ export const router = new Router({
             }  
         },
         {
+            path: '/printv2',
+            component: () => import(/** */ '../shared/print/printv2.vue'),
+            name: 'Editar hoja de impresión',
+            meta: {
+                typeMenu: 'print'
+            }  
+        },
+        {
+            path: '/mainPrint',
+            component: () => import(/** */ '../shared/print/mainPrint.vue'),
+            name: 'imprimir',
+            meta: {
+                typeMenu: 'print'
+            }
+        },
+        {
             path: '/auth',
             component: () => import(/** */ '../views/authentication/main.vue'),
             children: [

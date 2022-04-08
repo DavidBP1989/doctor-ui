@@ -46,6 +46,7 @@ export default new Vuex.Store({
                 base64: null,
                 title: null
             },
+            html: null
         }
     },
     actions,

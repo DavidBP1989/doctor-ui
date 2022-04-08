@@ -87,6 +87,10 @@ const SET_LOGOTITLE_PRINTCONFIG = (state, payload) => {
     state.printConfig.logo.title = payload
 }
 
+const SET_HTML_PRINTCONFIG = (state, payload) => {
+    state.printConfig.html = payload
+}
+
 export default {
     SET_DOCTOR_INFORMATION,
     SET_PATIENT_INFORMATION,
@@ -102,5 +106,6 @@ export default {
     SET_BGSECONDARYCOLOR_PRINTCONFIG,
     SET_LOGOURL_PRINTCONFIG,
     SET_LOGOBASE64_PRINTCONFIG,
-    SET_LOGOTITLE_PRINTCONFIG
+    SET_LOGOTITLE_PRINTCONFIG,
+    SET_HTML_PRINTCONFIG
 }

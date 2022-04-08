@@ -19,6 +19,7 @@ export default {
         this.getNecessaryResources()
         eventBus.$on('save', () => this.saveConsult())
         eventBus.$on('__print', (type) => this.print(type))
+        this.formWatch = {...this.form}
     },
     components: {
         diagnostics,
@@ -31,6 +32,7 @@ export default {
     data() {
         return {
             doctorId: this.$store.state.doctor.id,
+            formWatch: {},
             form: {
                 weight: null,
                 size: null,
@@ -142,6 +144,15 @@ export default {
             this.form.laboratory = []
             this.form.cabinet = []
             this.form.prognostic = []
+        }
+    },
+    watch: {
+        form: {
+            handler(val)  {
+                const diff = JSON.stringify(this.val) !== JSON.stringify(this.formWatch)
+                eventBus.$emit('isPendingInformation', diff)
+            },
+            deep: true
         }
     }
 }
