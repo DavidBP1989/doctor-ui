@@ -11,8 +11,9 @@ import prognostic from '../../../shared/components/prognostics.vue'
 import reqResources from '../../../helper/reqResources'
 import map from '../../../helper/map'
 import model from './helper/model'
-import { saved, windowPrint } from '@/helper/alerts'
+import { saved } from '@/helper/alerts'
 import eventBus from '@/helper/event-bus'
+import print from '../../../helper/print'
 
 export default {
     created() {
@@ -101,13 +102,16 @@ export default {
         saveConsult() {
             const req = new model(this.form)
             currentLoader = loader()
-            
+
             let success = false
             api.saveConsult(this.doctorId, req.__$).then((response) => {
                 success = response.body.IsSuccess
-                currentLoader.hide()
-                const title = success ? 'Consulta agregada' : 'Error al confirmar la consulta'
-                saved(title, success)
+                if (currentLoader.isActive) {
+
+                    currentLoader.hide()
+                    const title = success ? 'Consulta agregada' : 'Error al confirmar la consulta'
+                    saved(title, success)
+                }
             })
             .catch(_error => {
                 currentLoader.hide()
@@ -121,10 +125,8 @@ export default {
             })
         },
         print(type) {
-            windowPrint({
-                editPage: false,
-                arrayToPrint: type === 'laboratory' ? this.form.laboratory : this.form.cabinet
-            })
+            const toPrint = type === 'laboratory' ? this.form.laboratory : this.form.cabinet
+            print.printLaboratoryCabinet(toPrint)
         },
         clear() {
             this.form.weight = null
@@ -144,6 +146,18 @@ export default {
             this.form.laboratory = []
             this.form.cabinet = []
             this.form.prognostic = []
+            this.cabinet.forEach(x => {
+                x.style = false,
+                x.studies.forEach(n => {
+                    n.check = false
+                })
+            })
+            this.laboratory.forEach(x => {
+                x.style = false,
+                x.studies.forEach(n => {
+                    n.check = false
+                })
+            })
         }
     },
     watch: {

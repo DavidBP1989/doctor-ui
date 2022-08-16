@@ -13,10 +13,12 @@ import laboratory from '../../../shared/components/laboratory.vue'
 import cabinet from '../../../shared/components/cabinet.vue'
 import reqResources from '../../../helper/reqResources'
 import map from '../../../helper/map'
+import print from '../../../helper/print'
 
 export default {
     created() {
         this.getNecessaryResources()
+        eventBus.$on('__print', (type) => this.print(type))
     },
     components: {
         partner,
@@ -147,6 +149,10 @@ export default {
                 }
             })
         },
+        print(type) {
+            const toPrint = type === 'laboratory' ? this.form.laboratory : this.form.cabinet
+            print.printLaboratoryCabinet(toPrint)
+        },
         clear() {
             this.form.weight = null
             this.form.size = null
@@ -187,6 +193,19 @@ export default {
             this.form.treatments = []
             this.form.laboratory = []
             this.form.cabinet = []
+
+            this.cabinet.forEach(x => {
+                x.style = false,
+                x.studies.forEach(n => {
+                    n.check = false
+                })
+            })
+            this.laboratory.forEach(x => {
+                x.style = false,
+                x.studies.forEach(n => {
+                    n.check = false
+                })
+            })
         }
     }
 }

@@ -1,6 +1,19 @@
 const SET_DOCTOR_INFORMATION = (state, payload) => {
     state.doctor.emeci = payload.EMECI
-    state.doctor.name = payload.Name
+    state.doctor.name = payload.Name + payload.LastName
+    state.doctor.phone = payload.OfficePhone
+    state.doctor.colony = payload.OfficeAddress,
+    state.doctor.email = payload.Email,
+    state.doctor.city = payload.CityName,
+    state.doctor.state = payload.StateName,
+    state.doctor.medicalSpeciality = payload.MedicalSpecialityName,
+    state.doctor.subMedicalSpeciality = payload.SubmedicalSpeciality,
+    state.doctor.hospital = payload.ProfessionalResidenceHospital,
+    state.doctor.sep = payload.NoSEP_ProfessionalCertificate,
+    state.doctor.university = payload.UniversitySpecialty,
+    state.doctor.certificate = payload.SpecialtyCertificate,
+    state.doctor.ssa = payload.NoSSA,
+    state.doctor.cmcp = payload.NoCertification_CMCP
 }
 
 const SET_PATIENT_INFORMATION = (state, payload) => {

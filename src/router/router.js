@@ -10,14 +10,6 @@ export const router = new Router({
     routes: [
         {
             path: '/print',
-            component: () => import(/** */ '../shared/print/print.vue'),
-            name: 'Editar hoja de impresión',
-            meta: {
-                typeMenu: 'print'
-            }  
-        },
-        {
-            path: '/printv2',
             component: () => import(/** */ '../shared/print/printv2.vue'),
             name: 'Editar hoja de impresión',
             meta: {
@@ -25,7 +17,7 @@ export const router = new Router({
             }  
         },
         {
-            path: '/mainPrint',
+            path: '/mainPrint/:date',
             component: () => import(/** */ '../shared/print/mainPrint.vue'),
             name: 'imprimir',
             meta: {

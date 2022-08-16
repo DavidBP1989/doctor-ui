@@ -17,7 +17,20 @@ export default new Vuex.Store({
         doctor: {
             id: null,
             emeci: null,
-            name: null
+            name: null,
+            phone: null,
+            colony: null,
+            state: null,
+            city: null,
+            email: null,
+            medicalSpeciality: null,
+            subMedicalSpeciality: null,
+            hospital: null,
+            sep: null,
+            university: null,
+            certificate: null,
+            ssa: null,
+            cmcp: null
         },
         token: (localStorage.getItem('emecitoken') || null),
         patient: {

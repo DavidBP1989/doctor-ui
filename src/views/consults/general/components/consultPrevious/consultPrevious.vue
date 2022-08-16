@@ -27,7 +27,6 @@
 <script>
 import api from '@/api/general-consult-service'
 import { urlFileEmeci } from '@/helper/utilities'
-import { windowPrint } from '@/helper/alerts'
 import consultView from './consult.vue'
 import $ from 'jquery'
 
@@ -54,6 +53,7 @@ export default {
         return {
             dates: this.consultationDates,
             selectedDate: null,
+            selectedDateText: null,
             consult: null
         }
     },
@@ -68,6 +68,7 @@ export default {
         init() {
             if (this.dates.length > 0) {
                 this.selectedDate = this.dates[0].value
+                this.selectedDateText = this.dates[0].text
                 this.getConsult()
             }
         },
@@ -80,15 +81,8 @@ export default {
             window.open(`${urlFileEmeci}?opt=EST&emeci=${this.$store.state.patient.emeci}&posicion=${this.$store.state.patient.coordinate}&dato=${this.$store.state.patient.coordinateValue}`)
         },
         print() {
-            /*windowPrint({
-                editPage: false,
-                printConsult: true,
-                printingType: 'general-consult',
-                consultPreviousId: this.selectedDate
-            })*/
-
             this.$store.commit('SET_HTML_PRINTCONFIG', $('.cprev').html())
-            let routeData = this.$router.resolve({ name: 'imprimir', query: { data: 'hola'} })
+            let routeData = this.$router.resolve({ name: 'imprimir', params: { date: this.selectedDateText} })
             window.open(routeData.href, '_blank')
         }
     }

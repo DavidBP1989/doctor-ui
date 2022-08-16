@@ -59,11 +59,14 @@
 </template>
 
 <script>
-import Vue from 'vue'
 import eventBus from '@/helper/event-bus'
 
 export default {
     props: ['savedValues', 'newValues', 'type'],
+    mounted() {
+        console.log('saved', this.savedValues)
+        console.log('new', this.newValues)
+    },
     data() {
         return {
             listOfSavedValues: this.savedValues,
@@ -86,6 +89,7 @@ export default {
                 return x.style
             })
             this.listOfNewValues.splice(0)
+
             group.forEach(x => {
                 this.listOfNewValues.push({
                     id: x.id,
@@ -97,7 +101,6 @@ export default {
             })
         },
         print() {
-            Vue.swal.close()
             eventBus.$emit('__print', this.type)
         }
     }

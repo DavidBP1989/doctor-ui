@@ -1,10 +1,10 @@
 import api from '../api/doctor-service'
 
 const getDoctorInformation = (context, payload) => {
-    api.getBasicDoctorInformation(payload).then(response => {
+
+    api.getRegister(payload).then(response => {
         context.commit('SET_DOCTOR_INFORMATION', response.body)
-    })
-    .catch(e => {
+    }).catch(e => {
         localStorage.removeItem('emecitoken')
     })
 }
@@ -25,8 +25,15 @@ const setDefaultPrintColors = (context, payload) => {
     context.commit('SET_LOGOTITLE_PRINTCONFIG', null)
 }
 
+const setDefaultPrintConfig = (context, payload) => {
+    context.commit('SET_LOGOBASE64_PRINTCONFIG', null)
+    context.commit('SET_LOGOURL_PRINTCONFIG', payload.UrlImage)
+}
+
+
 export default {
     getDoctorInformation,
     logout,
-    setDefaultPrintColors
+    setDefaultPrintColors,
+    setDefaultPrintConfig
 }
