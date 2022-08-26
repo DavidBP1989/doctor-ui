@@ -10,7 +10,7 @@ const actions = {
     },
     forgotPwd: {
         method: 'GET',
-        url: `${API_URL}/wAuthority/forgotpwd/{emeci}`
+        url: `${API_URL}/wAuthority/forgotpwd/{email}`
     },
     getStates: {
         method: 'GET',
@@ -56,8 +56,8 @@ export default {
     getBasicDoctorInformation(doctorId) {
         return api.getBasicDoctorInformation({ doctorId })
     },
-    forgotPwd(emeci) {
-        return api.forgotPwd({ emeci })
+    forgotPwd(email) {
+        return api.forgotPwd({ email })
     },
     getStates() {
         return api.getStates()

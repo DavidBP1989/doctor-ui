@@ -3,12 +3,12 @@
         <b-form @submit="onSubmit" autocomplete="off">
             <p class="brand-wrapper mb-3">Recordar contrase&ntilde;a</p>
             <b-form-group class="mb-4">
-                <b-form-input v-model="emeci" maxlength="10" @keypress="format" placeholder="Número de tarjeta" />
+                <b-form-input v-model="email" placeholder="Correo electrónico" />
             </b-form-group>
             <b-button type="submit" class="w-100 mb-4 main-button">Recordar</b-button>
         </b-form>
         <b-alert :show="showError" variant="danger">
-            N&uacute;mero de tarjeta incorrecto
+            Correo electrónico incorrecto
         </b-alert>
         <b-alert :show="showSuccess" variant="success">
             Se ha enviado la contrase&ntilde;a a su correo electr&oacute;nico
@@ -19,30 +19,28 @@
 </template>
 
 <script>
-import { userFormat } from '@/helper/utilities'
 import api from '@/api/doctor-service'
 
 export default {
     data() {
         return {
-            emeci: '',
+            email: '',
             showSuccess: false,
             showError: false
         }
     },
     methods: {
-        format(evt) {
-            userFormat(evt, this.emeci.includes('-'))
-        },
         onSubmit(evt) {
             evt.preventDefault()
 
-            if (this.emeci !== '') {
-                api.forgotPwd(this.emeci).then(response => {
+            if (this.email !== '') {
+                const email = encodeURI(this.email)
+                console.log(email)
+                api.forgotPwd(email).then(response => {
                     if (response.body.IsSuccess) {
                         this.showError = false
                         this.showSuccess = true
-                        this.emeci = ''
+                        this.email = ''
                     } else this.onError()
                 }).catch(() => this.onError())
             }
@@ -50,13 +48,6 @@ export default {
         onError() {
             this.showSuccess = false
             this.showError = true
-        }
-    },
-    watch: {
-        emeci(val) {
-            if (/^[0-9]{5}$/.test(val)) {
-                this.emeci += '-'
-            }
         }
     }
 }

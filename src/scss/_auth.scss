@@ -40,7 +40,7 @@
         }
     }
     .form-control {
-        border: 1px solid #d5dae2 !important;
+        /*border: 1px solid #d5dae2 !important;*/
         font-weight: normal;
         color: #212529;
         font-size:13px;
@@ -63,5 +63,11 @@
         form {
             width: 100% !important;
         }
+    }
+
+    .form-control.is-invalid {
+        /*quitamos la imagen de exclamacion en los input que contienen errores
+        esto para los formularios que se validan*/
+        background-image: none !important;
     }
 }

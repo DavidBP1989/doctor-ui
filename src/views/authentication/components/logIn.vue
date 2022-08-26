@@ -1,14 +1,14 @@
 <template>
     <div>
         <p class="brand-wrapper mb-3">Iniciar sesi&oacute;n en su cuenta</p>
-        <p class="error" v-if="error">N&uacute;mero de tarjeta o contrase&ntilde;a incorrecta</p>
+        <p class="error" v-if="error">Correo electrónico o contrase&ntilde;a incorrecta</p>
 
-        <b-form @submit="onSubmit" autocomplete="off">
+        <b-form id="form-login" @submit="onSubmit" autocomplete="off">
             <b-form-group class="mb-3">
-                <b-form-input maxlength="10" v-model="user" @keypress="format" placeholder="Número de tarjeta" />
+                <b-form-input v-model="user" class="f-email" placeholder="Correo electrónico" />
             </b-form-group>
             <b-form-group class="mb-4">
-                <b-form-input v-model="password" type="password" placeholder="***********" />
+                <b-form-input v-model="password" type="password" class="f-text" placeholder="***********" />
             </b-form-group>
             <b-button type="submit" class="w-100 mb-4 main-button">Iniciar sesi&oacute;n</b-button>
         </b-form>
@@ -28,9 +28,20 @@
 let currentLoader = null
 import { loader } from '@/helper/loader'
 import api from '@/api/authentication-service'
-import { userFormat } from '@/helper/utilities'
+import formValidation from '@/helper/formValidation'
+import $ from 'jquery'
 
 export default {
+    mounted() {
+        this.$nextTick(function () {
+            $('.form-control*').on('keyup', function () {
+                if ($(this).hasClass('f-email')) {
+                    formValidation.inputSelected = $(this)
+                    formValidation.typeValidations.email()
+                }
+            })
+        })
+    },
     data() {
         return {
             user: '',
@@ -42,7 +53,7 @@ export default {
         onSubmit(evt) {
             evt.preventDefault()
 
-            if (this.validFeedback()) {
+            if (formValidation.check('form-login', false)) {
                 currentLoader = loader(true)
 
                 api.getToken({ username: this.user, password: this.password }).then(response => {
@@ -55,20 +66,6 @@ export default {
                     currentLoader.hide()
                     this.error = true
                 })
-            }
-
-        },
-        validFeedback() {
-            return (this.user !== '' && this.password !== '')
-        },
-        format(evt) {
-            userFormat(evt, this.user.includes('-'))
-        }
-    },
-    watch: {
-        user(val) {
-            if (/^[0-9]{5}$/.test(val)) {
-                this.user += '-'
             }
         }
     }

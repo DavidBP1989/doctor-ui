@@ -3,7 +3,7 @@ const regEmail = /^([\w+-.%]+@[\w-.]+\.[A-Za-z]{2,4};?)+$/
 
 const validate = {
     inputSelected: null,
-    check: function (formId) {
+    check: function (formId, showScrollError) {
         let success = true
         let firstInputWithError = null
         const elements = $(`#${formId}`).find('.form-control')
@@ -20,7 +20,7 @@ const validate = {
             if (validate.inputSelected.hasClass('f-select'))
                 inputStatus = validate.typeValidations.selectValue()
 
-            if (firstInputWithError == null && !inputStatus)
+            if (firstInputWithError == null && !inputStatus && showScrollError)
             {
                 firstInputWithError = 'hacer scroll al row que contiene el primer input con error'
                 validate.scrollToErrorInput()
