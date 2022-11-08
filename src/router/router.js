@@ -63,6 +63,17 @@ export const router = new Router({
                     }
                 },
                 {
+                    path: 'newPatientAssoc',
+                    component: () => import(/** */ '../views/patients/newPatientAssociation/newPatient.vue'),
+                    name: 'Nuevo paciente',
+                    meta: { 
+                        breadcrumb: [
+                            { text: 'Pacientes', to: '/' },
+                            { text: 'Nuevo paciente', to: '#', active: true }
+                        ]
+                    }
+                },
+                {
                     path: 'externalRegister/:id',
                     component: () => import(/** */ '../views/patients/externalRegister/externalRegister.vue'),
                     name: 'Registro de paciente'

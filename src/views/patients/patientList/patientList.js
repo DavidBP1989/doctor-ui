@@ -77,6 +77,10 @@ export default {
             if (Math.trunc(ageInMonths / 12) >= 12 && sex === 'F')
                 return `/consults/${patientId}/gynecology`
             return `/consults/${patientId}`
+        },
+        goToNewPatient() {
+            //this.$router.push(this.$store.state.doctor.isAssociation ?  '/newPatientAssoc' : '/newPatient')
+            this.$router.push('/newPatient')
         }
     }
 }

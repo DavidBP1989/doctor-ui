@@ -30,7 +30,8 @@ export default new Vuex.Store({
             university: null,
             certificate: null,
             ssa: null,
-            cmcp: null
+            cmcp: null,
+            isAssociation: false
         },
         token: (localStorage.getItem('emecitoken') || null),
         patient: {

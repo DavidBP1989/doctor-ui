@@ -15,7 +15,7 @@
                     </b-form-group>
                 </b-col>
                 <b-col order="1">
-                    <b-button variant="success" to="/newPatient" class="font-weight-bold float-right">
+                    <b-button variant="success" @click="goToNewPatient" class="font-weight-bold float-right">
                         Agregar paciente
                     </b-button>
                 </b-col>

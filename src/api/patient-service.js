@@ -8,6 +8,10 @@ const actions = {
         method: 'GET',
         url: `${API_URL}/patient/{doctorId}{?page,itemsPerPage,columnName,textToSearch,orderby}`
     },
+    getPatientListByAssociation: {
+        method: 'GET',
+        url: `${API_URL}/patient/assoc/{doctorId}{?filter}`
+    },
     getLastEmeci: {
         method: 'GET',
         url: `${API_URL}/patient/{doctorId}/last`
@@ -42,6 +46,9 @@ export default {
             textToSearch,
             orderby
         })
+    },
+    getPatientListByAssociation(doctorId, filter) {
+        return api.getPatientListByAssociation({ doctorId, filter})
     },
     getLastEmeci(doctorId) {
         return api.getLastEmeci({ doctorId })

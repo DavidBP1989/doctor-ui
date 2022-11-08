@@ -12,7 +12,15 @@ export default class model {
             Emails: form.email,
             BirthDate: Vue.moment(form.birthDate).format('YYYY-MM-DD'),
             Allergy: form.allergy,
-            Password: form.password
+            ContagiousDiseases: form.contagiousDiseases,
+            Surgeries: form.surgeries,
+            Trauma: form.trauma,
+            Other: form.other,
+            Alcohol: form.alcohol,
+            Tobacco: form.tobacco,
+            Drugs: form.drugs,
+            Password: form.password,
+            ExternalRegister: form.externalRegister
         }
     }
 }

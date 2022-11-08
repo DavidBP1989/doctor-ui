@@ -13,7 +13,8 @@ const SET_DOCTOR_INFORMATION = (state, payload) => {
     state.doctor.university = payload.UniversitySpecialty,
     state.doctor.certificate = payload.SpecialtyCertificate,
     state.doctor.ssa = payload.NoSSA,
-    state.doctor.cmcp = payload.NoCertification_CMCP
+    state.doctor.cmcp = payload.NoCertification_CMCP,
+    state.doctor.isAssociation = payload.IsAssociation
 }
 
 const SET_PATIENT_INFORMATION = (state, payload) => {

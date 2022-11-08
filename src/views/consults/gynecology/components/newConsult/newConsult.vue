@@ -162,7 +162,7 @@
                 <treatments :savedValues="treatments" :newValues="form.treatments" />
                 <laboratory :savedValues="laboratory" :newValues="form.laboratory" />
                 <cabinet :savedValues="cabinet" :newValues="form.cabinet" />
-                <b-button variant="success" @click="saveConsult">Guardar consulta</b-button>
+                <b-button class="mb-2" variant="success" @click="saveConsult">Guardar consulta</b-button>
             </b-col>
         </b-row>
 

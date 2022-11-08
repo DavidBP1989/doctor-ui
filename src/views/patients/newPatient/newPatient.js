@@ -2,6 +2,7 @@ let currentLoader = null
 import { loader } from '@/helper/loader'
 import api from '@/api/patient-service'
 import existingPatient from './components/existingPatient.vue'
+import findPatientByAssoc from './components/findPatientByAssoc.vue'
 import { onlyLetter } from '@/helper/utilities'
 import formValidation from '@/helper/formValidation'
 import $ from 'jquery'
@@ -26,10 +27,12 @@ export default {
         this.getLastPatient()
     },
     components: {
-        existingPatient
+        existingPatient,
+        findPatientByAssoc
     },
     data() {
         return {
+            isAssoc: this.$store.state.doctor.isAssociation,
             doctorId: this.$store.state.doctor.id,
             visibleCollapse: false,
             options: [
@@ -47,8 +50,16 @@ export default {
                 email: '',
                 birthDate: null,
                 allergy: '',
+                contagiousDiseases: false,
+                surgeries: false,
+                trauma: false,
+                other: false,
+                alcohol: false,
+                tobacco: false,
+                drugs: false,
                 password: '',
                 confirmPassword: '',
+                externalRegister: false
             }
         }
     },

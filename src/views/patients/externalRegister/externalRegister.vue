@@ -136,7 +136,53 @@
                         </b-form-group>
                     </b-col>
                 </b-form-row>
-                <b-form-row>
+                <fieldset class="mt-2">
+                    <h6>Antecedentes patol&oacute;gicos</h6>
+                    <b-form-row>
+                        <b-col cols="6" md="4">
+                            <b-form-group>
+                                <b-form-checkbox v-model="form.contagiousDiseases">Enfermedades contagiosas</b-form-checkbox>
+                            </b-form-group>
+                        </b-col>
+                        <b-col cols="6" md="3">
+                            <b-form-group>
+                                <b-form-checkbox v-model="form.surgeries">Cirug&iacute;as</b-form-checkbox>
+                            </b-form-group>
+                        </b-col>
+                        <b-col cols="6" md="3">
+                            <b-form-group>
+                                <b-form-checkbox v-model="form.trauma">Traumatismos</b-form-checkbox>
+                            </b-form-group>
+                        </b-col>
+                        <b-col cols="6" md="2">
+                            <b-form-group>
+                                <b-form-checkbox v-model="form.other">Otras</b-form-checkbox>
+                            </b-form-group>
+                        </b-col>
+                    </b-form-row>
+                </fieldset>
+                <fieldset>
+                    <h6>Toxicoman&iacute;as</h6>
+                    <b-form-row>
+                        <b-col>
+                            <b-form-group>
+                                <b-form-checkbox v-model="form.alcohol">Alcohol</b-form-checkbox>
+                            </b-form-group>
+                        </b-col>
+                        <b-col>
+                            <b-form-group>
+                                <b-form-checkbox v-model="form.tobacco">Tabaco</b-form-checkbox>
+                            </b-form-group>
+                        </b-col>
+                        <b-col>
+                            <b-form-group>
+                                <b-form-checkbox v-model="form.drugs">Drogas</b-form-checkbox>
+                            </b-form-group>
+                        </b-col>
+                    </b-form-row>
+                </fieldset>
+                
+                <b-form-row class="mt-2">
                     <b-col md="6">
                         <b-form-group label="Contraseña">
                             <b-input-group>

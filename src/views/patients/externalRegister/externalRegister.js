@@ -44,8 +44,16 @@ export default {
                 email: '',
                 birthDate: null,
                 allergy: '',
+                contagiousDiseases: false,
+                surgeries: false,
+                trauma: false,
+                other: false,
+                alcohol: false,
+                tobacco: false,
+                drugs: false,
                 password: '',
                 confirmPassword: '',
+                externalRegister: true
             },
             showErrorPassword: false
         }

@@ -14,7 +14,8 @@
                 </b-row>
                 <b-collapse class="mt-4 mb-4" id="collapse-1" v-model="visibleCollapse">
                     <b-card class="shadow rounded">
-                        <existing-patient />
+                        <existing-patient v-if="!isAssoc" />
+                        <find-patient-by-assoc v-else />
                     </b-card>
                 </b-collapse>
                 <b-form id="formPatients" :class="!visibleCollapse ? 'mt-4' : ''">
